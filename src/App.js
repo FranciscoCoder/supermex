@@ -1,17 +1,17 @@
 import React from "react";
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 import Header from "./components/Header";
-import Inicio from "./components/Inicio";
-import Productos from "./components/Productos";
-import Producto from "./components/Producto";
-import Recetas from "./components/Recetas";
-import Receta from "./components/Receta";
-import Horeca from "./components/Horeca";
-import LaTribu from "./components/LaTribu";
-import Calidad from "./components/Calidad";
-import LaHoguera from "./components/LaHoguera";
-import Contacto from "./components/Contacto";
-import NoEncontrada from "./components/NoEncontrada";
+import Inicio from "./pages/Inicio";
+import Productos from "./pages/Productos";
+import Producto from "./pages/Producto";
+import Recetas from "./pages/Recetas";
+import Receta from "./pages/Receta";
+import Horeca from "./pages/Horeca";
+import LaTribu from "./pages/LaTribu";
+import Calidad from "./pages/Calidad";
+import LaHoguera from "./pages/LaHoguera";
+import Contacto from "./pages/Contacto";
+import NoEncontrada from "./pages/NoEncontrada";
 import Footer from "./components/Footer";
 import "./App.css";
 

@@ -1,0 +1,179 @@
+footer {
+  padding: 400px 0px 0px;
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+.colfooter {
+  width: 50%;
+  position: relative;
+}
+.enlaceslegales {
+  font-size: calc(15px + (25 - 15) * ((100vw - 300px) / (2560 - 300)));
+  font-weight: 300;
+  transform: rotate(-90deg);
+  transform-origin: 0% -50%;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  display: flex;
+  & a {
+    color: var(--color_amarillomex);
+    margin: 0px 30px 0px 0px;
+  }
+}
+
+.frasefooter {
+  color: var(--color_amarillomex);
+  font-weight: 600;
+  font-size: calc(20px + (95 - 20) * ((100vw - 300px) / (2560 - 300)));
+  padding: 0px 10% 300px 10%;
+}
+.frase_siguenos {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  white-space: nowrap;
+  position: absolute;
+  bottom: 26%;
+  right: 30%;
+  width: 100%;
+  transform: rotate(-30deg);
+  user-select: none;
+  z-index: 1;
+  & span {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--color_amarillomex);
+    font-size: calc(60px + (120 - 60) * ((100vw - 300px) / (2560 - 300)));
+    animation: texto_footer_movimiento linear infinite 5s;
+    margin: 0px;
+  }
+}
+
+.iconos_redes_sociales {
+  position: relative;
+  z-index: 2;
+  width: 50%;
+  margin: 0px 20% 0px auto;
+  height: 100%;
+}
+.footer_twitter {
+  position: absolute;
+  z-index: 3;
+  width: 40%;
+  bottom: 10%;
+  left: 0%;
+}
+.footer_facebook {
+  position: absolute;
+  z-index: 2;
+  width: 50%;
+  bottom: 30%;
+  left: 10%;
+}
+.footer_instagram {
+  position: absolute;
+  z-index: 1;
+  width: 40%;
+  bottom: 30%;
+  right: 0px;
+}
+
+@keyframes texto_footer_movimiento {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@media only screen and (max-width: 1340px) {
+  footer {
+    padding: 300px 0px 0px;
+  }
+  .frase_siguenos {
+    bottom: 20%;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  footer {
+    padding: 200px 0px 0px;
+  }
+  .frase_siguenos {
+    bottom: 15%;
+  }
+  .frasefooter {
+    padding: 0px 0% 190px 15%;
+  }
+  .colfooter {
+    &:first-child {
+      width: 65%;
+    }
+    &:last-child {
+      width: 35%;
+    }
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .frasefooter {
+    padding: 0px 5% 20px 5%;
+  }
+  .enlaceslegales {
+    transform: rotate(0deg);
+    position: relative;
+    transform-origin: unset;
+    padding: 20px 5% 50px;
+    & a {
+      margin: 0px 15px 0px 0px;
+    }
+  }
+  .colfooter {
+    &:first-child {
+      width: 100%;
+    }
+    &:last-child {
+      width: 100%;
+      padding: 20px 0px 50px;
+    }
+  }
+  .frase_siguenos {
+    transform: rotate(0deg);
+    position: relative;
+    bottom: unset;
+    right: unset;
+  }
+
+  .iconos_redes_sociales {
+    position: relative;
+    z-index: 2;
+    width: 80%;
+    margin: 0px auto;
+    height: auto;
+    display: flex;
+    max-width: 400px;
+    align-items: flex-end;
+  }
+  .footer_twitter {
+    position: relative;
+    bottom: unset;
+    left: unset;
+  }
+  .footer_facebook {
+    position: relative;
+    bottom: unset;
+    left: unset;
+  }
+  .footer_instagram {
+    position: relative;
+    bottom: unset;
+    right: unset;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  footer {
+    padding: 100px 0px 0px;
+  }
+}
