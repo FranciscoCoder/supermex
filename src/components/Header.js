@@ -23,7 +23,8 @@ export default function Header(props) {
       document.querySelector('#lineamenu2').classList.add('ocultar');
       document.querySelector('#lineamenu3').classList.remove('lineamenu3');
       document.querySelector('#lineamenu3').classList.add('rotaizq');
-      // document.querySelector('#videomenu').get(0).play();
+      document.querySelector('#menucompleto').classList.add('mostrarmenu');
+      document.querySelector('#videomenu').play();
       document.querySelector('html').classList.add('noscroll');
       document.querySelector('body').classList.add('noscroll');
     }
@@ -34,21 +35,12 @@ export default function Header(props) {
       document.querySelector('#lineamenu2').classList.remove('ocultar');
       document.querySelector('#lineamenu3').classList.remove('rotaizq');
       document.querySelector('#lineamenu3').classList.add('lineamenu3');
-      // document.querySelector('#videomenu').get(0).pause();
+      document.querySelector('#menucompleto').classList.remove('mostrarmenu');
+      document.querySelector('#videomenu').pause();
+      document.querySelector('#videomenu').currentTime = 0;
       document.querySelector('html').classList.remove('noscroll');
       document.querySelector('body').classList.remove('noscroll');
     }
-    // // {
-    // //     $(".btmenu").data("menu", "closed");
-    // //     $('#lineamenu1').removeClass('rotadch').addClass('lineamenu1');
-    // //     $('#lineamenu2').removeClass('ocultar');
-    // //     $('#lineamenu3').removeClass('rotaizq').addClass('lineamenu3');
-    // //     $('#menucompleto').fadeOut();
-    // //     $('#videomenu').delay(1000).get(0).pause();
-    // //     $('#videomenu').delay(1000).get(0).currentTime = 0;
-    // //     $('body').removeClass('noscroll');
-    // //     $('html').removeClass('noscroll');
-    // // }
   };
 
   let logoaleatorio = generateRandomNumber(1, 5);
