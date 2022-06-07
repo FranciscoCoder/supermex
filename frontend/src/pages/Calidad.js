@@ -1,0 +1,58 @@
+import {changeStyleBody} from '../components/Utils';
+
+export default function Calidad(){
+    changeStyleBody('fondomorado','fondoturquesa');
+
+    return(
+        <div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+            <div>Calidad</div>
+        </div>
+    );
+}
