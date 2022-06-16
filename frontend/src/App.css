@@ -39,7 +39,6 @@ body {
 
 body {
   font-family: "Barlow Condensed", sans-serif;
-  /*background-color: var(--color_turquesa);*/
   -webkit-transition: all 0.6s var(--transition_ease);
   transition: all 0.6s var(--transition_ease);
   opacity: 1;

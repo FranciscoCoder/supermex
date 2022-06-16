@@ -27,12 +27,12 @@
   box-sizing: inherit;
 }
 
-$font-weights: (
-  "light": 300,
-  "regular": 500,
-  "semibold": 600,
-  "bold": 700,
-);
+// $font-weights: (
+//   "light": 300,
+//   "regular": 500,
+//   "semibold": 600,
+//   "bold": 700,
+// );
 
 html,
 body {
@@ -44,7 +44,6 @@ body {
 }
 body {
   font-family: "Barlow Condensed", sans-serif;
-  /*background-color: var(--color_turquesa);*/
   transition: all 0.6s var(--transition_ease);
   opacity: 1;
 }
@@ -93,8 +92,18 @@ textarea {
   height: auto;
 }
 
-.fondoturquesa{ background-color: var(--color_turquesa);}
-.fondorosa{ background-color: var(--color_fucsia);}
-.fondoamarillo{ background-color: var(--color_amarillomex);}
-.fondoazuloscuro{ background-color: var(--color_azul_oscuro);}
-.fondomorado{ background-color: var(--color_morado);}
+.fondoturquesa {
+  background-color: var(--color_turquesa);
+}
+.fondorosa {
+  background-color: var(--color_fucsia);
+}
+.fondoamarillo {
+  background-color: var(--color_amarillomex);
+}
+.fondoazuloscuro {
+  background-color: var(--color_azul_oscuro);
+}
+.fondomorado {
+  background-color: var(--color_morado);
+}
