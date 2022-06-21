@@ -1,0 +1,20 @@
+//fonts map and breakpoints
+$font-sizes: (
+  "initial": 0.785rem,
+  "medium": 1.1rem,
+  "large": 1.5rem,
+  "x-large": 1.9rem,
+  "xx-large": 3.9rem,
+);
+
+$font-weights: (
+  "thin": 100,
+  "light": 300,
+  "regular": 500,
+  "bold": 700,
+);
+
+$font-family:(
+  "openSans": ('Open Sans',sans-serif),
+  "roboto": ('Roboto', sans-serif)
+);

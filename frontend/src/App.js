@@ -14,6 +14,8 @@ import Contacto from "./pages/Contacto";
 import NoEncontrada from "./pages/NoEncontrada";
 import Footer from "./components/Footer";
 import "./App.css";
+//import Login from "./pages/admin/Login/Login";
+
 
 function App() {
   return (
@@ -52,7 +54,11 @@ function App() {
         <Route path="/en/contact" element={<Contacto lang="en" />} />
         <Route path="*" element={<NoEncontrada lang="en" />} />
       </Route>
+      {/* <Route path="/admin">
+        <Route element={<Login />} />
+      </Route> */}
       <Route path="/" element={<Navigate replace to="/es" />} />
+      <Route path="*" element={<NoEncontrada lang="en" />} />
     </Routes>
   );
 }

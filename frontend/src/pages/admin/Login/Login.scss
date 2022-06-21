@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&family=Roboto:wght@400;700&display=swap');
+@import "../_reset.scss";
+@import "../_variables.scss";
+@import "../_maps.scss";
+@import "../_utils.scss";
+
+html, body, #root{
+    width: 100%;
+    height: 100%;
+}
+
+body{
+    background-color: $pastel;
+}
+
+#root{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+h1{
+    font-size: fSizes(x-large);
+    font-family: fFamily(roboto);
+}
+.sectionLogin{
+    background-color: $blanco;
+    max-width: 500px;
+    width: 90%;
+    margin:0 auto;
+    padding: 10px;
+    border-radius: 5px;
+    & label{
+        font-family: fFamily(openSans);
+    }
+    & input{
+        width: 100%;
+        border-radius: 5px;
+        border:1px solid $negro;
+        padding: 5px;
+        margin: 5px 0;
+    }
+    & button{
+        background-color: $azul;
+        color: $blanco;
+        text-align: center;
+        padding: 5px;
+        width: 100px;
+        text-transform: uppercase;
+        margin: 10px auto 0 ;
+        transition: all .3s linear;
+        cursor: pointer;
+        font-size: fSizes(initial);
+        font-family: fFamily(roboto);
+        &:hover{
+            background-color: $azul-pastel;
+        }
+    }
+}
