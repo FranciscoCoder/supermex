@@ -20,37 +20,6 @@ export default function Horeca(){
         <div>Horeca</div>
         <div>Horeca</div>
         <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
-        <div>Horeca</div>
     </div>
         );
 }

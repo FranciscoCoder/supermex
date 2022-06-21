@@ -1,3 +1,4 @@
+import "../App.css";
 import "./Footer.css";
 import iconTwitter from "../assets/svg/footer_twitter.svg";
 import iconFacebook from "../assets/svg/footer_facebook.svg";
@@ -30,9 +31,9 @@ export default function Footer(props) {
                 <span>Siguenos!&nbsp;</span>
             </div>
             <div className="iconos_redes_sociales">
-                <div className="footer_twitter"><a href="https://twitter.com/SuperMexFoods" target="_blank"><img src={iconTwitter} className="imagenwidth" width="201" height="201" /></a></div>
-                <div className="footer_facebook"><a href="https://www.facebook.com/SuperMexFoods" target="_blank"><img src={iconFacebook} className="imagenwidth" width="261" height="238" /></a></div>
-                <div className="footer_instagram"><a href="https://www.instagram.com/supermexfoods/" target="_blank"><img src={iconInstagram} className="imagenwidth" width="195" height="196" /></a></div>
+                <div className="footer_twitter"><a href="https://twitter.com/SuperMexFoods" target="_blank" rel="noreferrer"><img src={iconTwitter} alt="Twitter" className="imagenwidth" width="201" height="201" /></a></div>
+                <div className="footer_facebook"><a href="https://www.facebook.com/SuperMexFoods" target="_blank" rel="noreferrer"><img src={iconFacebook} alt="Facebook" className="imagenwidth" width="261" height="238" /></a></div>
+                <div className="footer_instagram"><a href="https://www.instagram.com/supermexfoods/" target="_blank" rel="noreferrer"><img src={iconInstagram} alt="Instagram" className="imagenwidth" width="195" height="196" /></a></div>
             </div>
         </div>
     </footer>

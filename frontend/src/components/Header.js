@@ -1,4 +1,5 @@
 import React from "react";
+import "../App.css";
 import "./Header.css";
 import menu1 from "../assets/images/menu1.png";
 import menu2 from "../assets/images/menu2.png";
@@ -153,13 +154,13 @@ export default function Header(props) {
       </div>
       <div className="btmenu" data-menu="closed" onClick={() => {opera_menu();}}>
         <div id="lineamenu1" className="lineamenu1">
-          <img src={menu1} width="55" height="15" className="imagenmaxwidth" />
+          <img src={menu1} width="55" height="15" alt="lineamenu1" className="imagenmaxwidth" />
         </div>
         <div id="lineamenu2" className="lineamenu2">
-          <img src={menu2} width="57" height="16" className="imagenmaxwidth" />
+          <img src={menu2} width="57" height="16" alt="lineamenu1" className="imagenmaxwidth" />
         </div>
         <div id="lineamenu3" className="lineamenu3">
-          <img src={menu3} width="56" height="16" className="imagenmaxwidth" />
+          <img src={menu3} width="56" height="16" alt="lineamenu1" className="imagenmaxwidth" />
         </div>
       </div>
 

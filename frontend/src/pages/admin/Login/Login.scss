@@ -4,53 +4,52 @@
 @import "../_maps.scss";
 @import "../_utils.scss";
 
-html, body, #root{
+.bodyLogin{
     width: 100%;
-    height: 100%;
-}
-
-body{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
     background-color: $pastel;
 }
 
-#root{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-}
+.tituloLogin{text-align: center; padding: 0 0 20px;}
 h1{
     font-size: fSizes(x-large);
     font-family: fFamily(roboto);
 }
 .sectionLogin{
     background-color: $blanco;
-    max-width: 500px;
-    width: 90%;
-    margin:0 auto;
-    padding: 10px;
-    border-radius: 5px;
+    max-width: 360px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 1rem;
+    margin: 0px auto;
     & label{
         font-family: fFamily(openSans);
+        font-size: fSizes(medium);
     }
     & input{
         width: 100%;
-        border-radius: 5px;
-        border:1px solid $negro;
-        padding: 5px;
-        margin: 5px 0;
+        border-radius: 0.5rem;
+        border: 1px solid #ced4da;
+        padding: 0.8rem;
+        margin: 0px 0 1rem;
     }
+    & .bt{ text-align: center;}
     & button{
         background-color: $azul;
         color: $blanco;
         text-align: center;
-        padding: 5px;
-        width: 100px;
+        padding: 0.5rem 1rem;
         text-transform: uppercase;
         margin: 10px auto 0 ;
         transition: all .3s linear;
         cursor: pointer;
-        font-size: fSizes(initial);
+        font-size: fSizes(medium);
         font-family: fFamily(roboto);
+        border-radius: 0.5rem;
         &:hover{
             background-color: $azul-pastel;
         }
