@@ -1,5 +1,7 @@
-import {changeStyleBody} from '../components/Utils';
-import iconLaHoguera from '../assets/svg/icono_totem_noticias.svg';
+import {changeStyleBody} from '../../components/Utils';
+import iconLaHoguera from '../../assets/svg/icono_totem_noticias.svg';
+
+import styleLaHoguera from './LaHoguera.module.css';
 
 export default function LaHoguera(){
     changeStyleBody('fondoamarillo','fondomorado');

@@ -2,17 +2,16 @@ import React from "react";
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 import "../App.css";
 import Header from "../components/Header/Header";
-import Inicio from "./Inicio";
-import Productos from "./Productos";
-import Producto from "./Producto";
-import Recetas from "./Recetas";
-import Receta from "./Receta";
-import Horeca from "./Horeca";
-import LaTribu from "./LaTribu";
-import Calidad from "./Calidad";
-import LaHoguera from "./LaHoguera";
-import Contacto from "./Contacto";
-import NoEncontrada from "./NoEncontrada";
+import Inicio from "./Inicio/Inicio";
+import Productos from "./Productos/Productos";
+import Producto from "./Producto/Producto";
+import Recetas from "./Recetas/Recetas";
+import Receta from "./Receta/Receta";
+import LaTribu from "./LaTribu/LaTribu";
+import Calidad from "./Calidad/Calidad";
+import LaHoguera from "./LaHoguera/LaHoguera";
+import Contacto from "./Contacto/Contacto";
+import NoEncontrada from "./NoEncontrada/NoEncontrada";
 import Footer from "../components/Footer/Footer";
 
 function Front() {
@@ -28,7 +27,6 @@ function Front() {
             <Route path=":categoriaId" element={<Recetas lang="es" />} />
           </Route>
           <Route path="/es/receta/:recetaId" element={<Receta lang="es" />} />
-          <Route path="/es/horeca" element={<Horeca lang="es" />} />
           <Route path="/es/la-tribu" element={<LaTribu lang="es" />} />
           <Route path="/es/calidad" element={<Calidad lang="es" />} />
           <Route path="/es/la-hoguera" element={<LaHoguera lang="es" />} />
@@ -45,7 +43,6 @@ function Front() {
             <Route path=":categoriaId" element={<Recetas lang="en" />} />
           </Route>
           <Route path="/en/recipe/:recetaId" element={<Receta lang="en" />} />
-          <Route path="/en/horeca" element={<Horeca lang="en" />} />
           <Route path="/en/the-tribe" element={<LaTribu lang="en" />} />
           <Route path="/en/quality" element={<Calidad lang="en" />} />
           <Route path="/en/the-bonfire" element={<LaHoguera lang="en" />} />

@@ -1,4 +1,7 @@
-import {changeStyleBody} from '../components/Utils';
+import {changeStyleBody} from '../../components/Utils';
+
+import styleProducto from './Producto.module.css';
+
 export default function Producto(){
     changeStyleBody('fondoturquesa','fondorosa');  
     return(

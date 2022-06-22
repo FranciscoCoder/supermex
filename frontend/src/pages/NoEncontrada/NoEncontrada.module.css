@@ -1,0 +1,18 @@
+.noEncontrado {
+  width: 100%;
+  padding: 30vh 0 0 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+  font-size: calc(35px + (112 - 35) * ((100vw - 300px) / (1920 - 300)));
+  font-family: "Barlow Condensed", sans-serif;
+}
+/*# sourceMappingURL=NoEncontrada.module.css.map */

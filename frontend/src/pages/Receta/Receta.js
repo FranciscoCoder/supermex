@@ -1,4 +1,5 @@
-import {changeStyleBody} from '../components/Utils';
+import {changeStyleBody} from '../../components/Utils';
+import styleReceta from './Receta.module.css';
 export default function Receta(){
     changeStyleBody('fondorosa','fondoturquesa');
     return(
