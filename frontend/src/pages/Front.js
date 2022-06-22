@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 import "../App.css";
-import Header from "../components/Header";
+import Header from "../components/Header/Header";
 import Inicio from "./Inicio";
 import Productos from "./Productos";
 import Producto from "./Producto";
@@ -13,7 +13,7 @@ import Calidad from "./Calidad";
 import LaHoguera from "./LaHoguera";
 import Contacto from "./Contacto";
 import NoEncontrada from "./NoEncontrada";
-import Footer from "../components/Footer";
+import Footer from "../components/Footer/Footer";
 
 function Front() {
     return (

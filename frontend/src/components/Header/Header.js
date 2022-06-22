@@ -1,50 +1,45 @@
 import React from "react";
-import "../App.css";
-import "./Header.css";
-import menu1 from "../assets/images/menu1.png";
-import menu2 from "../assets/images/menu2.png";
-import menu3 from "../assets/images/menu3.png";
-import videomenu from "../assets/video/menu_back.mp4";
+import headerStyle from "./Header.module.css";
+import menu1 from "../../assets/images/menu1.png";
+import menu2 from "../../assets/images/menu2.png";
+import menu3 from "../../assets/images/menu3.png";
+import videomenu from "../../assets/video/menu_back.mp4";
 
 export default function Header(props) {
   //Funcion para generar un numero aleatorio
-  const generateRandomNumber = (min, max) =>
-    Math.floor(Math.random() * (max - min) + min);
-
-    // document.querySelector('.btmenu').addEventListener('click', ()=>{
-    //   console.log('ao2');
-    // });
+  const generateRandomNumber = (min, max) => Math.floor(Math.random() * (max - min) + min);
 
   const opera_menu = () =>{
-    let menu= document.querySelector('.btmenu');
+    let menu= document.querySelector('#btmenu');
     if(menu.getAttribute("data-menu")==='closed'){
       menu.setAttribute("data-menu", "open");
-      document.querySelector('#lineamenu1').classList.remove('lineamenu1');
-      document.querySelector('#lineamenu1').classList.add('rotadch');
-      document.querySelector('#lineamenu2').classList.add('ocultar');
-      document.querySelector('#lineamenu3').classList.remove('lineamenu3');
-      document.querySelector('#lineamenu3').classList.add('rotaizq');
-      document.querySelector('#menucompleto').classList.add('mostrarmenu');
+      document.querySelector('#lineamenu1').classList.remove(`${headerStyle.lineamenu1}`);
+      document.querySelector('#lineamenu1').classList.add(`${headerStyle.rotadch}`);
+      document.querySelector('#lineamenu2').classList.add(`${headerStyle.ocultar}`);
+      document.querySelector('#lineamenu3').classList.remove(`${headerStyle.lineamenu3}`);
+      document.querySelector('#lineamenu3').classList.add(`${headerStyle.rotaizq}`);
+      document.querySelector('#menucompleto').classList.add(`${headerStyle.mostrarmenu}`);
       document.querySelector('#videomenu').play();
       document.querySelector('html').classList.add('noscroll');
       document.querySelector('body').classList.add('noscroll');
     }
     else{
       menu.setAttribute("data-menu", "closed");
-      document.querySelector('#lineamenu1').classList.remove('rotadch');
-      document.querySelector('#lineamenu1').classList.add('lineamenu1');
-      document.querySelector('#lineamenu2').classList.remove('ocultar');
-      document.querySelector('#lineamenu3').classList.remove('rotaizq');
-      document.querySelector('#lineamenu3').classList.add('lineamenu3');
-      document.querySelector('#menucompleto').classList.remove('mostrarmenu');
+      document.querySelector('#lineamenu1').classList.remove(`${headerStyle.rotadch}`);
+      document.querySelector('#lineamenu1').classList.add(`${headerStyle.lineamenu1}`);
+      document.querySelector('#lineamenu2').classList.remove(`${headerStyle.ocultar}`);
+      document.querySelector('#lineamenu3').classList.remove(`${headerStyle.rotaizq}`);
+      document.querySelector('#lineamenu3').classList.add(`${headerStyle.lineamenu3}`);
+      document.querySelector('#menucompleto').classList.remove(`${headerStyle.mostrarmenu}`);
       document.querySelector('#videomenu').pause();
       document.querySelector('#videomenu').currentTime = 0;
       document.querySelector('html').classList.remove('noscroll');
       document.querySelector('body').classList.remove('noscroll');
     }
   };
-
   let logoaleatorio = generateRandomNumber(1, 5);
+  let idioma1=generateRandomNumber(1, 5);
+  let idioma2=generateRandomNumber(1, 5);
 
   let headerTranslate = {
     es: {
@@ -78,19 +73,18 @@ export default function Header(props) {
       linkLaHoguera: "the-bonfire",
     },
   };
-
   return (
     <header>
-      <div className="idiomas">
-        <a href="/es/" className={`idioma${generateRandomNumber(1, 5)}`}>
+      <div className={headerStyle.idiomas}>
+        <a href="/es/" className={headerStyle.idioma}>
           ES
         </a>
-        <a href="/en/" className={`idioma${generateRandomNumber(1, 5)}`}>
+        <a href="/en/" className={headerStyle.idioma}>
           EN
         </a>
       </div>
 
-      <div className="logo">
+      <div className={headerStyle.logo}>
         <a href={`/${props.lang}`}>
           <svg xmlns="http://www.w3.org/2000/svg" width="278" height="135" viewBox="0 0 278 135">
               <g transform="translate(-1141 270)">
@@ -142,97 +136,67 @@ export default function Header(props) {
                           </g>
                       </g>
                       <g transform="translate(30.928 5.475)">
-                          <path className={`logo_aztec_puntos_supermex${logoaleatorio}`} d="M2177.553,1468.016l-1.744,3.831-3.083-2.867,1.745-3.831Z" transform="translate(-2172.727 -1465.149)" fill="#ffaf00"/>
+                          <path className={`${headerStyle.logo_aztec_puntos_supermex}${logoaleatorio}`} d="M2177.553,1468.016l-1.744,3.831-3.083-2.867,1.745-3.831Z" transform="translate(-2172.727 -1465.149)" fill="#ffaf00"/>
                       </g>
                       <g transform="translate(204.755 5.475)">
-                          <path className={`logo_aztec_puntos_supermex${logoaleatorio}`} d="M3591.64,1468.016l1.745,3.831,3.083-2.867-1.745-3.831Z" transform="translate(-3591.64 -1465.149)" fill="#ffaf00"/>
+                          <path className={`${headerStyle.logo_aztec_puntos_supermex}${logoaleatorio}`} d="M3591.64,1468.016l1.745,3.831,3.083-2.867-1.745-3.831Z" transform="translate(-3591.64 -1465.149)" fill="#ffaf00"/>
                       </g>
                   </g>
               </g>
           </svg>
         </a>
       </div>
-      <div className="btmenu" data-menu="closed" onClick={() => {opera_menu();}}>
-        <div id="lineamenu1" className="lineamenu1">
+      <div id="btmenu" className={headerStyle.btmenu} data-menu="closed" onClick={() => {opera_menu();}}>
+        <div id="lineamenu1" className={headerStyle.lineamenu1}>
           <img src={menu1} width="55" height="15" alt="lineamenu1" className="imagenmaxwidth" />
         </div>
-        <div id="lineamenu2" className="lineamenu2">
-          <img src={menu2} width="57" height="16" alt="lineamenu1" className="imagenmaxwidth" />
+        <div id="lineamenu2" className={headerStyle.lineamenu2}>
+          <img src={menu2} width="57" height="16" alt="lineamenu2" className="imagenmaxwidth" />
         </div>
-        <div id="lineamenu3" className="lineamenu3">
-          <img src={menu3} width="56" height="16" alt="lineamenu1" className="imagenmaxwidth" />
+        <div id="lineamenu3" className={headerStyle.lineamenu3}>
+          <img src={menu3} width="56" height="16" alt="lineamenu3" className="imagenmaxwidth" />
         </div>
       </div>
 
-      <div id="menucompleto">
-        <div id="elmenu">
-          <div id="tablamenu">
-            <div className="tablamenuf">
-              <div className="tablamenuc">
-                <ul id="listamenu1">
-                  <li>
-                    <a
-                      href={`/${props.lang}/${
-                        headerTranslate[props.lang].linkProducto
-                      }`}
-                    >
-                      {headerTranslate[props.lang].producto}
-                    </a>
-                  </li>
-                  <li>
-                    <a href={`/${props.lang}/horeca`}>
-                      {headerTranslate[props.lang].horeca}
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href={`/${props.lang}/${
-                        headerTranslate[props.lang].linkLaTribu
-                      }`}
-                    >
-                      {headerTranslate[props.lang].laTribu}
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href={`/${props.lang}/${
-                        headerTranslate[props.lang].linkRecetas
-                      }`}
-                    >
-                      {headerTranslate[props.lang].recetas}
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href={`/${props.lang}/${
-                        headerTranslate[props.lang].linkCalidad
-                      }`}
-                    >
-                      {headerTranslate[props.lang].calidad}
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href={`/${props.lang}/${
-                        headerTranslate[props.lang].linkContacto
-                      }`}
-                    >
-                      {headerTranslate[props.lang].contacto}
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href={`/${props.lang}/${
-                        headerTranslate[props.lang].linkLaHoguera
-                      }`}
-                    >
-                      {headerTranslate[props.lang].laHoguera}
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+      <div id="menucompleto" className={headerStyle.menucompleto}>
+        <div>
+          <ul className={headerStyle.listamenu}>
+            <li>
+              <a href={`/${props.lang}/${headerTranslate[props.lang].linkProducto}`}>
+                {headerTranslate[props.lang].producto}
+              </a>
+            </li>
+            <li>
+              <a href={`/${props.lang}/horeca`}>
+                {headerTranslate[props.lang].horeca}
+              </a>
+            </li>
+            <li>
+              <a href={`/${props.lang}/${headerTranslate[props.lang].linkLaTribu}`}>
+                {headerTranslate[props.lang].laTribu}
+              </a>
+            </li>
+            <li>
+              <a href={`/${props.lang}/${headerTranslate[props.lang].linkRecetas}`}>
+                {headerTranslate[props.lang].recetas}
+              </a>
+            </li>
+            <li>
+              <a href={`/${props.lang}/${headerTranslate[props.lang].linkCalidad}`}>
+                {headerTranslate[props.lang].calidad}
+              </a>
+            </li>
+            <li>
+              <a href={`/${props.lang}/${headerTranslate[props.lang].linkContacto}`}>
+                {headerTranslate[props.lang].contacto}
+              </a>
+            </li>
+            <li>
+              <a href={`/${props.lang}/${headerTranslate[props.lang].linkLaHoguera}`}>
+                {headerTranslate[props.lang].laHoguera}
+              </a>
+            </li>
+          </ul>
         </div>
         <video id="videomenu" preload="yes" loop muted>
           <source src={videomenu} type="video/mp4" />
