@@ -3,7 +3,6 @@ import { Routes, Route} from "react-router-dom";
 import Front from "./pages/Front";
 import Dashboard from "./pages/Dashboard";
 
-
 function App() {
   return (
     <Routes>

@@ -8,10 +8,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/api/languages")
+ */
 class IdiomasController extends AbstractController
 {
     /**
-     * @Route("/idiomas", name="app_idiomas", methods={"GET"})
+     * @Route("/", name="app_languages_index", methods={"GET"})
      */
     public function index(IdiomasRepository $idiomasRepository): Response
     {
@@ -30,7 +33,7 @@ class IdiomasController extends AbstractController
     }
 
     /**
-     * @Route("/idiomas/activos", name="app_idiomas_activos", methods={"GET"})
+     * @Route("/activos", name="app_languages_activos", methods={"GET"})
      */
     public function activosIdioma(Request $request, IdiomasRepository $idiomasRepository): Response
     {

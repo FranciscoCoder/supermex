@@ -6,15 +6,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/api/news")
+ */
 class NoticiasController extends AbstractController
 {
     /**
-     * @Route("/noticias", name="app_noticias")
+     * @Route("/", name="app_noticias_index", methods={"GET"})
      */
     public function index(): Response
     {
-        return $this->render('noticias/index.html.twig', [
+        return ($this->render('noticias/index.html.twig', [
             'controller_name' => 'NoticiasController',
-        ]);
+        ]));
     }
 }
