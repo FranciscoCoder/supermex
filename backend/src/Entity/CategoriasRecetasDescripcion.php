@@ -29,7 +29,7 @@ class CategoriasRecetasDescripcion
     private $categoria;
 
     /**
-     * @ORM\OneToOne(targetEntity=Idiomas::class, inversedBy="categoriasRecetasDescripcion", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Idiomas::class, inversedBy="categoriasRecetasDescripcion", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $idioma;

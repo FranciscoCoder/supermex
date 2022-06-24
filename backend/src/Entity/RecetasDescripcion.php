@@ -39,10 +39,15 @@ class RecetasDescripcion
     private $receta;
 
     /**
-     * @ORM\OneToOne(targetEntity=Idiomas::class, inversedBy="recetasDescripcion", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Idiomas::class, inversedBy="recetasDescripcion", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $idioma;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
 
     public function getId(): ?int
     {
@@ -105,6 +110,18 @@ class RecetasDescripcion
     public function setIdioma(Idiomas $idioma): self
     {
         $this->idioma = $idioma;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

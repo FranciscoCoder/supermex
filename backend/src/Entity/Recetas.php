@@ -38,7 +38,7 @@ class Recetas
     private $imagen;
 
     /**
-     * @ORM\OneToOne(targetEntity=RecetasDescripcion::class, mappedBy="receta", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=RecetasDescripcion::class, mappedBy="receta", cascade={"persist", "remove"})
      */
     private $recetasDescripcion;
 
