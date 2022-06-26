@@ -1,1 +1,65 @@
-/* No CSS *//*# sourceMappingURL=Contacto.module.css.map */
+.section1 {
+  position: relative;
+}
+
+.section1 div {
+  position: absolute;
+  background-color: var(--color_rosa);
+  border: 7px solid var(--color_fucsia);
+  color: var(--color_fucsia);
+  border-radius: 15px;
+  width: 44%;
+  padding: 10px;
+  text-align: center;
+  -webkit-transform: rotate(-12deg);
+          transform: rotate(-12deg);
+  right: 16%;
+  top: 35%;
+}
+
+.section1 div span {
+  font-weight: 700;
+}
+
+.section1 div span:first-child {
+  font-size: 4vw;
+  line-height: 3.8vw;
+}
+
+.section1 div span:last-child {
+  font-size: 5vw;
+  line-height: 4.8vw;
+}
+
+.section2 {
+  padding: 50px 0;
+  background-color: var(--color_celeste);
+  color: var(--color_fucsia);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.section2 > div {
+  width: 50%;
+}
+
+.section2 > div:first-child {
+  overflow: hidden;
+}
+
+.section2 > div h1 {
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: calc(30px + (152 - 30) * ((100vw - 300px) / (1920 - 300)));
+}
+
+@media only screen and (max-width: 768px) {
+  .section1 div {
+    width: 50%;
+  }
+}
+/*# sourceMappingURL=Contacto.module.css.map */

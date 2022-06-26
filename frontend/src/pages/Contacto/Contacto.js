@@ -8,14 +8,14 @@ export default function Contacto(props){
     changeStyleBody('fondoazuloscuro','fondorosa');
     return(
         <div>
-            <section>
+            <section className={styleContacto.section1}>
                 <div>
-                    <span>Aquí nace el mejor sabor.</span>
+                    <span>Aquí nace el mejor sabor.</span><br />
                     <span>¿Sabes dónde nos encontramos?</span>
                 </div>
-                <img src={bannerContacto} width="" height="" alt="banner contacto" className='imagenwidth' />
+                <img src={bannerContacto} width="1920" height="1080" alt="banner contacto" className='imagenwidth' />
             </section>
-            <section>
+            <section className={styleContacto.section2}>
                 <div></div>
                 <div>
                     <h1>Contáctanos</h1>

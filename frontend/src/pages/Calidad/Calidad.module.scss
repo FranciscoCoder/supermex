@@ -1,0 +1,79 @@
+h1{
+    
+}
+
+.section1{
+    padding: 200px 0;
+    text-align: center;
+    max-width: 920px;
+    width: 90%;
+    margin: 0 auto;
+    color: var(--color_turquesa);
+    & h1{
+        font-weight: 700;
+        font-size: calc(40px + (131 - 40) * ((100vw - 300px) / (1920 - 300)));
+        line-height: calc(40px + (131 - 40) * ((100vw - 300px) / (1920 - 300)));
+        margin: 0 0 50px;
+    }
+}
+
+.texto{
+    font-size: 18px;
+    line-height: 25px;
+    font-weight: 500;
+}
+
+.section2{
+    padding: 100px 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    & > div{
+        width: 50%;
+        padding: 0 10%;
+        &:first-child{
+            color: var(--color_turquesa);
+        }
+        &:last-child{
+            color: var(--color_amarillomex);
+        }
+        & h2{
+            text-align: center;
+            font-weight: 700;
+            font-size: calc(30px + (101 - 30) * ((100vw - 300px) / (1920 - 300)));
+            line-height: calc(30px + (101 - 30) * ((100vw - 300px) / (1920 - 300)));
+        }
+        & h3{
+            text-align: center;
+            font-weight: 700;
+            font-size: calc(13px + (25 - 13) * ((100vw - 300px) / (1920 - 300)));
+            line-height: calc(13px + (25 - 13) * ((100vw - 300px) / (1920 - 300)));
+        }
+        & ul{
+            margin: 20px 0 0 20px;
+        }
+    }
+}
+
+.propiedades{
+    padding: 30px 0px;
+}
+
+.separacion{
+    margin: 0 0 25px;
+}
+
+
+@media only screen and (max-width: 768px) {
+    .section1{
+        padding: 100px 0;
+    }
+
+    .section2{
+        padding: 50px 0;
+        & > div{
+            width: 100%;
+            padding: 50px 10%;
+        }
+    }
+}

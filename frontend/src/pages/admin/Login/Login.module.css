@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&family=Roboto:wght@400;700&display=swap");
 :root {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -39,7 +38,7 @@
   padding: 0 0 20px;
 }
 
-h1 {
+.tituloLogin h1 {
   font-size: 1.9rem;
   font-family: "Roboto", sans-serif;
 }

@@ -5,8 +5,7 @@ export function changeStyleBody (styleValue, styleValue2) {
     window.addEventListener('scroll',()=>{
         //Get window scroll Y and Footer position
         let windowScroll=window.pageYOffset;
-        let footerPositionY=bodyWeb.querySelector('footer').offsetTop;
-
+        let footerPositionY=bodyWeb.querySelector('footer').offsetTop-200;
         if((windowScroll)>=footerPositionY){
             bodyWeb.classList.remove(styleValue);
             bodyWeb.classList.add(styleValue2);

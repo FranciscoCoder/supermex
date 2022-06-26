@@ -78,6 +78,11 @@ textarea {
   border: 0px solid;
 }
 
+ul {
+  margin: 0px;
+  padding: 0px;
+}
+
 .noscroll {
   overflow: hidden;
 }
