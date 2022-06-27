@@ -1,11 +1,43 @@
+import {useState } from "react";
 import {changeStyleBody} from '../../components/Utils';
-
 import styleContacto from './Contacto.module.css';
-
 import bannerContacto from "../../assets/images/banner_contacto.jpg";
+import iconoLagarto from "../../assets/svg/glifo_lagarto.svg";
 
 export default function Contacto(props){
     changeStyleBody('fondoazuloscuro','fondorosa');
+
+    const [estadoEnvio, setEstadoEnvio] = useState(false);
+    const [formValues, setFormValues] = useState({ nombre: "", correo: "", telefono: "", mensaje: "" , acepto: "0" });
+    const handleInputChange = (e) => {
+        //Ingresamos los campos del formulario
+        setFormValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+        
+        //Comprobacion del campo tipo checkbox
+        if(e.target.checked){
+            setFormValues((prev) => ({...prev, [e.target.name]: e.target.value }));
+        }
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        fetch('http://127.0.0.1:8080/api/contact',{
+          method: "POST",
+          body: JSON.stringify(formValues),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            if(data.resultado=="ok"){
+                setEstadoEnvio(true);
+            }
+        });
+      };
+
+    if (estadoEnvio) {window.location.href=`/${props.lang}/enviado`;};
+    
     return(
         <div>
             <section className={styleContacto.section1}>
@@ -16,41 +48,43 @@ export default function Contacto(props){
                 <img src={bannerContacto} width="1920" height="1080" alt="banner contacto" className='imagenwidth' />
             </section>
             <section className={styleContacto.section2}>
-                <div></div>
+                <div><img src={iconoLagarto} width="490" height="443" alt="glifo lagarto" /></div>
                 <div>
                     <h1>Contáctanos</h1>
-                    <div>
-                        <div>
-                            <div><input type="text" name="nombre" id="nombreContacto" required placeholder='nombre' /></div>
-                            <div><input type="email" name="correo" id="correoContacto" required placeholder='correo' /></div>
-                            <div><input type="tel" name="telefono" id="telefonoContacto" required placeholder='teléfono' /></div>
+                    <form onSubmit={handleSubmit}>
+                        <div className={styleContacto.formContacto}>
+                        
+                            <div className={styleContacto.colContacto}>
+                                <div><input type="text" name="nombre" id="nombreContacto" required placeholder='nombre' onChange={handleInputChange} value={formValues.nombre} /></div>
+                                <div><input type="email" name="correo" id="correoContacto" required placeholder='correo' onChange={handleInputChange} value={formValues.correo} /></div>
+                                <div><input type="tel" name="telefono" id="telefonoContacto" required placeholder='teléfono' onChange={handleInputChange} value={formValues.telefono} /></div>
+                            </div>
+                            <div className={styleContacto.colContacto}>
+                                <div>
+                                    <textarea name="mensaje" id="mensajeContacto" placeholder='¡Hola!' onChange={handleInputChange} value={formValues.mensaje}></textarea>
+                                </div>
+                                <div className={styleContacto.aceptoPolitica}>
+                                    <input type="checkbox" name="acepto" id='aceptoContacto' onChange={handleInputChange} value="1" required /> He leído y acepto la <a href={`/${props.lang}/politica-de-privacidad/`}>política de privacidad</a>.
+                                </div>
+                                <div className={styleContacto.botonEnviar}> 
+                                    <button type='submit'>enviar</button>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <div>
-                                <textarea name="mensaje" id="mensajeContacto" required placeholder='¡Hola!'></textarea>
-                            </div>
-                            <div>
-                                <input type="checkbox" name="acepto" id='aceptoContacto' value="1" /> He leído y acepto la <a href={`/${props.lang}/politica-de-privacidad/`}>política de privacidad</a>.
-                            </div>
-                            <div> 
-                                <button type='button'>enviar</button>
-                            </div>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </section>
-            <section>
+            <section className={styleContacto.section3}>
                 <div>
                     <div>
                         <h2>FÁBRICA / ENVÍOS</h2>
                         <p>
-                            Pol. Ind. Las Salinas de Poniente / C. Eratóstenes, 198.<br />
-                            CP 11500 - El Puerto de Santa María, Cádiz (España)
+                            Pol. Ind. Las Salinas de Poniente / C. Eratóstenes, 198. CP 11500 - El Puerto de Santa María, Cádiz (España)
                         </p>
                     </div>
                     <div>
                         <h2>TELÉFONO</h2>
-                        <p><a href="tel:+34956841136" target="_blank">(+34) 956 841 136</a></p>
+                        <p><a href="tel:+34956841136" target="_blank" rel="noreferrer">(+34) 956 841 136</a></p>
                     </div>
                 </div>
                 <div>
@@ -62,7 +96,7 @@ export default function Contacto(props){
                     </div>
                     <div>
                         <h2>EMAIL</h2>
-                        <p><a href="mail:info@supermexfoods.com" target="_blank">info@supermexfoods.com</a></p>
+                        <p><a href="mail:info@supermexfoods.com" target="_blank" rel="noreferrer">info@supermexfoods.com</a></p>
                     </div>
                 </div>
             </section>

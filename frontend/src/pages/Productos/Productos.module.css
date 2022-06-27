@@ -1,1 +1,307 @@
-/* No CSS *//*# sourceMappingURL=Productos.module.css.map */
+.section1 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 100%;
+}
+
+.section1 > div {
+  width: 50%;
+}
+
+.section1 > div:first-child img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  aspect-ratio: 1/1;
+}
+
+.section1 > div:last-child {
+  padding: 100px 5%;
+  background-color: var(--color_morado);
+  color: var(--color_amarillomex);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-weight: 700;
+}
+
+.section1 > div:last-child p:first-child {
+  font-size: calc(40px + (50 - 40) * ((100vw - 300px) / (1920 - 300)));
+  line-height: calc(39px + (49 - 39) * ((100vw - 300px) / (1920 - 300)));
+}
+
+.section1 > div:last-child p:last-child {
+  margin: 30px 0 0;
+  font-size: 20px;
+}
+
+.section2 {
+  padding: 150px 0 0;
+  color: var(--color_amarillomex);
+}
+
+.section2 .tortillachips {
+  text-align: center;
+}
+
+.section2 .tortillachips .subtitulo {
+  margin: 10px 0 30px;
+}
+
+.section2 .patatas {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: 50px 0 0;
+  padding: 0 5%;
+}
+
+.section2 .patatas > .colPatatas {
+  width: 33.33%;
+  padding: 0 1%;
+  -webkit-box-ordinal-group: 3;
+      -ms-flex-order: 2;
+          order: 2;
+}
+
+.section2 .patatas > .colPatatas:first-child {
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
+}
+
+.section2 .patatas > .colPatatas:last-child {
+  -webkit-box-ordinal-group: 4;
+      -ms-flex-order: 3;
+          order: 3;
+}
+
+.section2 .titulo {
+  font-size: calc(40px + (100 - 40) * ((100vw - 300px) / (1920 - 300)));
+  line-height: calc(40px + (100 - 40) * ((100vw - 300px) / (1920 - 300)));
+  font-weight: 700;
+}
+
+.section2 .subtitulo {
+  font-size: calc(30px + (50 - 30) * ((100vw - 300px) / (1920 - 300)));
+  line-height: calc(30px + (50 - 30) * ((100vw - 300px) / (1920 - 300)));
+  font-weight: 700;
+  margin: 30px 0;
+}
+
+.section2 .texto {
+  font-size: 20px;
+}
+
+.section2 img {
+  max-width: 100%;
+  height: auto;
+}
+
+.section2 .listaproductos1 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  padding: 30px 0;
+}
+
+.section2 .listaproductos1 > div {
+  width: 50%;
+  padding: 0 5%;
+}
+
+.section2 .listaproductos1 img {
+  max-width: 100%;
+  height: auto;
+}
+
+.section2 .listaproductos2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  padding: 30px 0;
+}
+
+.section2 .listaproductos2 > div {
+  width: 50%;
+  padding: 0 5%;
+}
+
+.section2 .listaproductos2 img {
+  max-width: 100%;
+  height: auto;
+}
+
+.glifoCocodrilo {
+  padding: 30px 0;
+  text-align: right;
+}
+
+.glifoCocodrilo svg {
+  -webkit-transform: translate(5px, 0px) scaleX(-1);
+          transform: translate(5px, 0px) scaleX(-1);
+  width: 200px;
+  height: auto;
+}
+
+.glifoCocodrilo svg path {
+  fill: var(--color_amarillomex);
+}
+
+.glifoLagarto {
+  padding: 30px 0;
+  text-align: left;
+}
+
+.glifoLagarto svg {
+  -webkit-transform: translate(-40%, 0px);
+          transform: translate(-40%, 0px);
+  width: 200px;
+  height: auto;
+}
+
+.glifoLagarto svg path {
+  fill: var(--color_amarillomex);
+}
+
+@media only screen and (max-width: 1024px) {
+  .section1 > div {
+    width: 100%;
+  }
+  .section1 > div:first-child img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+    -o-object-position: center;
+       object-position: center;
+    aspect-ratio: 16/9;
+  }
+  .section1 > div:last-child {
+    padding: 50px 5%;
+  }
+  .section2 .patatas > .colPatatas {
+    width: 100%;
+    -webkit-box-ordinal-group: 4;
+        -ms-flex-order: 3;
+            order: 3;
+    text-align: center;
+  }
+  .section2 .patatas > .colPatatas img {
+    max-width: 50%;
+  }
+  .section2 .patatas > .colPatatas:first-child {
+    -webkit-box-ordinal-group: 2;
+        -ms-flex-order: 1;
+            order: 1;
+    width: 50%;
+    padding: 0 5%;
+    text-align: left;
+    margin: 0 0 50px;
+  }
+  .section2 .patatas > .colPatatas:last-child {
+    width: 50%;
+    -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2;
+    padding: 0 5%;
+    text-align: left;
+    margin: 0 0 50px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .section2 .patatas > .colPatatas img {
+    max-width: 60%;
+  }
+  .section2 .patatas > .colPatatas:first-child {
+    width: 100%;
+    padding: 0;
+    margin: 0 0 50px;
+  }
+  .section2 .patatas > .colPatatas:last-child {
+    width: 100%;
+    padding: 0;
+  }
+  .section2 .listaproductos1 {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    width: 100%;
+    padding: 30px 0;
+  }
+  .section2 .listaproductos1 > div {
+    width: 100%;
+    padding: 0 5%;
+  }
+  .section2 .listaproductos1 > div:last-child {
+    text-align: center;
+    margin: 30px 0 0;
+  }
+  .section2 .listaproductos1 > div:last-child img {
+    max-width: 50%;
+    height: auto;
+  }
+  .section2 .listaproductos2 {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    width: 100%;
+    padding: 30px 0;
+  }
+  .section2 .listaproductos2 > div {
+    width: 100%;
+    padding: 0 5%;
+  }
+  .section2 .listaproductos2 > div:last-child {
+    text-align: center;
+    margin: 30px 0 0;
+  }
+  .section2 .listaproductos2 > div:last-child img {
+    max-width: 50%;
+    height: auto;
+  }
+  .glifoCocodrilo svg {
+    width: 100px;
+  }
+  .glifoLagarto svg {
+    width: 100px;
+  }
+}
+/*# sourceMappingURL=Productos.module.css.map */

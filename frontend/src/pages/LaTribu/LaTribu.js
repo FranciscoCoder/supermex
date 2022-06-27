@@ -11,37 +11,35 @@ export default function LaTribu(){
     changeStyleBody('fondoazuloscuro','fondoturquesa');
     return(
         <div>
-            <section>
+            <section className={stylesLaTribu.section1}>
                 <div>
-                    <h1>La tribu</h1>
-                    <div>
-                        <p>
-                            El pueblo azteca, conocido por sus rituales, naturaleza, lucha y misticismo, ha dejado mucho a la sociedad mexicana que todavía conserva hoy día. Lo más importante:
-                        </p>
-                        <p>
-                            Sus misteriosas recetas milenarias con los sabores más naturales y apreciados.
-                        </p>
+                    <div className={stylesLaTribu.contenidoSection1}>
+                        <h1>La tribu</h1>
+                        <div>
+                            <p>
+                                El pueblo azteca, conocido por sus rituales, naturaleza, lucha y misticismo, ha dejado mucho a la sociedad mexicana que todavía conserva hoy día. Lo más importante:
+                            </p>
+                            <p>
+                                Sus misteriosas recetas milenarias con los sabores más naturales y apreciados.
+                            </p>
+                        </div>
                     </div>
+                    <div className={stylesLaTribu.iconoTribu}><img src={iconTribu} width="1292" height="882" alt="icon la tribu" /></div>
                 </div>
-                <div><img src={iconTribu} width="1292" height="882" alt="icon la tribu" /></div>
-                <div>Regresa al presente.</div>
-                <div>¿Están llamando a la puerta? Ya han llegado nuestros amigos; la mesa está preparada.</div>
-                <div>
+                <div className={stylesLaTribu.subtitulo}><h2>Regresa al presente.</h2></div>
+                <div className={stylesLaTribu.llamandoPuerta}>¿Están llamando a la puerta? Ya han llegado nuestros amigos; la mesa está preparada.</div>
+                <div className={stylesLaTribu.aroma}>
                     El aroma de las tortillas recién calentadas, y el picante sabor del guacamole, el queso fundiéndose con los nachos adornados con chili y jalapeños… No será junto a un fuego en mitad de nuestra aldea, pero es con tu tribu con quien vas a disfrutar de este banquete.<br /><br />
                     
                     La comida está lista para disfrutarla. Para compartirla con los tuyos. 
                 </div>
-                <div>
-                    <div>tok tok</div>
-                    <div>tok tok</div>
-                </div>
             </section>
             <section>
-                <div><img src={imgGlifos} width="1920" height="160" className="imagenwidth" alt='imagen glifos' /></div>
-                <div>
+                <div className={stylesLaTribu.glifos1}><img src={imgGlifos} width="1920" height="160" className="imagenwidth" alt='imagen glifos' /></div>
+                <div className={stylesLaTribu.contenidoSection2}>
                     <div>
                         <div><h4>¿Conoces nuestra historia?</h4></div>
-                        <div>En Supermex te traemos las mejores recetas aztecas llenas de sabor.</div>
+                        <div><h5>En Supermex te traemos las mejores recetas aztecas llenas de sabor.</h5></div>
                         <div>
                             <p>
                                 Empezamos en 1986 con una pequeña fábrica de tortilla chips y tortillas de maíz en Andalucía, siguiendo nuestra receta milenaria. Gracias al delicioso sabor, y la gran calidad de nuestros productos, hemos crecido hasta convertirnos en un proveedor internacional de 
@@ -53,9 +51,9 @@ export default function LaTribu(){
                     </div>
                     <div><img src={imgTribu} width="1040" height="913" alt="imagen conoce nuestra historia" /></div>
                 </div>
-                <div><img src={imgGlifos} width="1920" height="160" className="imagenwidth" alt='imagen glifos' /></div>
+                <div className={stylesLaTribu.glifos2}><img src={imgGlifos} width="1920" height="160" className="imagenwidth" alt='imagen glifos' /></div>
             </section>
-            <section>
+            <section className={stylesLaTribu.section3}>
                 <div><img src={imgNuestraReceta} width="805" height="1164" className="imagenwidth" alt='imagen glifos' /></div>
                 <div>
                     <h3>Nuestra receta milenaria</h3>

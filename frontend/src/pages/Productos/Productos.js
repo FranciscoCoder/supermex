@@ -2,6 +2,9 @@ import {changeStyleBody} from '../../components/Utils';
 
 import styleProductos from './Productos.module.css';
 
+import bannerProductos1 from '../../assets/images/banner_productos1.jpg';
+import bannerProductos2 from '../../assets/images/banner_productos2.jpg';
+
 import patataClasica from '../../assets/images/bolsa_patatas_clasicas.png';
 import tortitas from '../../assets/images/tortitas.png';
 import salsas from '../../assets/images/mockup_queso.png';
@@ -9,13 +12,13 @@ import sazonadores from '../../assets/images/paquete_sachet_packet.png';
 import chiliConCarne from '../../assets/images/lata_tin_can.png';
 
 export default function Productos(){
-    changeStyleBody('fondoturquesa','fondorosa');  
+    changeStyleBody('fondoazuloscuro','fondorosa');  
     return(
     <div>
-        <section>
-            <div></div>
+        <section className={styleProductos.section1}>
+            <div><img src={bannerProductos1} width="" height="" alt="banner productos" /></div>
             <div>
-                <span>Disfruta de nuestros mejores productos en compañía de tu tribu.</span><br /><br />
+                <p>Disfruta de nuestros mejores productos en compañía de tu tribu.</p>
                 <p>
                     El auténtico sabor de nuestras deliciosas creaciones, siempre elaboradas con ingredientes de gran calidad, que te transportarán en un momento a nuestros antepasados aztecas.<br /><br />
 
@@ -23,59 +26,84 @@ export default function Productos(){
                 </p>
             </div>
         </section>
-        <section>
+        <section className={styleProductos.section2}>
             <div>
-                <div>Tortilla chips<br />triangulos - redondos</div>
-                <div>
-                    <div>CLÁSICAS</div>
-                    <div>
-                        <span>Las tradicionales con nuestra receta de la tribu.</span>
-                        <p>
-                            En Supermex elaboramos nuestras tortilla chips con ingredientes de proveedores locales elegidos por su máxima calidad. Elaboradas con maíz, y siguiendo nuestra técnica tradicional nixtamal, para conservar ese sabor que las hace únicas.
-                        </p>
+                <div class={styleProductos.tortillachips}>
+                    <div className={styleProductos.titulo}>
+                        Tortilla chips
                     </div>
+                    <div className={styleProductos.subtitulo}>triangulos - redondos</div>
                 </div>
-                <div><img src={patataClasica} width="616" height="883" alt="imagen patatas fritas" /></div>
-                <div>
-                    <div>SABORES</div>
-                    <div>
-                        <span>American BBQ / Queso.</span>
-                        <p>
-                            Nuestras tortillas chips están fabricadas con ingredientes de proveedores locales elegidos por su máxima calidad. Elaboradas con maíz y siguiendo nuestra técnica tradicional nixtamal, para conservar ese sabor que las hace únicas. Disfruta de la variedad de Queso y American BBQ, perfectas para dippear o comer directos de la bolsa.
-                        </p>
+                <div className={styleProductos.patatas}>
+                    <div className={styleProductos.colPatatas}>
+                        <div className={styleProductos.titulo}>CLÁSICAS</div>
+                        <div>
+                            <p className={styleProductos.subtitulo}>Las tradicionales con nuestra receta de la tribu.</p>
+                            <p className={styleProductos.texto}>
+                                En Supermex elaboramos nuestras tortilla chips con ingredientes de proveedores locales elegidos por su máxima calidad. Elaboradas con maíz, y siguiendo nuestra técnica tradicional nixtamal, para conservar ese sabor que las hace únicas.
+                            </p>
+                        </div>
+                    </div>
+                    <div className={styleProductos.colPatatas}><img src={patataClasica} width="616" height="883" alt="imagen patatas fritas" /></div>
+                    <div className={styleProductos.colPatatas}>
+                        <div className={styleProductos.titulo}>SABORES</div>
+                        <div>
+                            <p className={styleProductos.subtitulo}>American BBQ / Queso.</p>
+                            <p className={styleProductos.texto}>
+                                Nuestras tortillas chips están fabricadas con ingredientes de proveedores locales elegidos por su máxima calidad. Elaboradas con maíz y siguiendo nuestra técnica tradicional nixtamal, para conservar ese sabor que las hace únicas. Disfruta de la variedad de Queso y American BBQ, perfectas para dippear o comer directos de la bolsa.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div>
+            <div className={styleProductos.glifoCocodrilo}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="490" height="287.464" viewBox="0 0 490 287.464">
+                    <g transform="translate(42.74 -23.522)">
+                        <path d="M171.462,310.986c-2.651,0-5.166-.09-7.484-.172L6.787,304.7c-7.224-.26-16.227-.592-23.926-5.471-11.446-7.26-14.9-20.7-16.906-34.15A786.316,786.316,0,0,1-39.392,75.982c1.492-16.073,4.546-32.353,16.739-42.505C-10.228,23.144,7.317,23.405,19,23.567l191.754,2.974c7.367.109,15.7.234,23.655,3.074,9.829,3.5,16.981,10.745,19.127,19.379,1.42,5.7.549,11.267-.219,16.189-.737,4.663-1.357,8.689-.054,11.747,2.2,5.184,10.152,7.538,23.26,7.116l105.789-3.971c12.534-.439,26.72-.934,39.927,4.043a5.638,5.638,0,0,1,.629.269c25.058,12.524,23.863,27.583,22.6,43.512-.36,4.528-.727,9.209-.637,14.381.368,20.26.943,40.519,1.509,60.779l.844,31.014c.3,11.671-.017,22.91-6.989,32.056-10.683,13.989-30.493,13.872-41.5,13.98L207.7,279.947c-.11,8.113-1.8,20.054-10.062,25.112C189.449,310.069,179.844,310.986,171.462,310.986ZM14.666,37.007c-11.231,0-21.627.934-28.7,6.829-8.84,7.367-10.8,21.1-11.932,33.4a772.71,772.71,0,0,0,5.248,185.842c1.544,10.288,3.917,20.4,10.808,24.77,4.617,2.929,11.307,3.171,17.2,3.387l157.19,6.118c8.4.305,18.832.683,26.128-3.782,2.884-1.77,4.187-12.021,3.378-19.658a6.742,6.742,0,0,1,6.011-7.4,6.629,6.629,0,0,1,.691-.036h.009l198.032.161h.189c11.637,0,24.5-.709,30.565-8.673,4.34-5.678,4.484-14.024,4.241-23.548l-.844-30.978c-.566-20.3-1.132-40.609-1.51-60.905-.1-5.84.315-11.078.683-15.7,1.177-14.968,1.725-21.847-14.878-30.233-10.611-3.891-22.677-3.459-34.375-3.064L276.993,97.5c-7.17.279-29.191,1.033-36.135-15.309-2.812-6.6-1.77-13.243-.853-19.1.62-4.007,1.207-7.794.458-10.835-1.25-5-6.28-8.427-10.584-9.955-5.849-2.094-12.7-2.2-19.322-2.291L18.8,37.043C17.414,37.016,16.04,37.007,14.666,37.007Z" fill="#d10057"/>
+                        <path d="M92.327,270.61h-.252l-29.459-1.1a6.745,6.745,0,0,1-6.5-6.756c.017-3.576-.045-8.293-.11-13.666-.683-53.16.844-66.269,8.149-70.141,2.66-1.4,5.328-1.312,21.8.737,2.974.369,5.5.7,6.675.781a7.076,7.076,0,0,1,3.135.539,6.736,6.736,0,0,1,4.078,6.258l-.781,76.682a6.746,6.746,0,0,1-6.739,6.667ZM69.569,256.289l16.082.6.659-63.583c-.63-.071-1.3-.161-2.013-.242-3.324-.414-9.316-1.159-12.991-1.465-2.425,9.928-2,42.649-1.815,57.32C69.524,251.545,69.543,254.025,69.569,256.289Z" fill="#d10057"/>
+                        <path d="M147.563,278.355a6.754,6.754,0,0,1-6.173-4.035,6.659,6.659,0,0,1-.432-4.024c-1.438-7.466-14.581-40.861-20.309-55.434-3.837-9.73-5.7-14.484-6.208-16.19a6.713,6.713,0,0,1,2.92-7.717c1.473-.9,14.626-8.858,23.153-10.773a6.744,6.744,0,0,1,7.295,3.189c10.736,18.427,17.861,34.491,25.39,51.487,2.982,6.73,6.064,13.7,9.532,21.167a6.735,6.735,0,0,1-3.275,8.944l-.128.058-28.472,12.5-.593.269A6.813,6.813,0,0,1,147.563,278.355Zm-18.392-78.668c1.087,2.8,2.525,6.468,4.007,10.242,10.611,26.971,16.612,42.694,19.451,52.1l14.995-6.587c-2.362-5.229-4.582-10.233-6.757-15.121-7-15.808-13.135-29.648-21.993-45.416A103.892,103.892,0,0,0,129.171,199.687Z" fill="#d10057"/>
+                        <path d="M174.651,121.11c-.315,0-.629-.009-.943-.009a37.04,37.04,0,0,1-16.459-3.611,28.129,28.129,0,0,1-15.13-22.327C141.23,85.38,145.811,74.976,154.077,68c6.6-5.57,15.534-9.191,25.866-10.467,11.06-1.374,27.241,1.757,36.539,11.9a25.4,25.4,0,0,1,6.1,23.368C218.117,113.563,191.217,121.11,174.651,121.11ZM185.18,70.681a28.44,28.44,0,0,0-3.584.22h-.009c-7.717.952-14.222,3.513-18.813,7.385-4.959,4.2-7.735,10.189-7.232,15.65a14.733,14.733,0,0,0,7.825,11.545,24.146,24.146,0,0,0,10.584,2.147c13.494.18,32.891-5.777,35.452-17.664a12.091,12.091,0,0,0-2.867-11.429c-4.9-5.357-13.952-7.855-21.356-7.855Zm-4.421-6.468" fill="#d10057"/>
+                        <path d="M178.514,98.271a6.738,6.738,0,1,1-.109-13.476l7.861-.135h.11a6.738,6.738,0,1,1,.117,13.476l-7.861.135Z" fill="#d10057"/>
+                        <path d="M404.642,252.057h-.189l-183.909-5.208a6.721,6.721,0,0,1-5.283-2.794c-4.106-5.709-4.312-25.12-1.015-94.381.439-9.165.818-17.142,1-22.749a6.74,6.74,0,0,1,5.939-6.459c49.656-5.9,174.43-3.454,179.991-3.355A6.729,6.729,0,0,1,407.431,126l-16.467,49.046a6.736,6.736,0,0,1-11.518,2.21c-3.082-3.623-7.709-8.823-11.347-12.9l-4.25-4.807c-8.769-3.979-57.471-2.2-108.816,1.95-.018,9.1-.612,17.825-1.2,26.316-.414,6.038-.835,12.209-1.042,18.525l22.937-.027,16.082-21.375a6.745,6.745,0,0,1,9.441-1.317c1.518,1.141,2.7,2.9,5.3,6.747,2.561,3.8,10.35,15.345,13.846,16.406,5.407,1.14,53.384,1.537,85.5-.549a6.6,6.6,0,0,1,6.163,3.163c3.019,4.851,2.759,17.339-.79,37.132A6.736,6.736,0,0,1,404.642,252.057ZM225.97,233.522l172.975,4.9a145.989,145.989,0,0,0,1.742-18.409c-30.555,1.546-76.194,1.555-83.4-.135-7.151-1.689-13.683-9.972-20.224-19.5L284.477,217.1a6.749,6.749,0,0,1-5.373,2.686l-33.188.037h-.008a6.764,6.764,0,0,1-6.739-6.784c.054-9.092.659-17.762,1.222-26.144a314.1,314.1,0,0,0,1.078-31.392,6.748,6.748,0,0,1,6.172-6.916c81.018-6.873,119.016-6.334,125.924,1.617l4.591,5.193c1.177,1.317,2.471,2.757,3.765,4.222l9.8-29.172c-30-.432-118.893-1.427-163.226,2.794-.22,4.851-.486,10.673-.791,17.07C226.6,173.533,224.416,219.425,225.97,233.522Zm137.415-74.489.054.062Z" fill="#d10057"/>
+                        <path d="M47.239,164.746a148.388,148.388,0,0,1-38.822-5.22,6.739,6.739,0,0,1-4.95-5.912c-.36-3.9-.953-8.158-1.572-12.614-2.372-16.882-5.059-36.018,2.686-50.69,15.83-30.035,58.066-36.853,75.487-38.4,4.853-.439,11.886-.485,16.775,4,5.3,4.861,5.723,12.56,5.709,21.392,0,3.144-.4,31.14-13.333,42.361-9.661,8.392-31.815,10.4-46.422,7.017-9.771-2.263-16.37-6.806-19.056-13.162-1.976-4.673-1.653-10.1.943-15.687,3.361-7.224,10.161-13.638,16.531-15.606,6.433-1.986,19.98-1.392,25.435,1.105a6.737,6.737,0,0,1-5.6,12.255h0c-2.273-.979-12.156-1.626-15.858-.485-2.47.768-6.388,4.321-8.292,8.418-.9,1.941-1.186,3.719-.755,4.743.692,1.636,3.612,3.881,9.685,5.292,12.685,2.955,29.621.219,34.554-4.07,5.632-4.887,8.679-20.232,8.688-32.2.008-6.764-.449-10.619-1.347-11.445-.037-.037-1.141-.988-6.469-.5C69.37,66.386,29.6,71.748,16.487,96.6c-5.709,10.827-3.342,27.672-1.258,42.533.412,2.929.808,5.776,1.14,8.508C49,155.3,82.072,150.73,114.7,133.957a6.757,6.757,0,0,1,8.095,1.492c3.074,3.423,3.127,8.112.127,11.94a6.727,6.727,0,0,1-8.563,1.744C92.133,159.534,69.672,164.746,47.239,164.746Z" fill="#d10057"/>
+                    </g>
+                </svg>
+            </div>
+            <div className={styleProductos.listaproductos1}>
                 <div>
-                    <div>Tortillas de trigo</div>
+                    <div className={styleProductos.titulo}>Tortillas de trigo</div>
                     <div>
-                        <span>Rellénalo de lo que más te gusta y a disfrutar.</span>
-                        <p>
+                        <p className={styleProductos.subtitulo}>Rellénalo de lo que más te gusta y a disfrutar.</p>
+                        <p className={styleProductos.texto}>
                             Muy versátiles y sabrosas. Podemos usarlas en diversos platos, como burritos, kebabs y wraps. Puedes prepararlas calientes (fritas o recién salidas del horno) o frías. Nuestras tortillas de trigo están elaboradas con harina de máxima calidad y se envasan para permanecer frescas y sabrosas sin necesidad de refrigeración.
                         </p>
                     </div>
                 </div>
                 <div><div><img src={tortitas} width="1253" height="1117" alt="imagen patatas fritas" /></div></div>
             </div>
-            <div>
-                <div><div><img src={chiliConCarne} width="872" height="919" alt="imagen chili con carne" /></div></div>
+            <div className={styleProductos.glifoLagarto}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="490" height="443.443" viewBox="0 0 490 443.443">
+                    <path id="glifo_lagarto" d="M956.462,327.794h27.553a6.029,6.029,0,0,0,0-12.058H956.462a6.012,6.012,0,0,0-1.353.276l-.881-21.017,28.655.5h.109a6.026,6.026,0,1,0,.11-12.051l-33.03-.573a5.66,5.66,0,0,0-1.785-.448l-34.358-2.1a6.119,6.119,0,0,0-3.366.786c-2.509,1.432-6.309,1.157-10.65.693l-47.194-5.074.519-51.66,6.985.4-.526,4.263c-.535,4.291-1.534,12.286,3.359,18.185,4.994,6.01,13.222,6.4,17.634,6.6l59.974,2.785c.684.031,1.517.07,2.454.07,3.692,0,8.927-.605,12.585-4.625a11.884,11.884,0,0,0,1.038-1.526l26.231.842h.189a6.014,6.014,0,0,0,6.025-6v-.016l.15-96.636c.016-6.426.031-17.193-7.126-24.289-6.992-6.929-17.533-6.976-23.833-7l-93.143-.393a5.943,5.943,0,0,0-5.987,5.144l-3.524,24.108a3.8,3.8,0,0,0-.409-.071l-13.844.551,1.039-78.915,68.2,3.067a5.861,5.861,0,0,0,3.618-1.156h22.8a6.026,6.026,0,0,0,0-12.05H917.373l.951-19.318,21.754.693h.188a6.022,6.022,0,0,0,.2-12.043l-21.554-.693.739-15.054,22.921-.92a6.035,6.035,0,0,0,5.787-6.261,5.97,5.97,0,0,0-6.15-5.785l-.111,0L920.184-.1a5.956,5.956,0,0,0-5.864-6.044c-.151,0-.3,0-.452.01-8.055.464-18.067.653-19.995.244a6.033,6.033,0,0,0-7.5,4.064,5.989,5.989,0,0,0-.244,1.442c-.338,7.811-.677,13.585-1.023,19.334-.259,4.317-.519,8.62-.77,13.757L805.205,29.24a5.9,5.9,0,0,0-4.444,1.683,6.029,6.029,0,0,0-1.833,4.391l1,124.284-65.9-2.344-1.369-60.373a6.015,6.015,0,0,0-5.554-5.868L641.58,84.328l-.448-32.815,20.08-.653a6.048,6.048,0,0,0,5.821-5.6l2.926-41.467A6.006,6.006,0,0,0,668.63-.4l3.13-25.178a6.02,6.02,0,0,0-5.162-6.77,6.02,6.02,0,0,0-6.77,5.162c-.006.041-.011.081-.016.122L656.784-2.728c-3.445.032-7.645.118-12.145.229l1.9-29.654a6.027,6.027,0,0,0-5.632-6.4,6.026,6.026,0,0,0-6.4,5.632l-1.958,30.77c-4.806.158-9.312.322-12.986.472V-26.2a6.021,6.021,0,0,0-6.015-6.028,6.021,6.021,0,0,0-6.027,6.015V.695a5.989,5.989,0,0,0-1.574,4.334l5.325,107.31a6.024,6.024,0,0,0,5.836,5.726L675.1,119.8l-10.8,65.221c-27.5-.488-37.735-.967-66.972-1.447-30.353-.5-60.683-1.007-88.975-1.51h-.11a6.035,6.035,0,0,0-6.025,5.781c-5.12,125.346-.244,130.475,2.108,132.937a6.038,6.038,0,0,0,3.98,1.864c3.217.2,78.05,4.978,100.923,4.978.362,0,.709-.008,1.039-.008a6.012,6.012,0,0,0,5.962-5.718c1.275-25.047,3.783-83.446,3.783-83.446a6.033,6.033,0,0,0-1.722-4.483,5.939,5.939,0,0,0-4.445-1.8l-59.165,1.424a6.027,6.027,0,0,0-5.875,5.749L547.6,266.738a6.023,6.023,0,0,0,1.692,4.459,5.942,5.942,0,0,0,4.4,1.833l32-.377-2.808,15.389-48-1.141c.323-13.6,1.376-47.382,4.291-69.054,23.037,1.345,47.744,2.694,72.447,4.05,24.879,1.361,30.8,2.714,53.993,4.075.315,2.627.677,5.64,1.07,8.9,5.868,49,8.29,64.285,10.807,68.171,7.764,11.932,51.811,15.338,75.054,16.306.818,9.045,1.4,30.919,1.8,46.226.354,13.49.684,26.224,1.141,33.649a6.016,6.016,0,0,0,6.009,5.655H799a6.029,6.029,0,0,0,5.6-3.8c1.046-2.635,1.1-13.615.8-25.6a1.717,1.717,0,0,0,.2.047c4.255.166,6.576.338,8.9.5,2.423.173,4.846.346,9.273.527h.252a6.024,6.024,0,0,0,.228-12.043c-4.248-.165-6.568-.338-8.888-.5-2.431-.172-4.854-.346-9.3-.527a5.887,5.887,0,0,0-1.046.173c-.2-5.3-.441-10.278-.646-14.379l20.7-.117a6.027,6.027,0,0,0,6-6.049,6.276,6.276,0,0,0-6.04-6l-21.308.118a3.234,3.234,0,0,0-.377.079,5.98,5.98,0,0,0-5.011-3.693c-4.459-.385-6.921-.763-9.38-1.148-1.518-.236-3.02-.472-4.916-.708L782,284.024a6.025,6.025,0,0,0-5.671-5.758l-54.677-3.2,4.137-27.2,91.987,8.92,13.9,52.73A6.021,6.021,0,0,0,837.346,314l77.272,1.943c.29,4.7.786,10.925,1.313,17.383.723,9.03,1.479,18.374,1.518,22.165a6.022,6.022,0,0,0,5.639,5.963l27.324,1.746a6.165,6.165,0,0,0,4.6-1.706,5.9,5.9,0,0,0,1.613-3.422l23.706,2.439c.2.016.417.031.622.031a6.029,6.029,0,0,0,.6-12.027l-25.2-2.587-.764-18.32A5.336,5.336,0,0,0,956.462,327.794Zm-27.207,21.984c-.283-4.69-.8-10.933-1.314-17.414-.74-9.109-1.5-18.524-1.526-22.346a6.023,6.023,0,0,0-5.876-5.977l-78.364-1.967L828.34,249.611a6.015,6.015,0,0,0-5.318-4.468L721.188,235.4a5.933,5.933,0,0,0-6.458,5.1l-5.987,39.3a6.018,6.018,0,0,0,5.033,6.862,5.679,5.679,0,0,0,.567.059l55.83,3.265,2.029,47.507a6.024,6.024,0,0,0,5.507,5.742c4.444.385,6.913.771,9.368,1.149,1.542.243,3.083.48,5.026.723.653,12.185,1.683,37.661,1.51,47.729H767.218c-.307-7.292-.567-17.21-.833-27.569-1.1-41.995-1.668-51.166-3.4-54.509a6.02,6.02,0,0,0-5.16-3.264c-34.263-1.1-66.441-6.159-70.012-10.619-2.186-5.1-6.906-44.495-9.171-63.436-.669-5.6-1.251-10.453-1.7-13.938a6.015,6.015,0,0,0-5.616-5.254c-24.611-1.462-32.355-2.925-59.058-4.38-26.656-1.463-53.321-2.918-77.9-4.374a6.066,6.066,0,0,0-6.293,5.018c-4.553,27.121-5.34,79.954-5.371,82.188a6.023,6.023,0,0,0,5.875,6.111l59.149,1.4h.15a6.028,6.028,0,0,0,5.931-4.948l5.041-27.631a6.028,6.028,0,0,0-1.329-4.972,6.719,6.719,0,0,0-4.672-2.139l-32.931.393.685-15.417,47.1-1.124c-.636,14.449-2.178,49.884-3.209,71.144-23.03-.456-76.039-3.693-91.256-4.641-1.8-12.466-1.5-58.077.8-116.653,26.6.464,54.847.928,83.109,1.4,31.2.519,43.46,1.031,72.556,1.549h.1a6.023,6.023,0,0,0,6.016-5.918,5.413,5.413,0,0,0-.174-.944l12.474-75.341a6.023,6.023,0,0,0-4.955-6.929,5.954,5.954,0,0,0-.811-.079l-59.322-1.77L618.27,10.41C628.283,9.969,647.7,9.4,657.495,9.293l-2.095,29.7-20.557.669a6.024,6.024,0,0,0-5.821,6.111L629.628,90a6.024,6.024,0,0,0,5.553,5.922l85.57,6.686,1.377,60.644a6.014,6.014,0,0,0,5.844,5.888l77.868,2.682a5.7,5.7,0,0,0,4.4-1.714,6.009,6.009,0,0,0,1.809-4.358L811.035,41.562l78.782,3.453a5.945,5.945,0,0,0,4.334-1.573,6.046,6.046,0,0,0,1.951-4.176c.346-7.929.692-13.757,1.039-19.593.251-4.176.5-8.353.747-13.309,3.13.063,6.662-.016,9.979-.142l-2.6,53.088-68.429-3.079a6.125,6.125,0,0,0-4.4,1.635,6,6,0,0,0-1.888,4.3l-1.2,91.493a6.027,6.027,0,0,0,1.817,4.4,6.231,6.231,0,0,0,4.443,1.706l18.492-.739a5.956,5.956,0,0,0,5.066,6.175,6.017,6.017,0,0,0,6.826-5.079v-.01l4.436-30.306,10.677.039-1.03,20.765a6.019,6.019,0,0,0,5.708,6.315h.01l.306.008a6.008,6.008,0,0,0,6-5.726l1.039-20.836c.008-.165-.063-.306-.071-.472l14.851.063a5.912,5.912,0,0,0-.96,2.636l-1.824,18.775a6.026,6.026,0,0,0,5.409,6.586h0c.2.016.4.024.59.024a6.03,6.03,0,0,0,5.993-5.442l1.825-18.784a5.9,5.9,0,0,0-.983-3.752l16.928.071a5.99,5.99,0,0,0-1.7,4.169V153a6.022,6.022,0,0,0,12.043.013V134.237a5.991,5.991,0,0,0-1.675-4.129l14.768.063c6.025.032,12.175.322,15.4,3.507,3.3,3.273,3.563,9.557,3.555,15.708l-.133,90.43-17.364-.55,4.838-57.962a6.045,6.045,0,0,0-1.644-4.664,5.672,5.672,0,0,0-4.57-1.864l-64.506,2.265a6.026,6.026,0,0,0-5.82,5.914l-.772,43.662a6.022,6.022,0,0,0,5.8,6.127l26.783.991a5.822,5.822,0,0,0,5.875-3.908,41.378,41.378,0,0,0,2.273-19.436,6.023,6.023,0,1,0-11.955,1.478h0a29.463,29.463,0,0,1-.426,9.651l-16.194-.6.565-32.044,52.016-1.817-4.468,53.517c-.087,1.046-.283,3.5-.81,4.074-.347.385-1.581.8-5.562.614l-59.973-2.794c-2.556-.118-7.315-.338-8.9-2.257-1.573-1.88-.991-6.506-.677-9.006l5.035-40.957a6.028,6.028,0,0,0-11.964-1.479L861.7,213.478l-14.07-.81a5.925,5.925,0,0,0-4.46,1.612,6.023,6.023,0,0,0-1.912,4.342l-.629,63.452a6.023,6.023,0,0,0,5.38,6.049l52.621,5.655c4.263.456,10.493,1.14,16.172-1.338l27.333,1.668,2.368,56.64Z" transform="translate(-499.968 38.561)" fill="#d10057" />
+                </svg>
+            </div>
+            <div className={styleProductos.listaproductos2}>
                 <div>
-                    <div>Chili con carne</div>
+                    <div className={styleProductos.titulo}>Chili con carne</div>
                     <div>
-                        <span>Perfecto para los amantes de la cocina tradicional tex-mex.</span>
-                        <p>
+                        <p className={styleProductos.subtitulo}>Perfecto para los amantes de la cocina tradicional tex-mex.</p>
+                        <p className={styleProductos.texto}>
                             El chili con carne es un famoso plato de la cocina tex-mex, preparado a base de carne de vacuno y alubias rojas, mezclado con una salsa de tomate ligeramente picante. Llena de sabor y lista para consumir, es el complemento perfecto para acompañar unos nachos, rellenar unos burritos o simplemente comerlo con arroz como plato principal.
                         </p>
                     </div>
                 </div>
+                <div><div><img src={chiliConCarne} width="872" height="919" alt="imagen chili con carne" /></div></div>
             </div>
-            <div>
+            <div className={styleProductos.listaproductos1}>
                 <div>
-                    <div>Salsas</div>
+                    <div className={styleProductos.titulo}>Salsas</div>
                     <div>
-                        <span>El complemento perfecto para nuestras tortilla chips.</span>
-                        <p>
+                        <p className={styleProductos.subtitulo}>El complemento perfecto para nuestras tortilla chips.</p>
+                        <p className={styleProductos.texto}>
                             Ya sea dippeando o para cubrir unos nachos. Nuestras salsas, hechas a partir de las recetas tradicionales milenarias, añaden sabor y color a cualquier plato. Están especialmente envasadas para su fácil utilización.<br /><br />
                             cheese - tomato - guacamole
                         </p>
@@ -83,17 +111,17 @@ export default function Productos(){
                 </div>
                 <div><div><img src={salsas} width="1088" height="1148" alt="imagen patatas fritas" /></div></div>
             </div>
-            <div>
-                <div><div><img src={sazonadores} width="1049" height="958" alt="imagen sazonadores" /></div></div>
+            <div className={styleProductos.listaproductos2}>
                 <div>
-                    <div>Sazonadores</div>
+                    <div className={styleProductos.titulo}>Sazonadores</div>
                     <div>
-                        <span>Perfectos para preparar tacos, burritos o fajitas en casa.</span>
-                        <p>
+                        <p className={styleProductos.subtitulo}>Perfectos para preparar tacos, burritos o fajitas en casa.</p>
+                        <p className={styleProductos.texto}>
                             Preparamos nuestros condimentos con productos 100% naturales y libres de gluten. Ajo, comino, cebolla… son algunos de los ingredientes de nuestra mezcla especial que ayudan a realzar el sabor azteca de tus recetas. Envasados en sobres monodosis de 25gr.
                         </p>
                     </div>
                 </div>
+                <div><div><img src={sazonadores} width="1049" height="958" alt="imagen sazonadores" /></div></div>
             </div>
         </section>
     </div>

@@ -12,6 +12,8 @@ import Calidad from "./Calidad/Calidad";
 import LaHoguera from "./LaHoguera/LaHoguera";
 import Contacto from "./Contacto/Contacto";
 import NoEncontrada from "./NoEncontrada/NoEncontrada";
+import Enviado from "./Enviado/Enviado";
+import NoEnviado from "./NoEnviado/NoEnviado";
 import Footer from "../components/Footer/Footer";
 
 function Front() {
@@ -31,6 +33,8 @@ function Front() {
           <Route path="/es/calidad" element={<Calidad lang="es" />} />
           <Route path="/es/la-hoguera" element={<LaHoguera lang="es" />} />
           <Route path="/es/contacto" element={<Contacto lang="es" />} />
+          <Route path="/es/enviado" element={<Enviado lang="es" />} />
+          <Route path="/es/no-enviado" element={<NoEnviado lang="es" />} />
           <Route path="*" element={<NoEncontrada lang="es" />} />
         </Route>
         <Route path="/en" element={<Layout lang="en" />}>
