@@ -14,8 +14,8 @@
   padding: 5px 10px 10px;
   margin: 0px 5px;
   font-size: 30px;
-  -webkit-transition: all 0.6s var(--transition_ease);
-  transition: all 0.6s var(--transition_ease);
+  -webkit-transition: all 0.6s ease;
+  transition: all 0.6s ease;
 }
 
 .idioma1 {
@@ -81,8 +81,8 @@
   max-width: 100%;
   height: auto;
   margin: -46px 0px 0px 0px;
-  -webkit-transition: all 0.3s var(--transition_cubic);
-  transition: all 0.3s var(--transition_cubic);
+  -webkit-transition: all 0.3s cubic-bezier(0.42, 0, 0.21, 0.99);
+  transition: all 0.3s cubic-bezier(0.42, 0, 0.21, 0.99);
 }
 
 .logo a:hover svg {
@@ -103,8 +103,8 @@
 .btmenu div {
   width: 100%;
   text-align: center;
-  -webkit-transition: all 0.3s var(--transition_cubic);
-  transition: all 0.3s var(--transition_cubic);
+  -webkit-transition: all 0.3s cubic-bezier(0.42, 0, 0.21, 0.99);
+  transition: all 0.3s cubic-bezier(0.42, 0, 0.21, 0.99);
 }
 
 .btmenu .lineamenu1 {

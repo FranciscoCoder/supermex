@@ -1,0 +1,27 @@
+.sidebar {
+  position: fixed;
+  width: 250px;
+  height: 100vh;
+  overflow-y: auto;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: var(--dark);
+  color: var(--white);
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar ul li {
+  padding: 0.5rem 1rem;
+}
+
+.sidebar a {
+  color: var(--white);
+  text-decoration: none;
+  width: 100%;
+  display: block;
+}
+/*# sourceMappingURL=Sidebar.module.css.map */

@@ -1,0 +1,23 @@
+.sidebar{
+  position: fixed;
+  width: 250px;
+  height: 100vh;
+  overflow-y: auto;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: var(--dark);
+  color: var(--white);
+  & ul{
+    list-style: none;
+    & li{
+      padding: 0.5rem 1rem;
+    }
+  }
+  & a{
+    color: var(--white);
+    text-decoration: none;
+    width: 100%;
+    display: block;
+  }
+}

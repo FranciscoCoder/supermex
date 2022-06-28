@@ -1,0 +1,52 @@
+.estiloBody {
+  font-family: "Open sans", sans-serif;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--light);
+}
+
+.content {
+  padding: 0 0 0 250px;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.contentHeader {
+  padding: 20px 2.5rem;
+}
+
+.contentHeader h1 {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.contentBody {
+  margin: 20px 2.5rem;
+  background-color: var(--white);
+  border-radius: 5px;
+  padding: 20px 2rem;
+}
+
+.contentBody table {
+  width: 100%;
+}
+
+.contentBody table thead tr th {
+  padding: 5px;
+  margin: 0;
+  border: 1px solid var(--gray-light);
+}
+
+.contentBody table tbody tr td {
+  padding: 5px;
+  margin: 0;
+  border: 1px solid var(--gray-light);
+}
+
+.contentBody input[type=text], .contentBody textarea {
+  border: 2px solid var(--gray-light);
+  padding: 10px;
+  border-radius: 5px;
+}
+/*# sourceMappingURL=Dashboard.module.css.map */
