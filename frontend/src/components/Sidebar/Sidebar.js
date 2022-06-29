@@ -8,7 +8,7 @@ export default function Sidebar() {
     <div className={sidebarStyle.sidebar}>
       <ul>
         <li>
-          <Link to={`/admin`}>Inicio</Link>
+          <Link to={`/admin/inicio`}>Inicio</Link>
         </li>
         <li>
           <Link to={`/admin/recetas`}>Recetas</Link>
@@ -18,6 +18,9 @@ export default function Sidebar() {
         </li>
         <li>
           <Link to={`/admin/productos`}>Productos</Link>
+        </li>
+        <li>
+          <Link to={`/admin/contactos`}>Contactos</Link>
         </li>
       </ul>
     </div>

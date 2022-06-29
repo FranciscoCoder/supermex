@@ -29,6 +29,7 @@
   --danger: #dc3545;
   --light: #e9ecef;
   --dark: #343a40;
+  --black: #000;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
@@ -131,5 +132,9 @@ ul {
 
 .fondomorado {
   background-color: var(--color_morado);
+}
+
+.fondoDashboard {
+  background-color: var(--light);
 }
 /*# sourceMappingURL=index.css.map */

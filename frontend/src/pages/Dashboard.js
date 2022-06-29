@@ -9,10 +9,14 @@ import Noticias from "./admin/Noticias/Noticias";
 import Noticia from "./admin/Noticia/Noticia";
 import Productos from "./admin/Productos/Productos";
 import Producto from "./admin/Producto/Producto";
+import Contactos from "./admin/Contactos/Contactos";
 import styleDashboard from "./Dashboard.module.css";
+import {backgroundColorBody} from '../components/Utils';
 
 
 function Dashboard() {
+
+    backgroundColorBody('fondoDashboard');
     return (
     <Routes>
       <Route path="/login" element={<Login />} />
@@ -27,6 +31,7 @@ function Dashboard() {
         <Route path="/productos" element={<Productos />}>
           <Route path=":productoId" element={<Producto />} />
         </Route>
+        <Route path="/contactos" element={<Contactos />} />
       </Route>
       <Route path="*" element={<Navigate replace to="/admin/inicio" />} />
     </Routes>

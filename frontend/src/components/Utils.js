@@ -16,3 +16,9 @@ export function changeStyleBody (styleValue, styleValue2) {
         }
     });
 }
+
+export function backgroundColorBody(styleValue)
+{
+    let bodyWeb= document.body;
+    bodyWeb.classList.add(styleValue);
+}
