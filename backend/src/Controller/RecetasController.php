@@ -15,20 +15,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class RecetasController extends AbstractController
 {
     /**
-     * @Route("/api/recipes")", name="app_recipes_index", methods={"GET"})
+     * @Route("/api/recipes", name="app_recetas_index", methods={"GET"})
+     * 
      */
     public function index(RecetasRepository $recetasRepository, IdiomasRepository $idiomasRepository, Request $request): Response
     {
-        //?page=1&language=es&limit=20
-
+        //?page=1&language=es&limit=12
         //recibimos los query params para realizar busquedas concretas
         $page = $request->query->get('page', 1);
         $language = $request->query->get('language', "es");
         $limit = $request->query->get('limit', 20);
 
-        if($page<=0){
-            $page=1;
-        }
+        if($page<=0){$page=1;}
 
         //Comprobamos el idioma recibido
         $languageRegister = $idiomasRepository->findOneBy(['abreviatura'=>$language]);
@@ -39,99 +37,136 @@ class RecetasController extends AbstractController
 
         //Consulta para recibir las recetas segun los params recibidos
         $recetas = $recetasRepository->findBy(['idioma' => $language], ['id' => 'DESC'], $limit, $offset);
-        $contador = count($recetas);
+        $totalRegistros = count($recetasRepository->findBy(['idioma' => $language]));
         $resultado = [];
         foreach ($recetas as $receta){
+            if($receta->getActivo()===1){$activo='Si';}else{$activo='No';}
 
             $resultado[]=[
-                // 'id' => $receta->getId(),
-                // 'nombre' => $receta->getNombre(),
-                // 'slug' => $receta->getSlug(),
-                // 'descripcion' => $receta->getDescripcion(),
-                // 'ingredientes' => $receta->getIngredientes(),
-                // 'idioma' => $receta->getIdioma()->getId(),
-                // 'fecha_creacion' => $receta->getReceta()->getFechaCreacion()->format('Y-m-d H:i:s'),
-                // 'activo' => $receta->getReceta()->getActivo(),
-                // 'imagen' => $receta->getReceta()->getImagen(),
+                'id' => $receta->getId(),
+                'nombre' => $receta->getNombre(),
+                'slug' => $receta->getSlug(),
+                'descripcion' => $receta->getDescripcion(),
+                'ingredientes' => $receta->getIngredientes(),
+                'idioma' => $receta->getIdioma()->getId(),
+                'fecha_creacion' => $receta->getFechaCreacion()->format('d-m-Y H:i'),
+                'activo' => $activo,
+                'imagen' => $receta->getImagen(),
             ];
         }
 
-        return $this->json($resultado);
+        return $this->json([
+            "result" => $resultado ,
+            "count" => $totalRegistros
+        ]);
     }
 
     /**
-     * @Route("/api/recipes/{slug}", name="app_recipes_recipe", methods={"GET"})
+     * @Route("/api/recipes/{slug}", name="app_recipes_show", methods={"GET"})
      */
     public function showRecipe(RecetasRepository $recetasRepository, $slug): Response
     {
-        // $receta = $recetasDescripcionRepository->findOneBy(['slug'=>$slug]);
-        // if($receta == null){
-        //     throw $this->createNotFoundException();
-        // }
+        $receta = $recetasRepository->findOneBy(['slug'=>$slug]);
+        if($receta === null){
+            throw $this->createNotFoundException();
+        }
         
         $resultado[]=[
-            // 'id' => $receta->getId(),
-            // 'nombre' => $receta->getNombre(),
-            // 'slug' => $receta->getSlug(),
-            // 'descripcion' => $receta->getDescripcion(),
-            // 'ingredientes' => $receta->getIngredientes(),
-            // 'idioma' => $receta->getIdioma()->getId(),
-            // 'fecha_creacion' => $receta->getReceta()->getFechaCreacion()->format('Y-m-d H:i:s'),
-            // 'activo' => $receta->getReceta()->getActivo(),
-            // 'imagen' => $receta->getReceta()->getImagen(),
+            'id' => $receta->getId(),
+            'nombre' => $receta->getNombre(),
+            'slug' => $receta->getSlug(),
+            'descripcion' => $receta->getDescripcion(),
+            'ingredientes' => $receta->getIngredientes(),
+            'idioma' => $receta->getIdioma()->getId(),
+            'fecha_creacion' => $receta->getFechaCreacion()->format('d-m-Y H:i'),
+            'activo' => $receta->getActivo(),
+            'imagen' => $receta->getImagen(),
         ];
 
-        return $this->json($resultado);
+        return $this->json([
+            'result' => $resultado,
+        ]);
     }
 
     /**
-     * @Route("/api/recipe", name="app_recipes_new_recipe", methods={"POST"})
+     * @Route("/api/recipe", name="app_recipes_register", methods={"POST"})
      */
     public function newRecipe(Request $request, IdiomasRepository $idiomasRepository, EntityManagerInterface $em): Response
     {
         $data = $request->toArray();
-        $imagen = $request->files->get('imagen');
-        // $idioma = $idiomasRepository->find(1);
-        // $resultado="ko";
-        // if(isset($data["nombre"])){
-        //     $receta = new Recetas();
-        //     $receta->setActivo(1);
-        //     $receta->setFechaCreacion(new \DateTime());
-        //     $receta->setFechaModificacion(new \DateTime());
-        //     $receta->setImagen($data["ingredientes"]);
 
-        //     $em->persist($receta);
-        //     $em->flush();
+        $idioma = $idiomasRepository->find(1);
+        $resultado="ko";
+        if(isset($data["nombre"])){
+            $receta = new Recetas();
+            $receta->setActivo(1);
+            $receta->setNombre($data["nombre"]);
+            $receta->setSlug($data["nombre"]);
+            $receta->setIdioma($idioma);
+            $receta->setDescripcion($data["descripcion"]);
+            $receta->setIngredientes($data["ingredientes"]);
+            $receta->setFechaCreacion(new \DateTime());
+            $receta->setFechaModificacion(new \DateTime());
+            $receta->setImagen($data["ingredientes"]);
 
-        //     if(!empty($receta->getId())){
-        //         $recetaDescripcion = new RecetasDescripcion();
-        //         $recetaDescripcion->setReceta($receta);
-        //         $recetaDescripcion->setIdioma($idioma);
-        //         $recetaDescripcion->setNombre($data["nombre"]);
-        //         $recetaDescripcion->setDescripcion($data["descripcion"]);
-        //         $recetaDescripcion->setIngredientes($data["ingredientes"]);
-        //         $recetaDescripcion->setSlug($data["nombre"]);
-        //         $em->persist($recetaDescripcion);
-        //         $em->flush();
+            $em->persist($receta);
+            $em->flush();
 
-        //         if(!empty($recetaDescripcion->getId()))
-        //         {
-        //             $resultado="ok";
-        //         }
-
-        //     }
-        // }
-
-        // return $this->json([
-        //     'resultado' => $resultado
-        // ]);
+            $registro='';
+            if(!empty($receta->getId()))
+            {
+                $resultado="ok";
+                $registro=$receta->getId();
+            }
+        }
 
         return $this->json([
-            'nombre' => $data["nombre"],
-            'ingredientes' => $data["ingredientes"],
-            'descripcion' => $data["descripcion"],
-            'imagen' => $imagen,
-            'request' => $request,
+            'result' => $resultado,
+            'id' => $registro
+        ]);
+    }
+
+    /**
+     * @Route("/api/recipe/{id}", name="app_recipes_update", methods={"PUT"})
+     */
+    public function updateRecipe(Request $request, IdiomasRepository $idiomasRepository, RecetasRepository $recetasRepository, EntityManagerInterface $em, $id): Response
+    {
+        $data=$request->toArray();
+        $receta = $recetasRepository->find($id);
+        
+        if(isset($data['nombre'])){
+            $receta->setNombre($data['nombre']);
+        }
+        if(isset($data['descripcion'])){
+            $receta->setDescripcion($data['texto']);
+        }
+        if(isset($data['ingredientes'])){
+            $receta->setIngredientes($data['ingredientes']);
+        }
+        if(isset($data['activo'])){
+            $receta->setActivo($data['activo']);
+        }
+
+        $receta->setFechaModificacion(new \DateTime());
+        $em->flush();
+        
+        return $this->json([
+            'result' => 'ok',
+            'id' => $receta->getId(),
+        ]);
+    }
+
+    /**
+     * @Route("/api/recipe/{id}", name="app_recipes_detele", methods={"DELETE"})
+     */
+    public function deleteRecipe(RecetasRepository $recetasRepository, EntityManagerInterface $em, $id): Response
+    {
+        $receta = $recetasRepository->find($id);
+        $em->remove($receta);
+        $em->flush();
+        
+        return $this->json([
+            'result' => 'ok',
         ]);
     }
 }
