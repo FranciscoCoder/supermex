@@ -66,7 +66,7 @@ export default function Contactos() {
         <div>
           <div className={styleDashboard.contentHeader}><h1>Contactos</h1></div>
           <div className={styleDashboard.contentBody}>
-            <div>No exiten contactos registrados</div>
+            <div className={styleDashboard.notFound}>No exiten contactos registrados</div>
           </div>
         </div>
       );

@@ -209,4 +209,15 @@
   font-size: 5vw;
   font-weight: 700;
 }
+
+.notFound {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 20px 5px;
+  text-align: center;
+}
 /*# sourceMappingURL=Dashboard.module.css.map */

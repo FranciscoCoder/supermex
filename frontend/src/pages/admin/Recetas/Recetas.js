@@ -7,7 +7,7 @@ export default function Recetas() {
   const [loading, setLoading] = useState(true);
   const [recetas, setRecetas] = useState([]);
   useEffect(() => {
-    fetch(`http://127.0.0.1:8080/api/recipes/?page=${page}&language=es`,{
+    fetch(`http://127.0.0.1:8080/api/recipes/?page=${page}&language=es&limit=8`,{
       method: 'GET',
       headers:{
         'Content-Type': 'application/json'
@@ -86,7 +86,7 @@ export default function Recetas() {
             <div className={styleDashboard.botones}>
               <a href="/admin/receta/" className={styleDashboard.botonNuevo}>Nueva receta</a>
             </div>
-            <div>No exiten recetas registradas</div>
+            <div className={styleDashboard.notFound}>No exiten recetas registradas</div>
           </div>
         </div>
       );

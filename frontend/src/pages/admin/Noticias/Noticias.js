@@ -61,7 +61,10 @@ export default function Noticias() {
         <div>
           <div className={styleDashboard.contentHeader}><h1>Noticias</h1></div>
           <div className={styleDashboard.contentBody}>
-            <div>No exiten noticias registradas</div>
+            <div className={styleDashboard.botones}>
+              <a href="/admin/noticia/" className={styleDashboard.botonNuevo}>Nueva noticia</a>
+            </div>
+            <div className={styleDashboard.notFound}>No exiten noticias registradas</div>
           </div>
         </div>
       );
