@@ -15,23 +15,38 @@ class ContactoController extends AbstractController
     /**
      * @Route("/api/contact", name="app_contact_index", methods={"GET"})
      */
-    public function index(ContactoRepository $contactoRepository): Response
+    public function index(ContactoRepository $contactoRepository, Request $request): Response
     {
-        $contactos = $contactoRepository->findAll();
+        //?page=1&limit=20
+        
+        //recibimos los query params para realizar busquedas concretas
+        $page = $request->query->get('page', 1);
+        $limit = $request->query->get('limit', 20);
+
+        if($page<=0){$page=1;}
+
+        //calculamos el offset de los registros
+        $offset = ($page-1)*$limit;
+        
+        $contactos = $contactoRepository->findBy([], ['fecha' => 'DESC'], $limit, $offset);
+        $totalRegistros = count($contactoRepository->findAll());
         $resultado = [];
         foreach ($contactos as $contacto){
+            $aceptar='No';
+            if($contacto->getAceptar()===1){$aceptar='Si';}
             $resultado[]=[
                 'id' => $contacto->getId(),
                 'nombre' => $contacto->getNombre(),
                 'email' => $contacto->getCorreo(),
                 'telefono' => $contacto->getTelefono(),
                 'mensaje' => $contacto->getMensaje(),
-                'aceptar' => $contacto->getAceptar(),
-                'fecha' => $contacto->getFecha(),
+                'aceptar' => $aceptar,
+                'fecha' => $contacto->getFecha()->format('d-m-Y H:i'),
             ];
         }
         return $this->json([
-            'result' => $resultado
+            'result' => $resultado,
+            'count' => $totalRegistros,
         ]);
     }
 

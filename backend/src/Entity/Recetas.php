@@ -18,9 +18,24 @@ class Recetas
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
-    private $activo;
+    private $nombre;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $descripcion;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $ingredientes;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $imagen;
 
     /**
      * @ORM\Column(type="datetime")
@@ -33,28 +48,70 @@ class Recetas
     private $fecha_modificacion;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
-    private $imagen;
+    private $activo;
 
     /**
-     * @ORM\OneToMany(targetEntity=RecetasDescripcion::class, mappedBy="receta", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Idiomas::class, inversedBy="recetas")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $recetasDescripcion;
+    private $idioma;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $slug;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getActivo(): ?int
+    public function getNombre(): ?string
     {
-        return $this->activo;
+        return $this->nombre;
     }
 
-    public function setActivo(int $activo): self
+    public function setNombre(string $nombre): self
     {
-        $this->activo = $activo;
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    public function getDescripcion(): ?string
+    {
+        return $this->descripcion;
+    }
+
+    public function setDescripcion(?string $descripcion): self
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    public function getIngredientes(): ?string
+    {
+        return $this->ingredientes;
+    }
+
+    public function setIngredientes(?string $ingredientes): self
+    {
+        $this->ingredientes = $ingredientes;
+
+        return $this;
+    }
+
+    public function getImagen(): ?string
+    {
+        return $this->imagen;
+    }
+
+    public function setImagen(?string $imagen): self
+    {
+        $this->imagen = $imagen;
 
         return $this;
     }
@@ -83,31 +140,38 @@ class Recetas
         return $this;
     }
 
-    public function getImagen(): ?string
+    public function getActivo(): ?int
     {
-        return $this->imagen;
+        return $this->activo;
     }
 
-    public function setImagen(string $imagen): self
+    public function setActivo(int $activo): self
     {
-        $this->imagen = $imagen;
+        $this->activo = $activo;
 
         return $this;
     }
 
-    public function getRecetasDescripcion(): ?RecetasDescripcion
+    public function getIdioma(): ?Idiomas
     {
-        return $this->recetasDescripcion;
+        return $this->idioma;
     }
 
-    public function setRecetasDescripcion(RecetasDescripcion $recetasDescripcion): self
+    public function setIdioma(?Idiomas $idioma): self
     {
-        // set the owning side of the relation if necessary
-        if ($recetasDescripcion->getReceta() !== $this) {
-            $recetasDescripcion->setReceta($this);
-        }
+        $this->idioma = $idioma;
 
-        $this->recetasDescripcion = $recetasDescripcion;
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

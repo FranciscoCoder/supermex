@@ -4,9 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Idiomas;
 use App\Entity\Recetas;
-use App\Entity\RecetasDescripcion;
 use App\Repository\IdiomasRepository;
-use App\Repository\RecetasDescripcionRepository;
 use App\Repository\RecetasRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,8 +17,10 @@ class RecetasController extends AbstractController
     /**
      * @Route("/api/recipes")", name="app_recipes_index", methods={"GET"})
      */
-    public function index(RecetasDescripcionRepository $recetasDescripcionRepository, IdiomasRepository $idiomasRepository, Request $request): Response
+    public function index(RecetasRepository $recetasRepository, IdiomasRepository $idiomasRepository, Request $request): Response
     {
+        //?page=1&language=es&limit=20
+
         //recibimos los query params para realizar busquedas concretas
         $page = $request->query->get('page', 1);
         $language = $request->query->get('language', "es");
@@ -38,21 +38,21 @@ class RecetasController extends AbstractController
         $offset = ($page-1)*$limit;
 
         //Consulta para recibir las recetas segun los params recibidos
-        $recetas = $recetasDescripcionRepository->findBy(['idioma' => $language], ['id' => 'DESC'], $limit, $offset);
+        $recetas = $recetasRepository->findBy(['idioma' => $language], ['id' => 'DESC'], $limit, $offset);
         $contador = count($recetas);
         $resultado = [];
         foreach ($recetas as $receta){
 
             $resultado[]=[
-                'id' => $receta->getId(),
-                'nombre' => $receta->getNombre(),
-                'slug' => $receta->getSlug(),
-                'descripcion' => $receta->getDescripcion(),
-                'ingredientes' => $receta->getIngredientes(),
-                'idioma' => $receta->getIdioma()->getId(),
-                'fecha_creacion' => $receta->getReceta()->getFechaCreacion()->format('Y-m-d H:i:s'),
-                'activo' => $receta->getReceta()->getActivo(),
-                'imagen' => $receta->getReceta()->getImagen(),
+                // 'id' => $receta->getId(),
+                // 'nombre' => $receta->getNombre(),
+                // 'slug' => $receta->getSlug(),
+                // 'descripcion' => $receta->getDescripcion(),
+                // 'ingredientes' => $receta->getIngredientes(),
+                // 'idioma' => $receta->getIdioma()->getId(),
+                // 'fecha_creacion' => $receta->getReceta()->getFechaCreacion()->format('Y-m-d H:i:s'),
+                // 'activo' => $receta->getReceta()->getActivo(),
+                // 'imagen' => $receta->getReceta()->getImagen(),
             ];
         }
 
@@ -62,23 +62,23 @@ class RecetasController extends AbstractController
     /**
      * @Route("/api/recipes/{slug}", name="app_recipes_recipe", methods={"GET"})
      */
-    public function showRecipe(RecetasDescripcionRepository $recetasDescripcionRepository, $slug): Response
+    public function showRecipe(RecetasRepository $recetasRepository, $slug): Response
     {
-        $receta = $recetasDescripcionRepository->findOneBy(['slug'=>$slug]);
-        if($receta == null){
-            throw $this->createNotFoundException();
-        }
+        // $receta = $recetasDescripcionRepository->findOneBy(['slug'=>$slug]);
+        // if($receta == null){
+        //     throw $this->createNotFoundException();
+        // }
         
         $resultado[]=[
-            'id' => $receta->getId(),
-            'nombre' => $receta->getNombre(),
-            'slug' => $receta->getSlug(),
-            'descripcion' => $receta->getDescripcion(),
-            'ingredientes' => $receta->getIngredientes(),
-            'idioma' => $receta->getIdioma()->getId(),
-            'fecha_creacion' => $receta->getReceta()->getFechaCreacion()->format('Y-m-d H:i:s'),
-            'activo' => $receta->getReceta()->getActivo(),
-            'imagen' => $receta->getReceta()->getImagen(),
+            // 'id' => $receta->getId(),
+            // 'nombre' => $receta->getNombre(),
+            // 'slug' => $receta->getSlug(),
+            // 'descripcion' => $receta->getDescripcion(),
+            // 'ingredientes' => $receta->getIngredientes(),
+            // 'idioma' => $receta->getIdioma()->getId(),
+            // 'fecha_creacion' => $receta->getReceta()->getFechaCreacion()->format('Y-m-d H:i:s'),
+            // 'activo' => $receta->getReceta()->getActivo(),
+            // 'imagen' => $receta->getReceta()->getImagen(),
         ];
 
         return $this->json($resultado);
@@ -90,7 +90,7 @@ class RecetasController extends AbstractController
     public function newRecipe(Request $request, IdiomasRepository $idiomasRepository, EntityManagerInterface $em): Response
     {
         $data = $request->toArray();
-
+        $imagen = $request->files->get('imagen');
         // $idioma = $idiomasRepository->find(1);
         // $resultado="ko";
         // if(isset($data["nombre"])){
@@ -130,7 +130,8 @@ class RecetasController extends AbstractController
             'nombre' => $data["nombre"],
             'ingredientes' => $data["ingredientes"],
             'descripcion' => $data["descripcion"],
-            'imagen' => $data["imagen"],
+            'imagen' => $imagen,
+            'request' => $request,
         ]);
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\IdiomasRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,50 +20,29 @@ class Idiomas
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $idioma;
-
-    /**
      * @ORM\Column(type="string", length=3)
      */
     private $abreviatura;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\OneToMany(targetEntity=Recetas::class, mappedBy="idioma")
      */
-    private $activo;
+    private $recetas;
 
     /**
-     * @ORM\OneToOne(targetEntity=CategoriasRecetasDescripcion::class, mappedBy="idioma", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=Noticias::class, mappedBy="idioma")
      */
-    private $categoriasRecetasDescripcion;
+    private $noticias;
 
-    /**
-     * @ORM\OneToOne(targetEntity=RecetasDescripcion::class, mappedBy="idioma", cascade={"persist", "remove"})
-     */
-    private $recetasDescripcion;
-
-    /**
-     * @ORM\OneToOne(targetEntity=NoticiasDescripcion::class, mappedBy="idioma", cascade={"persist", "remove"})
-     */
-    private $noticiasDescripcion;
+    public function __construct()
+    {
+        $this->recetas = new ArrayCollection();
+        $this->noticias = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdioma(): ?string
-    {
-        return $this->idioma;
-    }
-
-    public function setIdioma(string $idioma): self
-    {
-        $this->idioma = $idioma;
-
-        return $this;
     }
 
     public function getAbreviatura(): ?string
@@ -76,65 +57,62 @@ class Idiomas
         return $this;
     }
 
-    public function getActivo(): ?int
+    /**
+     * @return Collection<int, Recetas>
+     */
+    public function getRecetas(): Collection
     {
-        return $this->activo;
+        return $this->recetas;
     }
 
-    public function setActivo(int $activo): self
+    public function addReceta(Recetas $receta): self
     {
-        $this->activo = $activo;
+        if (!$this->recetas->contains($receta)) {
+            $this->recetas[] = $receta;
+            $receta->setIdioma($this);
+        }
 
         return $this;
     }
 
-    public function getCategoriasRecetasDescripcion(): ?CategoriasRecetasDescripcion
+    public function removeReceta(Recetas $receta): self
     {
-        return $this->categoriasRecetasDescripcion;
-    }
-
-    public function setCategoriasRecetasDescripcion(CategoriasRecetasDescripcion $categoriasRecetasDescripcion): self
-    {
-        // set the owning side of the relation if necessary
-        if ($categoriasRecetasDescripcion->getIdioma() !== $this) {
-            $categoriasRecetasDescripcion->setIdioma($this);
+        if ($this->recetas->removeElement($receta)) {
+            // set the owning side to null (unless already changed)
+            if ($receta->getIdioma() === $this) {
+                $receta->setIdioma(null);
+            }
         }
-
-        $this->categoriasRecetasDescripcion = $categoriasRecetasDescripcion;
 
         return $this;
     }
 
-    public function getRecetasDescripcion(): ?RecetasDescripcion
+    /**
+     * @return Collection<int, Noticias>
+     */
+    public function getNoticias(): Collection
     {
-        return $this->recetasDescripcion;
+        return $this->noticias;
     }
 
-    public function setRecetasDescripcion(RecetasDescripcion $recetasDescripcion): self
+    public function addNoticia(Noticias $noticia): self
     {
-        // set the owning side of the relation if necessary
-        if ($recetasDescripcion->getIdioma() !== $this) {
-            $recetasDescripcion->setIdioma($this);
+        if (!$this->noticias->contains($noticia)) {
+            $this->noticias[] = $noticia;
+            $noticia->setIdioma($this);
         }
-
-        $this->recetasDescripcion = $recetasDescripcion;
 
         return $this;
     }
 
-    public function getNoticiasDescripcion(): ?NoticiasDescripcion
+    public function removeNoticia(Noticias $noticia): self
     {
-        return $this->noticiasDescripcion;
-    }
-
-    public function setNoticiasDescripcion(NoticiasDescripcion $noticiasDescripcion): self
-    {
-        // set the owning side of the relation if necessary
-        if ($noticiasDescripcion->getIdioma() !== $this) {
-            $noticiasDescripcion->setIdioma($this);
+        if ($this->noticias->removeElement($noticia)) {
+            // set the owning side to null (unless already changed)
+            if ($noticia->getIdioma() === $this) {
+                $noticia->setIdioma(null);
+            }
         }
-
-        $this->noticiasDescripcion = $noticiasDescripcion;
 
         return $this;
     }

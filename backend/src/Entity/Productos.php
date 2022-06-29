@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\NoticiasRepository;
+use App\Repository\ProductosRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=NoticiasRepository::class)
+ * @ORM\Entity(repositoryClass=ProductosRepository::class)
  */
-class Noticias
+class Productos
 {
     /**
      * @ORM\Id
@@ -20,15 +20,10 @@ class Noticias
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $titular;
+    private $nombre;
 
     /**
-     * @ORM\Column(type="text")
-     */
-    private $descripcion;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $imagen;
 
@@ -47,42 +42,19 @@ class Noticias
      */
     private $fecha_modificacion;
 
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $slug;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Idiomas::class, inversedBy="noticias")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $idioma;
-
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTitular(): ?string
+    public function getNombre(): ?string
     {
-        return $this->titular;
+        return $this->nombre;
     }
 
-    public function setTitular(string $titular): self
+    public function setNombre(string $nombre): self
     {
-        $this->titular = $titular;
-
-        return $this;
-    }
-
-    public function getDescripcion(): ?string
-    {
-        return $this->descripcion;
-    }
-
-    public function setDescripcion(string $descripcion): self
-    {
-        $this->descripcion = $descripcion;
+        $this->nombre = $nombre;
 
         return $this;
     }
@@ -92,7 +64,7 @@ class Noticias
         return $this->imagen;
     }
 
-    public function setImagen(?string $imagen): self
+    public function setImagen(string $imagen): self
     {
         $this->imagen = $imagen;
 
@@ -131,30 +103,6 @@ class Noticias
     public function setFechaModificacion(\DateTimeInterface $fecha_modificacion): self
     {
         $this->fecha_modificacion = $fecha_modificacion;
-
-        return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    public function getIdioma(): ?Idiomas
-    {
-        return $this->idioma;
-    }
-
-    public function setIdioma(?Idiomas $idioma): self
-    {
-        $this->idioma = $idioma;
 
         return $this;
     }
