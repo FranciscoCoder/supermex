@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Noticias;
 use App\Repository\IdiomasRepository;
 use App\Repository\NoticiasRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,11 +42,11 @@ class NoticiasController extends AbstractController
 
             $resultado[]=[
                 'id' => $noticia->getId(),
-                'nombre' => $noticia->getTitular(),
+                'titular' => $noticia->getTitular(),
                 'slug' => $noticia->getSlug(),
                 'descripcion' => $noticia->getDescripcion(),
                 'idioma' => $noticia->getIdioma()->getId(),
-                'fecha_creacion' => $noticia->getFechaCreacion()->format('Y-m-d H:i:s'),
+                'fecha_creacion' => $noticia->getFechaCreacion()->format('d-m-Y H:i'),
                 'activo' => $activo,
                 'imagen' => $noticia->getImagen(),
             ];
@@ -68,15 +70,94 @@ class NoticiasController extends AbstractController
         
         $resultado[]=[
             'id' => $noticia->getId(),
-            'nombre' => $noticia->getTitular(),
+            'titular' => $noticia->getTitular(),
             'slug' => $noticia->getSlug(),
             'descripcion' => $noticia->getDescripcion(),
             'idioma' => $noticia->getIdioma()->getId(),
-            'fecha_creacion' => $noticia->getFechaCreacion()->format('Y-m-d H:i:s'),
+            'fecha_creacion' => $noticia->getFechaCreacion()->format('d-m-Y H:i'),
             'activo' => $noticia->getActivo(),
             'imagen' => $noticia->getImagen(),
         ];
 
         return $this->json($resultado);
+    }
+
+    /**
+     * @Route("/api/new/", name="app_new_register", methods={"POST"})
+     */
+    public function newNew(Request $request, IdiomasRepository $idiomasRepository, EntityManagerInterface $em): Response
+    {
+        $data = $request->toArray();
+
+        $idioma = $idiomasRepository->find(1);
+        $resultado="ko";
+        if(isset($data["nombre"])){
+            $noticia = new Noticias();
+            $noticia->setActivo(1);
+            $noticia->setTitular($data["nombre"]);
+            $noticia->setSlug($data["nombre"]);
+            $noticia->setIdioma($idioma);
+            $noticia->setDescripcion($data["descripcion"]);
+            $noticia->setFechaCreacion(new \DateTime());
+            $noticia->setFechaModificacion(new \DateTime());
+            $noticia->setImagen('');
+
+            $em->persist($noticia);
+            $em->flush();
+
+            $registro='';
+            if(!empty($noticia->getId()))
+            {
+                $resultado="ok";
+                $registro=$noticia->getId();
+            }
+        }
+
+        return $this->json([
+            'result' => $resultado,
+            'id' => $registro
+        ]);
+    }
+
+    /**
+     * @Route("/api/new/{id}", name="app_new_update", methods={"PUT"})
+     */
+    public function updateNew(Request $request, IdiomasRepository $idiomasRepository, NoticiasRepository $noticiasRepository, EntityManagerInterface $em, $id): Response
+    {
+        $data=$request->toArray();
+        $noticia = $noticiasRepository->find($id);
+        
+        if(isset($data['nombre'])){
+            $noticia->setTitular($data['nombre']);
+        }
+        if(isset($data['descripcion'])){
+            $noticia->setDescripcion($data['descripcion']);
+        }
+        
+        if(isset($data['activo'])){
+            $noticia->setActivo($data['activo']);
+        }
+
+        $noticia->setFechaModificacion(new \DateTime());
+        $em->flush();
+        
+        return $this->json([
+            'result' => 'ok',
+            'id' => $noticia->getId(),
+        ]);
+    }
+
+    /**
+     * @Route("/api/new/{id}", name="app_new_detele", methods={"DELETE"})
+     */
+    public function deleteRecipe(NoticiasRepository $noticiasRepository, EntityManagerInterface $em, $id): Response
+    {
+        $noticia = $noticiasRepository->find($id);
+        $em->remove($noticia);
+        $em->flush();
+        
+        return $this->json([
+            'result' => 'ok',
+        ]);
     }
 }

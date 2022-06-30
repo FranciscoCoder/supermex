@@ -89,7 +89,7 @@ class RecetasController extends AbstractController
     }
 
     /**
-     * @Route("/api/recipe", name="app_recipes_register", methods={"POST"})
+     * @Route("/api/recipe/", name="app_recipes_register", methods={"POST"})
      */
     public function newRecipe(Request $request, IdiomasRepository $idiomasRepository, EntityManagerInterface $em): Response
     {
@@ -97,11 +97,14 @@ class RecetasController extends AbstractController
 
         $idioma = $idiomasRepository->find(1);
         $resultado="ko";
+
         if(isset($data["nombre"])){
+            $slug=strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $data["nombre"])));
+
             $receta = new Recetas();
             $receta->setActivo(1);
             $receta->setNombre($data["nombre"]);
-            $receta->setSlug($data["nombre"]);
+            $receta->setSlug($slug);
             $receta->setIdioma($idioma);
             $receta->setDescripcion($data["descripcion"]);
             $receta->setIngredientes($data["ingredientes"]);
@@ -136,9 +139,11 @@ class RecetasController extends AbstractController
         
         if(isset($data['nombre'])){
             $receta->setNombre($data['nombre']);
+            $slug=strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $data["nombre"])));
+            $receta->setSlug($slug);
         }
         if(isset($data['descripcion'])){
-            $receta->setDescripcion($data['texto']);
+            $receta->setDescripcion($data['descripcion']);
         }
         if(isset($data['ingredientes'])){
             $receta->setIngredientes($data['ingredientes']);
