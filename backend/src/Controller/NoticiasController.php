@@ -21,31 +21,38 @@ class NoticiasController extends AbstractController
         //?page=1&language=es&limit=12
         //recibimos los query params para realizar busquedas concretas
         $page = $request->query->get('page', 1);
-        $language = $request->query->get('language', "es");
+        $language = $request->query->get('language');
         $limit = $request->query->get('limit', 20);
 
         if($page<=0){$page=1;}
 
         //Comprobamos el idioma recibido
-        $languageRegister = $idiomasRepository->findOneBy(['abreviatura'=>$language]);
-        $language= $languageRegister->getId();
+        if(!empty($language)){
+            $languageRegister = $idiomasRepository->findOneBy(['abreviatura'=>$language]);
+            $language= $languageRegister->getId();
+        }
         
         //calculamos el offset de los registros
         $offset = ($page-1)*$limit;
 
         //Consulta para recibir las noticias segun los params recibidos
-        $noticias = $noticiasRepository->findBy(['idioma' => $language], ['id' => 'DESC'], $limit, $offset);
+        if(!empty($language)){
+            $noticias = $noticiasRepository->findBy(['idioma' => $language], ['id' => 'DESC'], $limit, $offset);
+        }
+        else{
+            $noticias = $noticiasRepository->findBy([], ['id' => 'DESC'], $limit, $offset);
+        }
         $totalRegistros = count($noticiasRepository->findBy(['idioma' => $language]));
         $resultado = [];
         foreach ($noticias as $noticia){
             if($noticia->getActivo()===1){$activo='Si';}else{$activo='No';}
-
             $resultado[]=[
                 'id' => $noticia->getId(),
                 'titular' => $noticia->getTitular(),
                 'slug' => $noticia->getSlug(),
                 'descripcion' => $noticia->getDescripcion(),
-                'idioma' => $noticia->getIdioma()->getId(),
+                'idioma_id' => $noticia->getIdioma()->getId(),
+                'idioma' => strtoupper($noticia->getIdioma()->getAbreviatura()),
                 'fecha_creacion' => $noticia->getFechaCreacion()->format('d-m-Y H:i'),
                 'activo' => $activo,
                 'imagen' => $noticia->getImagen(),
@@ -61,7 +68,7 @@ class NoticiasController extends AbstractController
     /**
      * @Route("/api/news/{slug}", name="app_news_show", methods={"GET"})
      */
-    public function showRecipe(NoticiasRepository $noticiasRepository, $slug): Response
+    public function showNew(NoticiasRepository $noticiasRepository, $slug): Response
     {
         $noticia = $noticiasRepository->findOneBy(['slug'=>$slug]);
         if($noticia == null){
@@ -79,7 +86,9 @@ class NoticiasController extends AbstractController
             'imagen' => $noticia->getImagen(),
         ];
 
-        return $this->json($resultado);
+        return $this->json([
+            'result' => $resultado,
+        ]);
     }
 
     /**
@@ -88,28 +97,32 @@ class NoticiasController extends AbstractController
     public function newNew(Request $request, IdiomasRepository $idiomasRepository, EntityManagerInterface $em): Response
     {
         $data = $request->toArray();
-
         $idioma = $idiomasRepository->find(1);
         $resultado="ko";
-        if(isset($data["nombre"])){
-            $noticia = new Noticias();
-            $noticia->setActivo(1);
-            $noticia->setTitular($data["nombre"]);
-            $noticia->setSlug($data["nombre"]);
-            $noticia->setIdioma($idioma);
-            $noticia->setDescripcion($data["descripcion"]);
-            $noticia->setFechaCreacion(new \DateTime());
-            $noticia->setFechaModificacion(new \DateTime());
-            $noticia->setImagen('');
+        $registro='';
+        if(!empty($idioma->getId())){
+            if(isset($data["nombre"])){
+                $slug=strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $data["nombre"])));
 
-            $em->persist($noticia);
-            $em->flush();
+                $noticia = new Noticias();
+                $noticia->setActivo(1);
+                $noticia->setTitular($data["nombre"]);
+                $noticia->setSlug($slug);
+                $noticia->setIdioma($idioma);
+                $noticia->setDescripcion($data["descripcion"]);
+                $noticia->setFechaCreacion(new \DateTime());
+                $noticia->setFechaModificacion(new \DateTime());
+                $noticia->setImagen('');
 
-            $registro='';
-            if(!empty($noticia->getId()))
-            {
-                $resultado="ok";
-                $registro=$noticia->getId();
+                $em->persist($noticia);
+                $em->flush();
+
+                $registro='';
+                if(!empty($noticia->getId()))
+                {
+                    $resultado="ok";
+                    $registro=$noticia->getId();
+                }
             }
         }
 
@@ -126,23 +139,35 @@ class NoticiasController extends AbstractController
     {
         $data=$request->toArray();
         $noticia = $noticiasRepository->find($id);
+        $idioma = $idiomasRepository->find($data["idioma"]);
+        $resultado="ko";
         
-        if(isset($data['nombre'])){
-            $noticia->setTitular($data['nombre']);
-        }
-        if(isset($data['descripcion'])){
-            $noticia->setDescripcion($data['descripcion']);
-        }
-        
-        if(isset($data['activo'])){
-            $noticia->setActivo($data['activo']);
-        }
+        if(!empty($idioma->getId()))
+        {
+            if(!empty($noticia->getId()))
+            {
+                if(isset($data['nombre'])){
+                    $noticia->setTitular($data['nombre']);
+                    $slug=strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $data["nombre"])));
+                    $noticia->setSlug($slug);
+                }
+                if(isset($data['descripcion'])){
+                    $noticia->setDescripcion($data['descripcion']);
+                }
+                
+                if(isset($data['activo'])){
+                    $noticia->setActivo($data['activo']);
+                }
 
-        $noticia->setFechaModificacion(new \DateTime());
-        $em->flush();
+                $noticia->setFechaModificacion(new \DateTime());
+                $em->flush();
+
+                $resultado="ok";
+            }
+        }
         
         return $this->json([
-            'result' => 'ok',
+            'result' => $resultado,
             'id' => $noticia->getId(),
         ]);
     }
@@ -152,12 +177,16 @@ class NoticiasController extends AbstractController
      */
     public function deleteRecipe(NoticiasRepository $noticiasRepository, EntityManagerInterface $em, $id): Response
     {
-        $noticia = $noticiasRepository->find($id);
-        $em->remove($noticia);
-        $em->flush();
+        $resultado="ko";
+        if(!empty($id)){
+            $noticia = $noticiasRepository->find($id);
+            $em->remove($noticia);
+            $em->flush();
+            $resultado="ok";
+        }
         
         return $this->json([
-            'result' => 'ok',
+            'result' => $resultado,
         ]);
     }
 }

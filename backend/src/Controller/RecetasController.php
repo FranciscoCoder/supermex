@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Idiomas;
 use App\Entity\Recetas;
 use App\Repository\IdiomasRepository;
 use App\Repository\RecetasRepository;
@@ -23,32 +22,39 @@ class RecetasController extends AbstractController
         //?page=1&language=es&limit=12
         //recibimos los query params para realizar busquedas concretas
         $page = $request->query->get('page', 1);
-        $language = $request->query->get('language', "es");
+        $language = $request->query->get('language');
         $limit = $request->query->get('limit', 20);
 
         if($page<=0){$page=1;}
 
         //Comprobamos el idioma recibido
-        $languageRegister = $idiomasRepository->findOneBy(['abreviatura'=>$language]);
-        $language= $languageRegister->getId();
+        if(!empty($language)){
+            $languageRegister = $idiomasRepository->findOneBy(['abreviatura'=>$language]);
+            $language= $languageRegister->getId();
+        }
         
         //calculamos el offset de los registros
         $offset = ($page-1)*$limit;
 
         //Consulta para recibir las recetas segun los params recibidos
-        $recetas = $recetasRepository->findBy(['idioma' => $language], ['id' => 'DESC'], $limit, $offset);
+        if(!empty($language)){
+            $recetas = $recetasRepository->findBy(['idioma' => $language], ['id' => 'DESC'], $limit, $offset);
+        }
+        else{
+            $recetas = $recetasRepository->findBy([], ['id' => 'DESC'], $limit, $offset);
+        }
         $totalRegistros = count($recetasRepository->findBy(['idioma' => $language]));
         $resultado = [];
         foreach ($recetas as $receta){
             if($receta->getActivo()===1){$activo='Si';}else{$activo='No';}
-
             $resultado[]=[
                 'id' => $receta->getId(),
                 'nombre' => $receta->getNombre(),
                 'slug' => $receta->getSlug(),
                 'descripcion' => $receta->getDescripcion(),
                 'ingredientes' => $receta->getIngredientes(),
-                'idioma' => $receta->getIdioma()->getId(),
+                'idioma_id' => $receta->getIdioma()->getId(),
+                'idioma' => strtoupper($receta->getIdioma()->getAbreviatura()),
                 'fecha_creacion' => $receta->getFechaCreacion()->format('d-m-Y H:i'),
                 'activo' => $activo,
                 'imagen' => $receta->getImagen(),
@@ -94,32 +100,34 @@ class RecetasController extends AbstractController
     public function newRecipe(Request $request, IdiomasRepository $idiomasRepository, EntityManagerInterface $em): Response
     {
         $data = $request->toArray();
-
-        $idioma = $idiomasRepository->find(1);
+        $idioma = $idiomasRepository->find($data["idioma"]);
         $resultado="ko";
+        $registro='';
 
-        if(isset($data["nombre"])){
-            $slug=strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $data["nombre"])));
-
-            $receta = new Recetas();
-            $receta->setActivo(1);
-            $receta->setNombre($data["nombre"]);
-            $receta->setSlug($slug);
-            $receta->setIdioma($idioma);
-            $receta->setDescripcion($data["descripcion"]);
-            $receta->setIngredientes($data["ingredientes"]);
-            $receta->setFechaCreacion(new \DateTime());
-            $receta->setFechaModificacion(new \DateTime());
-            $receta->setImagen($data["ingredientes"]);
-
-            $em->persist($receta);
-            $em->flush();
-
-            $registro='';
-            if(!empty($receta->getId()))
-            {
-                $resultado="ok";
-                $registro=$receta->getId();
+        if(!empty($idioma->getId())){
+            if(isset($data["nombre"])){
+                $slug=strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $data["nombre"])));
+    
+                $receta = new Recetas();
+                $receta->setActivo($data["activo"]);
+                $receta->setNombre($data["nombre"]);
+                $receta->setSlug($slug);
+                $receta->setIdioma($idioma);
+                $receta->setDescripcion($data["descripcion"]);
+                $receta->setIngredientes($data["ingredientes"]);
+                $receta->setFechaCreacion(new \DateTime());
+                $receta->setFechaModificacion(new \DateTime());
+                $receta->setImagen('');
+    
+                $em->persist($receta);
+                $em->flush();
+    
+                $registro='';
+                if(!empty($receta->getId()))
+                {
+                    $resultado="ok";
+                    $registro=$receta->getId();
+                }
             }
         }
 
@@ -136,27 +144,37 @@ class RecetasController extends AbstractController
     {
         $data=$request->toArray();
         $receta = $recetasRepository->find($id);
-        
-        if(isset($data['nombre'])){
-            $receta->setNombre($data['nombre']);
-            $slug=strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $data["nombre"])));
-            $receta->setSlug($slug);
-        }
-        if(isset($data['descripcion'])){
-            $receta->setDescripcion($data['descripcion']);
-        }
-        if(isset($data['ingredientes'])){
-            $receta->setIngredientes($data['ingredientes']);
-        }
-        if(isset($data['activo'])){
-            $receta->setActivo($data['activo']);
-        }
+        $idioma = $idiomasRepository->find($data["idioma"]);
+        $resultado="ko";
 
-        $receta->setFechaModificacion(new \DateTime());
-        $em->flush();
+        if(!empty($idioma->getId()))
+        {
+            if(!empty($receta->getId()))
+            {
+                if(isset($data['nombre'])){
+                    $receta->setNombre($data['nombre']);
+                    $slug=strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $data["nombre"])));
+                    $receta->setSlug($slug);
+                }
+                if(isset($data['descripcion'])){
+                    $receta->setDescripcion($data['descripcion']);
+                }
+                if(isset($data['ingredientes'])){
+                    $receta->setIngredientes($data['ingredientes']);
+                }
+                if(isset($data['activo'])){
+                    $receta->setActivo($data['activo']);
+                }
+        
+                $receta->setFechaModificacion(new \DateTime());
+                $em->flush();
+
+                $resultado="ok";
+            }
+        }
         
         return $this->json([
-            'result' => 'ok',
+            'result' => $resultado,
             'id' => $receta->getId(),
         ]);
     }
@@ -166,12 +184,16 @@ class RecetasController extends AbstractController
      */
     public function deleteRecipe(RecetasRepository $recetasRepository, EntityManagerInterface $em, $id): Response
     {
-        $receta = $recetasRepository->find($id);
-        $em->remove($receta);
-        $em->flush();
+        $resultado="ko";
+        if(!empty($id)){
+            $receta = $recetasRepository->find($id);
+            $em->remove($receta);
+            $em->flush();
+            $resultado="ok";
+        }
         
         return $this->json([
-            'result' => 'ok',
+            'result' => $resultado,
         ]);
     }
 }
