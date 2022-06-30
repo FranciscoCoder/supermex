@@ -23,10 +23,10 @@ function Dashboard() {
         <Route path="/inicio" element={<Inicio />} />
         <Route path="/recetas" element={<Recetas />} />
         <Route path="/receta" element={<Receta />} />
-        <Route path="/receta/:recetaSlug" element={<Receta />} />
+        <Route path="/receta/:slug" element={<Receta />} />
         <Route path="/noticias" element={<Noticias />} />
         <Route path="/noticia" element={<Noticia />} />
-        <Route path="/noticia/:noticiaId" element={<Noticia />} />
+        <Route path="/noticia/:slug" element={<Noticia />} />
         <Route path="/contactos" element={<Contactos />} />
         <Route path="/error-conexion" element={<NoConexion />} />
       </Route>
