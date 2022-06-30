@@ -7,7 +7,7 @@ export default function Noticias() {
   const [loading, setLoading] = useState(true);
   const [noticias, setNoticias] = useState([]);
   useEffect(() => {
-    fetch(`http://127.0.0.1:8080/api/news/?page=${page}&language=es`,{
+    fetch(`http://127.0.0.1:8080/api/news/?page=${page}`,{
       method: 'GET',
       headers:{
         'Content-Type': 'application/json'
@@ -17,6 +17,8 @@ export default function Noticias() {
     .then((data) => {
       setLoading(false);
       setNoticias(data.result);
+    }).catch((error)=>{
+      window.location.href="/admin/error-conexion";
     });
   }, [page]);
 
@@ -30,7 +32,9 @@ export default function Noticias() {
         <div>
           <div className={styleDashboard.contentHeader}><h1>Noticias</h1></div>
           <div className={styleDashboard.contentBody}>
-            <Link to={`/admin/noticia/`}>Nuevo</Link>
+            <div className={styleDashboard.botonesDerecha}>
+              <a href="/admin/noticia/" className={styleDashboard.botonNuevo}>Nueva noticia</a>
+            </div>
             <table>
               <thead>
                 <tr>
@@ -46,9 +50,29 @@ export default function Noticias() {
                 <tr key={noticia.id}>
                   <td>{noticia.titular}</td>
                   <td>{noticia.slug}</td>
-                  <td>{noticia.activo}</td>
-                  <td>{noticia.fecha_creacion}</td>
-                  <td><Link to={`/admin/noticia/${noticia.slug}`}>Editar</Link><Link to={`/admin/noticia`}>Borrar</Link></td>
+                  <td className={styleDashboard.alignCenter}>{noticia.activo}</td>
+                  <td className={styleDashboard.alignCenter}>{noticia.fecha_creacion}</td>
+                  <td>
+                  <div className={styleDashboard.botonesCentrado}>
+                      <a href={`/admin/noticia/${noticia.slug}`} className={styleDashboard.botonNuevo}>Editar</a>
+                      <button type="button" className={styleDashboard.botonBorrar} onClick={()=>{
+                        if (window.confirm("¿Quieres eliminar el registro?")) {
+                          fetch(`http://127.0.0.1:8080/api/new/${noticia.id}`,{
+                            method: 'DELETE',
+                            headers:{
+                              'Content-Type': 'application/json'
+                            }
+                          })
+                          .then((res) => res.json())
+                          .then((data) => {
+                            if(data.result==='ok'){
+                              window.location.reload();
+                            }
+                          });                          
+                        }
+                      }}>Borrar</button>
+                    </div>
+                  </td>
                 </tr>
               </tbody>
             ))}

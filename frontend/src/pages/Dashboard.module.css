@@ -1,3 +1,22 @@
+.bienvenida {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  padding: 0 10%;
+  height: 100vh;
+  font-size: 3.5vw;
+  font-weight: 700;
+}
+
 .alignLeft {
   text-align: left;
 }

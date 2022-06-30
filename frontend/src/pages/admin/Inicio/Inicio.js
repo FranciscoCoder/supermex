@@ -1,9 +1,9 @@
 import React from "react";
-import inicioStyle from "./Inicio.module.css";
+import styleDashboard from "../../Dashboard.module.css";
 
 export default function Inicio() {
   
   return (
-    <div className={inicioStyle.bienvenida}>Bienvenido al panel de control</div>
+    <div className={styleDashboard.bienvenida}>Bienvenido al panel de control</div>
   );
 }

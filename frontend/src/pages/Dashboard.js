@@ -7,11 +7,10 @@ import Recetas from "./admin/Recetas/Recetas";
 import Receta from "./admin/Receta/Receta";
 import Noticias from "./admin/Noticias/Noticias";
 import Noticia from "./admin/Noticia/Noticia";
-import Productos from "./admin/Productos/Productos";
-import Producto from "./admin/Producto/Producto";
 import Contactos from "./admin/Contactos/Contactos";
 import styleDashboard from "./Dashboard.module.css";
 import {backgroundColorBody} from '../components/Utils';
+import NoConexion from "./admin/NoConexion/NoConexion";
 
 
 function Dashboard() {
@@ -25,14 +24,13 @@ function Dashboard() {
         <Route path="/recetas" element={<Recetas />} />
         <Route path="/receta" element={<Receta />} />
         <Route path="/receta/:recetaSlug" element={<Receta />} />
-        <Route path="/noticias" element={<Noticias />}>
-          <Route path=":noticiaId" element={<Noticia />} />
-        </Route>
-        <Route path="/productos" element={<Productos />}>
-          <Route path=":productoId" element={<Producto />} />
-        </Route>
+        <Route path="/noticias" element={<Noticias />} />
+        <Route path="/noticia" element={<Noticia />} />
+        <Route path="/noticia/:noticiaId" element={<Noticia />} />
         <Route path="/contactos" element={<Contactos />} />
+        <Route path="/error-conexion" element={<NoConexion />} />
       </Route>
+      
       <Route path="*" element={<Navigate replace to="/admin/inicio" />} />
     </Routes>
     );

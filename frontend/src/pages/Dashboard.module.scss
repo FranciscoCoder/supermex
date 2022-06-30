@@ -7,6 +7,18 @@
     cursor: pointer;
 }
 
+.bienvenida{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 10%;
+    height: 100vh;
+    font-size: 3.5vw;
+    font-weight: 700;
+}
+
 .alignLeft{
     text-align: left;
 }

@@ -21,7 +21,10 @@ export default function Contactos() {
       setLoading(false);
       setContactos(data.result);
       setPaginador(data.count);
-    });
+    })
+    .catch((error)=>{
+      window.location.href="/admin/error-conexion";
+    });;
   }, [page, paginador]);
 
   if(loading){

@@ -1,62 +1,143 @@
-.banner {
-  position: relative;
-  text-align: center;
-  display: flex;
-  align-items: stretch;
+.zonarosa{
+  padding: 60px 5%;
   width: 100%;
-  transition: all 0.3s cubic-bezier(0.42, 0, 0.21, 0.99);
-}
-
-.banner1 {
-  background-color: var(--color_morado);
-  color: var(--color_amarillomex);
-}
-.banner2 {
-  background-color: var(--color_amarillomex);
-  color: var(--color_turquesa);
-}
-.banner3 {
-  background-color: var(--color_turquesa);
-  color: var(--color_morado);
-}
-
-.contenido_banner {
-  display: flex;
+  background-color: var(--color_rosa_pastel);
+  position: relative;
+  z-index: 1;
   overflow: hidden;
-  flex-wrap: nowrap;
-  align-items: stretch;
-  width: 100%;
-  height: 100%;
-  position: relative;
-  & div.textosbanner {
-    width: 80%;
-    padding: 0px 0px;
-    display: flex;
-    align-items: center;
-    & div {
-      max-width: 560px;
-      width: 80%;
-      margin: 0px auto;
-      font-size: 80px;
-      line-height: 80px;
-      font-weight: 700;
+  & .cuerpozonarosa{
+    position: relative;
+    z-index: 1;
+    & .letras_zonarosa{
       text-transform: uppercase;
-      padding: 50px 0px;
+      font-size: 5.625vw;
+      font-weight: 500;
+      position: relative;
+      z-index: 3;
+    }
+    & .letradesplazada1{padding: 0px 0px; text-align: left;}
+    & .letradesplazada2{padding: 0px 0px 0px 25%; text-align: left;}
+    & .letradesplazada3{padding: 0px 18% 0px 0px; text-align: right;}
+    & .letradesplazada4{padding: 0px 0px; text-align: right;}
+    & .imagen_productos_inicio{display: none; width: 100px;}
+    & .letras_productos_inicio {
+      & a{
+        position: relative;
+        z-index: 2;
+        & span{
+          transition: all 0.3s cubic-bezier(0.42, 0, 0.21, 0.99); 
+          display: inline-block; 
+          z-index: 2;
+          position: relative;
+        }
+        &.letrarosa{color: var(--color_fucsia);}
+        &.letramorada{color: var(--color_morado);}
+        &:hover{
+          & span{
+            transform:skew(-12deg, 0deg);
+          }
+        }
+      }
+    }
+    & .coleccionimg{
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      left: 0;
+      width: 200px;
+      & div{
+        position: relative;
+        & img{
+          position: absolute;
+          z-index: 1;
+          top: 0;
+          left: 0;
+          opacity: 0;
+          transform: scale(0);
+          transition: all .20s ease-in-out;
+          &.activado{opacity: 0.6; transform: scale(1);}
+        }
+      }
     }
   }
-  & div:first-child,
-  div:last-child {
-    width: 10%;
-    padding: 50px 0px;
+}
+
+.receta_inicio{
+  padding: 100px 0px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  & .img_conocenos{
+    position: relative;
+    z-index: 2;
+    width: 30%;
+    margin: 0px 10% 0px auto;
+    & .aun_no{
+      position: relative; 
+      z-index: 1;
+    }
+    & .txt_aun_no{
+      position: absolute;
+      z-index: 2;
+      top: 0px;
+      left: 0px;
+      animation: rotation linear infinite 20s;} 
+  }
+  & .frase_receta1{
     display: flex;
+    flex-direction: row;
     align-items: center;
+    white-space: nowrap;
+    width: 100%;
+    user-select: none;
+    z-index: 1;
+    position: absolute;
+    & span{
+      color: var(--color_fucsia);
+      font-weight: 300;
+      font-size: calc(50px + (131 - 50) * ((100vw - 300px) / (2560 - 300))); 
+      animation: texto_movimiento linear infinite 30s; 
+      margin: 0px;
+    }
   }
-  & div:first-child img {
-    transform: translateX(-50%);
-    cursor: pointer;
+}
+
+/*ANIMATIONS*/
+@keyframes rotation{
+  from {transform: rotate(0deg);}
+  to{transform: rotate(-359deg);}
+}
+
+@keyframes texto_movimiento {
+  to {
+    transform: translateX(-100%);
   }
-  & div:last-child img {
-    transform: translateX(50%);
-    cursor: pointer;
+}
+
+
+@media only screen and (max-width: 1024px){
+  .receta_inicio{ padding: 80px 0px;}
+}
+
+@media only screen and (max-width: 768px){
+  .zonarosa{
+    padding: 40px 5%;
+    & .cuerpozonarosa{
+      & .letras_zonarosa{
+        display: flex;
+        align-items: center;
+        font-size: 7vw; 
+        padding: 10px 0px !important;
+        & .letradesplazada2{padding: 0px 0px 0px 17%;}
+        & .letradesplazada3 {padding: 0px 14% 0px 0px;}
+      }
+      & .imagen_productos_inicio{display: block;}
+      & .letras_productos_inicio{ text-align: left !important; padding: 0px 0px 0px 5%;}
+    }
+    & .coleccionimg{ display: none;}
   }
+  .receta_inicio{ padding: 40px 0px;}
 }

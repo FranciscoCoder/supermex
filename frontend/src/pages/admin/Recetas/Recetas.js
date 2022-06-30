@@ -6,8 +6,10 @@ export default function Recetas() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [recetas, setRecetas] = useState([]);
+  
+  //Listamos las noticias dados de alta
   useEffect(() => {
-    fetch(`http://127.0.0.1:8080/api/recipes/?page=${page}&language=es&limit=8`,{
+    fetch(`http://127.0.0.1:8080/api/recipes/?page=${page}&limit=20`,{
       method: 'GET',
       headers:{
         'Content-Type': 'application/json'
@@ -15,11 +17,16 @@ export default function Recetas() {
     })
     .then((res) => res.json())
     .then((data) => {
+      //Actualizamos el estado login a false para renderizar los datos
       setLoading(false);
+      //Actualizadmos el estado recetas con los datos
       setRecetas(data.result);
+    })
+    .catch((error)=>{
+      window.location.href="/admin/error-conexion";
     });
   }, [page]);
-
+  
   if(loading){
     return (<div className={styleDashboard.loading}>Loading</div>)
   }

@@ -17,9 +17,6 @@ export default function Sidebar() {
           <Link to={`/admin/noticias`}>Noticias</Link>
         </li>
         <li>
-          <Link to={`/admin/productos`}>Productos</Link>
-        </li>
-        <li>
           <Link to={`/admin/contactos`}>Contactos</Link>
         </li>
       </ul>

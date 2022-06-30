@@ -1,0 +1,108 @@
+.recetas {
+  padding: 90px 0px;
+  width: 100%;
+}
+
+.recetas .cuerpo_recetas {
+  width: 78%;
+  margin: 0px auto;
+}
+
+.recetas .cuerpo_recetas .recetas_tribu {
+  text-align: center;
+}
+
+.recetas .cuerpo_recetas .recetas_tribu_icono {
+  text-align: center;
+  margin: -50px 0px 0px;
+}
+
+.recetas .cuerpo_recetas .lista_inicio_recetas {
+  width: 100%;
+  margin: 50px 0px 0px;
+}
+
+.recetas .cuerpo_recetas .lista_inicio_recetas ul {
+  width: 100%;
+  margin: 0px;
+  padding: 10px 0px;
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: no-wrap;
+      flex-wrap: no-wrap;
+  background-color: var(--color_amarillomex);
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+
+.recetas .cuerpo_recetas .lista_inicio_recetas ul li {
+  width: 25%;
+  margin: 0px 0.5%;
+  position: relative;
+  z-index: 1;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.recetas .cuerpo_recetas .lista_inicio_recetas ul li a {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.recetas .cuerpo_recetas .lista_inicio_recetas ul li img {
+  position: relative;
+  z-index: 1;
+}
+
+.recetas .cuerpo_recetas .lista_inicio_recetas ul li .espacio_ver_recetas {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 2;
+}
+
+.recetas .cuerpo_recetas .lista_inicio_recetas ul li .espacio_ver_recetas2 {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 1;
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 1024px) {
+  .recetas {
+    padding: 50px 0px;
+  }
+  .recetas .cuerpo_recetas {
+    width: 95%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .recetas {
+    padding: 40px 0px;
+  }
+  .recetas .cuerpo_recetas .lista_inicio_recetas ul {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    padding: 0px;
+  }
+  .recetas .cuerpo_recetas .lista_inicio_recetas ul li {
+    width: 48%;
+    margin: 6px 1%;
+  }
+}
+/*# sourceMappingURL=LastRecipes.module.css.map */

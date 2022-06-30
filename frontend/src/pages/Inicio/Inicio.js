@@ -1,59 +1,110 @@
-import {changeStyleBody, alturaBanner} from '../../components/Utils';
-import iconLagarto from '../../assets/svg/glifo_lagarto.svg';
-import iconCocodrilo from '../../assets/svg/glifo_cocodrilo.svg';
-import iconSerpiente from '../../assets/svg/glifo_serpiente.svg';
-import styleInicio from './Inicio.module.css';
+import {changeStyleBody} from '../../components/Utils';
 
-export default function Inicio() {
+import homeProductoChips from '../../assets/images/home-producto-chips.jpg';
+import homeProductoSalsas from '../../assets/images/home-producto-salsas.jpg';
+import homeProductoTrigo from '../../assets/images/home-producto-trigo.jpg';
+import homeProductoMiraResto from '../../assets/images/home-producto-mira-el-resto.jpg';
+import homeNoConocesSaborTexto from '../../assets/images/home-aun-no-conoces-el-sabor-texto.png';
+import homeNoConocesSabor from '../../assets/images/home-aun-no-conoces-el-sabor.jpg';
+
+import styleInicio from './Inicio.module.css';
+import Slider from '../../components/Slider/Slider';
+import LastRecipes from '../../components/LastRecipes/LastRecipes';
+
+export default function Inicio(props) {
   changeStyleBody('fondoturquesa','fondorosa');
-  alturaBanner();  
-  let alturaVentana = window.innerHeight;
-  const cambiabanner = () => {
-    let colorfondo=document.querySelector(".active").getAttribute('data-color');
-    let banner=document.querySelector("#bannerInicio");
+
   
-    if(colorfondo==='amarillo'){
-        banner.classList.add(`${styleInicio.banner2}`);
-        banner.classList.remove(`${styleInicio.banner1}`, `${styleInicio.banner3}`);
-    }
-    else if(colorfondo==='turquesa'){
-        banner.classList.add(`${styleInicio.banner3}`);
-        banner.classList.remove(`${styleInicio.banner1}`, `${styleInicio.banner2}`);
-    }
-    else{
-        banner.classList.add(`${styleInicio.banner1}`);
-        banner.classList.remove(`${styleInicio.banner2}`, `${styleInicio.banner3}`);
-    }
+  const eventMouseEnter = () => {
+      document.querySelectorAll(`#coleccionimg img`).forEach(box => {
+        box.classList.remove(`${styleInicio.activado}`);
+      });
+  }
+
+  const eventMouseMove = (e) => {
+      // var parentOffset = document.querySelector(`#cuerpozonarosa`).getBoundingClientRect();
+      // let capadesplaza=1;
+      // document.querySelectorAll(`.enlaceLetra:hover`).forEach(box=>{
+      //   console.log(box);
+      //   capadesplaza=box.getAttribute('data-adesplazar');
+      // });
+      // //.getAttribute('data-adesplazar')
+      // document.querySelector('img[data-desplazamiento="'+capadesplaza+'"]').classList.add(`${styleInicio.activado}`);
+
+      // var relativeXPosition = (e.pageX - parentOffset.left - 100); //offset -> method allows you to retrieve the current position of an element 'relative' to the document
+      // var relativeYPosition = (e.pageY - parentOffset.top - 100);
+      // document.querySelector(`#coleccionimg`).setAttribute("style", "transform:translate(" + (relativeXPosition) +"px, " + (relativeYPosition) + "px)");
+   
+  }
+  const eventMouseOut = () => {
+    document.querySelectorAll(`#coleccionimg img`).forEach(box => {
+      box.classList.remove(`${styleInicio.activado}`);
+    });
   }
   
-  window.addEventListener('resize', alturaBanner);
+    // $(".cuerpozonarosa").mouseenter(function(){
+    //     $('.coleccionimg img').removeClass('activado');
+    // }).mousemove(function(e){
+    //     var parentOffset = $(this).offset();
+    //     capadesplaza= $('.letras_zonarosa a:hover').data("adesplazar");
+
+    //     $('[data-desplazamiento="'+capadesplaza+'"]').addClass('activado');
+    //     var relativeXPosition = (e.pageX - parentOffset.left - 100); //offset -> method allows you to retrieve the current position of an element 'relative' to the document
+    //     var relativeYPosition = (e.pageY - parentOffset.top - 100);
+    //     $('.coleccionimg').css({'transform' : 'translate(' + (relativeXPosition) +'px, ' + (relativeYPosition) + 'px)'});
+    // }).mouseout(function(){
+    //     $('[data-desplazamiento="'+capadesplaza+'"]').removeClass('activado');
+    // });
   return (
     <div>
-        <section>
-          <div id='bannerInicio' className={`${styleInicio.banner} ${styleInicio.banner1}`} style={{height: alturaVentana + 'px'}}>
-              <div className={`active ${styleInicio.contenido_banner}`} data-color="morado">
-                  <div><img src={iconLagarto} className="imagenwidth" width="524" height="444" alt='icono glifo lagarto' onClick={cambiabanner} /></div>
-                  <div className={styleInicio.textosbanner}>
-                    <div>Sabores Milenarios que reúnen a la tribu</div>
-                  </div>
-                  <div><img src={iconCocodrilo} className="imagenwidth" width="462" height="262" alt='icono glifo cocodrilo' /></div>
+        <Slider lang={props.lang} />
+        <section className={styleInicio.zonarosa}>
+          <div id="cuerpozonarosa" className={styleInicio.cuerpozonarosa} onMouseEnter={eventMouseEnter} onMouseMove={eventMouseMove} onMouseOut={eventMouseOut}>
+              <div className={`${styleInicio.letras_zonarosa} ${styleInicio.letradesplazada1}`}>
+                  <div className={styleInicio.imagen_productos_inicio}><img src={homeProductoChips} alt="Imagen producto chips" width="732" height="886" className="imagenwidth" /></div>
+                  <div className={styleInicio.letras_productos_inicio}><a href={`/${props.lang}/productos`} className={`${styleInicio.letrarosa} .enlaceLetra`} rel="noreferrer" data-adesplazar="1"><span>Tortilla Chips</span></a></div>
               </div>
-              <div className={styleInicio.contenido_banner} data-color="amarillo">
-                  <div><img src={iconCocodrilo} className="imagenwidth" width="462" height="262" alt='icono glifo cocodrilo' /></div>
-                  <div className={styleInicio.textosbanner}>
-                    <div>Un nuevo mundo delicioso por descubrir</div>
-                  </div>
-                  <div><img src={iconSerpiente} className="imagenwidth" width="804" height="204" alt='icono glifo serpiente' /></div>
+              <div className={`${styleInicio.letras_zonarosa} ${styleInicio.letradesplazada2}`}>
+                  <div className={styleInicio.imagen_productos_inicio}><img src={homeProductoSalsas} alt="Imagen producto salsas" width="732" height="886" className="imagenwidth" /></div>
+                  <div className={styleInicio.letras_productos_inicio}><a href={`/${props.lang}/productos`} className={`${styleInicio.letrarosa} .enlaceLetra`} rel="noreferrer" data-adesplazar="2"><span>Salsas dip</span></a></div>
               </div>
-              <div className={styleInicio.contenido_banner} data-color="turquesa">
-                  <div><img src={iconSerpiente} className="imagenwidth" width="804" height="204" alt='icono glifo srpiente' /></div>
-                  <div className={styleInicio.textosbanner}>
-                    <div>El secreto azteca ahora en tus manos</div>
-                  </div>
-                  <div><img src={iconLagarto} className="imagenwidth" width="524" height="444" alt='icono glifo lagarto' /></div>
+              <div className={`${styleInicio.letras_zonarosa} ${styleInicio.letradesplazada3}`}>
+                  <div className={styleInicio.imagen_productos_inicio}><img src={homeProductoTrigo} alt="Imagen producto trigo" width="732" height="886" className="imagenwidth" /></div>
+                  <div className={styleInicio.letras_productos_inicio}><a href={`/${props.lang}/productos`} className={`${styleInicio.letrarosa} .enlaceLetra`} rel="noreferrer" data-adesplazar="3"><span>Tortillas de trigo</span></a></div>
+              </div>
+              <div className={`${styleInicio.letras_zonarosa} ${styleInicio.letradesplazada4}`}>
+                  <div className={styleInicio.imagen_productos_inicio}><img src={homeProductoMiraResto} alt="Imagen mira el resto" width="732" height="886" className="imagenwidth" /></div>
+                  <div className={styleInicio.letras_productos_inicio}><a href={`/${props.lang}/productos`} className={styleInicio.letramorada} rel="noreferrer" data-adesplazar="4"><span>¡Mira el resto!</span></a></div>
+              </div>
+              <div id="coleccionimg" className={styleInicio.coleccionimg}>
+                <div>
+                  <img src={homeProductoChips} data-desplazamiento="1" alt="Imagen producto chips" width="732" height="886" className="imagenwidth" />
+                  <img src={homeProductoSalsas} data-desplazamiento="2" alt="Imagen producto salsas" width="732" height="886" className="imagenwidth" />
+                  <img src={homeProductoTrigo} data-desplazamiento="3" alt="Imagen producto trigo" width="732" height="886" className="imagenwidth" />
+                  <img src={homeProductoMiraResto} data-desplazamiento="4" alt="Imagen mira el resto" width="732" height="886" className="imagenwidth" />
+                </div>
               </div>
           </div>
+        </section>
+        <section className={styleInicio.receta_inicio}>
+          <div className={styleInicio.img_conocenos}>
+              <a href={`/${props.lang}/recetas`}>
+              <div className={styleInicio.txt_aun_no}><img src={homeNoConocesSaborTexto} className="imagenwidth" alt='Imagen aun no conoces nuestro sabor' /></div>
+              <div className={styleInicio.aun_no}><img src={homeNoConocesSabor}  className="imagenwidth" alt='Imagen aun no conoces nuestro sabor' /></div>
+              </a>
+          </div>
+          <div className={styleInicio.frase_receta1}>
+              <span>¿Aún no conoces el secreto azteca?</span>
+              <span>¿Aún no conoces el secreto azteca?</span>
+              <span>¿Aún no conoces el secreto azteca?</span>
+              <span>¿Aún no conoces el secreto azteca?</span>
+              <span>¿Aún no conoces el secreto azteca?</span>
+              <span>¿Aún no conoces el secreto azteca?</span>
+              <span>¿Aún no conoces el secreto azteca?</span>
+              <span>¿Aún no conoces el secreto azteca?</span>
+          </div>
       </section>
+      <LastRecipes lang={props.lang} />
     </div>
   );
 }
