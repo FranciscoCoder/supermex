@@ -47,20 +47,35 @@ export default function Noticia() {
   //Funcion para insertar o modificar el registro al endpoint POST / PUT
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    let formData = new FormData();
+    formData.append("nombre", formValues.nombre);
+    formData.append("descripcion", formValues.descripcion);
+    formData.append("activo", formValues.activo);
+    formData.append("idioma", formValues.idioma);
+
     let methodState = "POST";
     if (operation === "edit") {
       methodState = "PUT";
+    } else {
+      formData.append("imagen", e.target.imagen.files[0]);
     }
+
     fetch(`http://127.0.0.1:8080/api/new/${registerId}`, {
+      // method: methodState,
+      // body: JSON.stringify(formValues),
+      // headers: {
+      //   "Content-Type": "multipart/form-data",
+      // },
       method: methodState,
-      body: JSON.stringify(formValues),
+      body: formData,
       headers: {
-        "Content-Type": "multipart/form-data",
+        enctype: "multipart/form-data",
       },
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.result == "ok") {
+        if (data.result === "ok") {
           window.location.href = "/admin/noticias";
         }
       });
@@ -101,7 +116,7 @@ export default function Noticia() {
       setOperation("edit");
       consultaEdicion(params.slug);
     }
-  }, []);
+  }, [params.slug]);
 
   return (
     <>

@@ -19,8 +19,8 @@ function Dashboard() {
     backgroundColorBody('fondoDashboard');
     return (
     <Routes>
-        <Route index element={<LayoutAdmin />}>
-          <Route path="/inicio" element={<Inicio />} />
+        <Route element={<LayoutAdmin />}>
+          <Route index path="/inicio" element={<Inicio />} />
           <Route path="/recetas" element={<Recetas />} />
           <Route path="/receta" element={<Receta />} />
           <Route path="/receta/:slug" element={<Receta />} />

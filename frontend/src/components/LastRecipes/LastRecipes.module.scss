@@ -1,84 +1,216 @@
-.recetas{
+@mixin etiqueta {
+  font-weight: 600;
+  font-size: 1.5vw;
+  line-height: 1.5vw;
+  position: absolute;
+  z-index: 8;
+  bottom: 5%;
+  width: 49%;
+  padding: 2%;
+  border-radius: 1vw;
+  text-align: center;
+}
+
+.recetas {
   padding: 90px 0px;
   width: 100%;
-  & .cuerpo_recetas{
+  & .cuerpo_recetas {
     width: 78%;
     margin: 0px auto;
-    & .recetas_tribu{
+    & .recetas_tribu {
       text-align: center;
     }
-    & .recetas_tribu_icono{ text-align: center; margin: -50px 0px 0px;}
-    & .lista_inicio_recetas{
+    & .recetas_tribu_icono {
+      text-align: center;
+      margin: -50px 0px 0px;
+    }
+    & .lista_inicio_recetas {
       width: 100%;
       margin: 50px 0px 0px;
-      & ul{
+      & ul {
         width: 100%;
         margin: 0px;
         padding: 10px 0px;
         list-style: none;
         display: flex;
-        flex-wrap: no-wrap;
+        flex-wrap: nowrap;
         background-color: var(--color_amarillomex);
         align-items: stretch;
-        & li{
+        & li {
           width: 25%;
-          margin: 0px 0.5%;
+          padding: 0px 1%;
           position: relative;
           z-index: 1;
           background-position: center center;
           background-repeat: no-repeat;
           background-size: cover;
-          & a{ position: relative; z-index: 2; display: block; width: 100%; height: 100%;}
-          & img{ position: relative; z-index: 1;}
+          &:nth-child(1) {
+            & div.etiqueta {
+              @include etiqueta;
+              left: 5%;
+              transform: rotate(4deg);
+              border: 7px solid var(--color_morado);
+              background-color: var(--color_celeste);
+              color: var(--color_morado);
+            }
+          }
+          &:nth-child(2) {
+            & div.etiqueta {
+              @include etiqueta;
+              left: 15%;
+              transform: rotate(-15deg);
+              border: 7px solid var(--color_turquesa);
+              background-color: var(--color_mostaza);
+              color: var(--color_turquesa);
+            }
+          }
+          &:nth-child(3) {
+            & div.etiqueta {
+              @include etiqueta;
+              left: 5%;
+              transform: rotate(7deg);
+              border: 7px solid var(--color_fucsia);
+              background-color: var(--color_rosa);
+              color: var(--color_fucsia);
+            }
+          }
+          &:nth-child(4) {
+            & div.etiqueta {
+              @include etiqueta;
+              right: 5%;
+              transform: rotate(-7deg);
+              border: 7px solid var(--color_morado);
+              background-color: var(--color_mostaza);
+              color: var(--color_morado);
+            }
+          }
+          & a {
+            position: relative;
+            z-index: 2;
+            display: block;
+            width: 100%;
+            height: 100%;
+          }
+          & img {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            object-position: center;
+            aspect-ratio: 1/1;
+          }
 
-
-          & .espacio_ver_recetas{ position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; display: block; z-index: 2;}
-          & .espacio_ver_recetas2{ position: relative; top: 0px; left: 0px; width: 100%; height: 100%; display: block; z-index: 1; overflow: hidden;}
+          & .espacio_ver_recetas {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            display: block;
+            z-index: 2;
+          }
+          & .espacio_ver_recetas2 {
+            position: relative;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            display: block;
+            z-index: 1;
+            overflow: hidden;
+          }
         }
       }
     }
   }
 }
 
-// .etiqueta1, .etiqueta2, .etiqueta3, .etiqueta4{font-family: var(--font-barlow-semibold); font-size: 1.50vw; line-height: 1.50vw; position: absolute; z-index: 8; bottom: 5%; width: 49%; padding: 2%; border-radius: 1vw; text-align: center;}
-
-// .etiqueta1{left: 5%; transform: rotate(4deg);}
-// .etiqueta2{left: 15%; transform: rotate(-15deg);}
-// .etiqueta3{left: 5%; transform: rotate(7deg);}
-// .etiqueta4{right: 5%; transform: rotate(-7deg);}
-
-// .color_etiqueta1{border: 7px solid var(--color_morado); background-color: var(--color_celeste); color: var(--color_morado);}
-// .color_etiqueta2{border: 7px solid var(--color_turquesa); background-color: var(--color_mostaza); color: var(--color_turquesa);}
-// .color_etiqueta3{border: 7px solid var(--color_fucsia); background-color: var(--color_rosa); color: var(--color_fucsia);}
-// .color_etiqueta4{border: 7px solid var(--color_morado); background-color: var(--color_mostaza); color: var(--color_morado);}
-
-
-// .ver_receta{ width: 45%; height: 45%; display: flex; align-items: center; flex-wrap: wrap; font-size: 1.50vw; border-radius: 100%; justify-content: center; font-family: var(--font-barlow-semibold); position: absolute; top: 0px; left: 0px; z-index: 1; opacity: 0; transform: scale(0); -webkit-transition: opacity 0.3s var(--transition_cubic), transform 0.3s var(--transition_cubic); -moz-transition: opacity 0.3s var(--transition_cubic), transform 0.3s var(--transition_cubic); -o-transition: opacity 0.3s var(--transition_cubic), transform 0.3s var(--transition_cubic); transition: opacity 0.3s var(--transition_cubic), transform 0.3s var(--transition_cubic);}
-
-// .lista_inicio_recetas ul li a:hover .ver_receta{transform: scale(1); opacity:1;}
-
-@media only screen and (max-width: 1024px){
-  .recetas{
+@media only screen and (max-width: 1024px) {
+  .recetas {
     padding: 50px 0px;
-    & .cuerpo_recetas{ width: 95%;}
+    & .cuerpo_recetas {
+      width: 95%;
+      & .lista_inicio_recetas {
+        & ul {
+          & li {
+            &:nth-child(1) {
+              & div.etiqueta {
+                font-size: 2.5vw;
+                line-height: 2.5vw;
+                width: 60%;
+              }
+            }
+            &:nth-child(2) {
+              & div.etiqueta {
+                font-size: 2.5vw;
+                line-height: 2.5vw;
+                width: 60%;
+              }
+            }
+            &:nth-child(3) {
+              & div.etiqueta {
+                font-size: 2.5vw;
+                line-height: 2.5vw;
+                width: 60%;
+              }
+            }
+            &:nth-child(4) {
+              & div.etiqueta {
+                font-size: 2.5vw;
+                line-height: 2.5vw;
+                width: 60%;
+              }
+            }
+          }
+        }
+      }
+    }
   }
-  // .etiqueta1, .etiqueta2, .etiqueta3, .etiqueta4{font-size: 2.5vw; line-height: 2.5vw; width: 60%;}
-  // .ver_receta{font-size: 2.50vw;}
 }
 
-@media only screen and (max-width: 768px){
-  .recetas{
+@media only screen and (max-width: 768px) {
+  .recetas {
     padding: 40px 0px;
-    & .cuerpo_recetas{
-      & .lista_inicio_recetas{
-        & ul{
+    & .cuerpo_recetas {
+      & .lista_inicio_recetas {
+        & ul {
           flex-wrap: wrap;
           padding: 0px;
-          & li{ width: 48%; margin: 6px 1%;}
+          & li {
+            width: 48%;
+            margin: 6px 1%;
+            &:nth-child(1) {
+              & div.etiqueta {
+                font-size: 3.5vw;
+                line-height: 3.5vw;
+                width: 50%;
+              }
+            }
+            &:nth-child(2) {
+              & div.etiqueta {
+                font-size: 3.5vw;
+                line-height: 3.5vw;
+                width: 50%;
+              }
+            }
+            &:nth-child(3) {
+              & div.etiqueta {
+                font-size: 3.5vw;
+                line-height: 3.5vw;
+                width: 50%;
+              }
+            }
+            &:nth-child(4) {
+              & div.etiqueta {
+                font-size: 3.5vw;
+                line-height: 3.5vw;
+                width: 50%;
+              }
+            }
+          }
         }
       }
     }
   }
-  // .etiqueta1, .etiqueta2, .etiqueta3, .etiqueta4{font-size: 3.5vw; line-height: 3.5vw; width: 50%;}
-  // .ver_receta {font-size: 3.5vw;}
 }

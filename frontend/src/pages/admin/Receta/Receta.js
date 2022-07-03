@@ -27,10 +27,10 @@ export default function Receta() {
     })
       .then((response) => response.json())
       .then((data) => {
-        data.result.map((idioma) => {
+        data.result.map((lang) => {
           var option = document.createElement("option");
-          option.text = idioma.abreviatura.toUpperCase();
-          option.value = idioma.id;
+          option.text = lang.abreviatura.toUpperCase();
+          option.value = lang.id;
           document.querySelector("#idiomaReceta").appendChild(option);
         });
       })
@@ -55,28 +55,27 @@ export default function Receta() {
     formData.append("ingredientes", formValues.ingredientes);
     formData.append("activo", formValues.activo);
     formData.append("idioma", formValues.idioma);
-    
+
     let methodState = "POST";
     if (operation === "edit") {
       methodState = "PUT";
-    }
-    else {
+    } else {
       formData.append("imagen", e.target.imagen.files[0]);
     }
-    
+
     fetch(`http://127.0.0.1:8080/api/recipe/${registerId}`, {
       method: methodState,
       body: formData,
       headers: {
-        "enctype": "multipart/form-data",
+        enctype: "multipart/form-data",
       },
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        // if (data.result == "ok") {
-        //   window.location.href = "/admin/recetas";
-        // }
+        //console.log(data);
+        if (data.result === "ok") {
+          window.location.href = "/admin/recetas";
+        }
       });
   };
 
@@ -114,7 +113,7 @@ export default function Receta() {
       setOperation("edit");
       consultaEdicion(params.slug);
     }
-  }, []);
+  }, [params.slug]);
 
   return (
     <>

@@ -20,8 +20,14 @@ export default function Login() {
     })
       .then((res) => res.json())
       .then((data) => {
-        localStorage.setItem("token", data.token);
-        window.location.href="/admin/inicio";
+        if(data.code===401){
+          alert('Error, datos incorrecto');
+        }
+        else{
+          localStorage.setItem("token", data.token);
+          window.location.href="/admin/inicio";
+        }
+        
       });
   };
 

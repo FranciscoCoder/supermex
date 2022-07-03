@@ -44,6 +44,7 @@ export default function Noticias() {
             <table>
               <thead>
                 <tr>
+                  <th>Imagen</th>
                   <th>Nombre</th>
                   <th>Slug</th>
                   <th>Idioma</th>
@@ -55,6 +56,7 @@ export default function Noticias() {
               {noticias.map((noticia) => (
                 <tbody key={noticia.id}>
                   <tr key={noticia.id}>
+                  <td className={styleDashboard.alignCenter}><img src={noticia.imagen} width="300px" height="300px" alt="imagen noticia" /></td>
                     <td>{noticia.titular}</td>
                     <td>{noticia.slug}</td>
                     <td className={styleDashboard.alignCenter}>{noticia.idioma}</td>

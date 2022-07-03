@@ -4,7 +4,6 @@ import Front from "./pages/Front";
 
 import Login from "./pages/admin/Login/Login";
 import { AuthProvider } from "./components/AuthContext";
-import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./pages/Dashboard";
 
 function App() {
@@ -16,12 +15,10 @@ function App() {
         path="/admin/*"
         element={
           <AuthProvider>
-            
               <Dashboard />
           </AuthProvider>
         }
       />
-
     </Routes>
   );
 }

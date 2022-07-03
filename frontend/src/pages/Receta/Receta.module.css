@@ -1,1 +1,142 @@
-/* No CSS *//*# sourceMappingURL=Receta.module.css.map */
+.titulo {
+  padding: 200px 2% 100px;
+  text-align: center;
+  color: var(--color_amarillomex);
+}
+
+.titulo .enlaceAtras {
+  z-index: 5;
+  padding: 0 0 30px;
+}
+
+.titulo .enlaceAtras a {
+  color: var(--color_amarillomex);
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.titulo h1 {
+  font-size: calc(50px + (131 - 50) * ((100vw - 300px) / (2560 - 300)));
+  font-weight: 700;
+  line-height: calc(50px + (131 - 50) * ((100vw - 300px) / (2560 - 300)));
+}
+
+.imagenReceta img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+}
+
+.textos {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.textos > div:first-child {
+  width: 40%;
+}
+
+.textos > div:last-child {
+  width: 60%;
+}
+
+.textos .ingredientes {
+  background-color: var(--color_celeste);
+  border: 2px solid var(--color_turquesa);
+  color: var(--color_turquesa);
+  font-size: 20px;
+  line-height: 35px;
+  width: 60%;
+  margin: -90px auto 0;
+  padding: 20px 2%;
+}
+
+.textos .ingredientes h2 {
+  text-align: center;
+  font-weight: 700;
+  font-size: 3vw;
+  line-height: 3vw;
+  text-transform: uppercase;
+  margin: 0 0 20px;
+}
+
+.textos .elaboracion {
+  color: var(--color_amarillomex);
+  padding: 100px 0;
+  width: 80%;
+  font-size: calc(17px + (25 - 17) * ((100vw - 300px) / (2560 - 300)));
+  line-height: calc(27px + (35 - 27) * ((100vw - 300px) / (2560 - 300)));
+  font-weight: 700;
+}
+
+.textos .elaboracion h2 {
+  font-weight: 700;
+  font-size: 4vw;
+  line-height: 4vw;
+  text-transform: uppercase;
+  margin: 0 0 40px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .titulo {
+    padding: 150px 2% 100px;
+  }
+  .textos > div:first-child {
+    width: 100%;
+  }
+  .textos > div:last-child {
+    width: 100%;
+  }
+  .textos .ingredientes h2 {
+    font-size: 6vw;
+    line-height: 6vw;
+  }
+  .textos .elaboracion {
+    padding: 100px 0 0;
+    width: 90%;
+    margin: 0 auto;
+  }
+  .textos .elaboracion h2 {
+    font-size: 6vw;
+    line-height: 6vw;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .titulo {
+    padding: 100px 2%;
+  }
+  .textos > div:first-child {
+    width: 100%;
+  }
+  .textos > div:last-child {
+    width: 100%;
+  }
+  .textos .ingredientes {
+    width: 90%;
+    margin: 50px auto 0;
+    padding: 20px 2%;
+  }
+  .textos .ingredientes h2 {
+    text-align: left;
+    font-size: 6vw;
+    line-height: 6vw;
+  }
+  .textos .elaboracion {
+    padding: 50px 0 0;
+    width: 90%;
+    margin: 0 auto;
+  }
+  .textos .elaboracion h2 {
+    font-size: 6vw;
+    line-height: 6vw;
+  }
+}
+/*# sourceMappingURL=Receta.module.css.map */

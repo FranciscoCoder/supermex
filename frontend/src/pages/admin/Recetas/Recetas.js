@@ -44,6 +44,7 @@ export default function Recetas() {
             <table>
               <thead>
                 <tr>
+                  <th>Imagen</th>
                   <th>Nombre</th>
                   <th>Slug</th>
                   <th>Idioma</th>
@@ -55,6 +56,7 @@ export default function Recetas() {
               {recetas.map((receta) => (
                 <tbody key={receta.id}>
                   <tr key={receta.id}>
+                    <td className={styleDashboard.alignCenter}><img src={receta.imagen} width="300px" height="300px" alt="imagen receta" /></td>
                     <td>{receta.nombre}</td>
                     <td>{receta.slug}</td>
                     <td className={styleDashboard.alignCenter}>

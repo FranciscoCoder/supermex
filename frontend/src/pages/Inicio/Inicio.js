@@ -14,52 +14,11 @@ import LastRecipes from '../../components/LastRecipes/LastRecipes';
 export default function Inicio(props) {
   changeStyleBody('fondoturquesa','fondorosa');
 
-  
-  const eventMouseEnter = () => {
-      document.querySelectorAll(`#coleccionimg img`).forEach(box => {
-        box.classList.remove(`${styleInicio.activado}`);
-      });
-  }
-
-  const eventMouseMove = (e) => {
-      // var parentOffset = document.querySelector(`#cuerpozonarosa`).getBoundingClientRect();
-      // let capadesplaza=1;
-      // document.querySelectorAll(`.enlaceLetra:hover`).forEach(box=>{
-      //   console.log(box);
-      //   capadesplaza=box.getAttribute('data-adesplazar');
-      // });
-      // //.getAttribute('data-adesplazar')
-      // document.querySelector('img[data-desplazamiento="'+capadesplaza+'"]').classList.add(`${styleInicio.activado}`);
-
-      // var relativeXPosition = (e.pageX - parentOffset.left - 100); //offset -> method allows you to retrieve the current position of an element 'relative' to the document
-      // var relativeYPosition = (e.pageY - parentOffset.top - 100);
-      // document.querySelector(`#coleccionimg`).setAttribute("style", "transform:translate(" + (relativeXPosition) +"px, " + (relativeYPosition) + "px)");
-   
-  }
-  const eventMouseOut = () => {
-    document.querySelectorAll(`#coleccionimg img`).forEach(box => {
-      box.classList.remove(`${styleInicio.activado}`);
-    });
-  }
-  
-    // $(".cuerpozonarosa").mouseenter(function(){
-    //     $('.coleccionimg img').removeClass('activado');
-    // }).mousemove(function(e){
-    //     var parentOffset = $(this).offset();
-    //     capadesplaza= $('.letras_zonarosa a:hover').data("adesplazar");
-
-    //     $('[data-desplazamiento="'+capadesplaza+'"]').addClass('activado');
-    //     var relativeXPosition = (e.pageX - parentOffset.left - 100); //offset -> method allows you to retrieve the current position of an element 'relative' to the document
-    //     var relativeYPosition = (e.pageY - parentOffset.top - 100);
-    //     $('.coleccionimg').css({'transform' : 'translate(' + (relativeXPosition) +'px, ' + (relativeYPosition) + 'px)'});
-    // }).mouseout(function(){
-    //     $('[data-desplazamiento="'+capadesplaza+'"]').removeClass('activado');
-    // });
   return (
     <div>
         <Slider lang={props.lang} />
         <section className={styleInicio.zonarosa}>
-          <div id="cuerpozonarosa" className={styleInicio.cuerpozonarosa} onMouseEnter={eventMouseEnter} onMouseMove={eventMouseMove} onMouseOut={eventMouseOut}>
+          <div id="cuerpozonarosa" className={styleInicio.cuerpozonarosa}>
               <div className={`${styleInicio.letras_zonarosa} ${styleInicio.letradesplazada1}`}>
                   <div className={styleInicio.imagen_productos_inicio}><img src={homeProductoChips} alt="Imagen producto chips" width="732" height="886" className="imagenwidth" /></div>
                   <div className={styleInicio.letras_productos_inicio}><a href={`/${props.lang}/productos`} className={`${styleInicio.letrarosa} .enlaceLetra`} rel="noreferrer" data-adesplazar="1"><span>Tortilla Chips</span></a></div>

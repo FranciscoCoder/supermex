@@ -57,32 +57,17 @@ export default function Header(props) {
       laHoguera: "La Hoguera",
       linkLaHoguera: "la-hoguera",
     },
-    en: {
-      producto: "Products",
-      linkProducto: "products",
-      horeca: "Horeca",
-      laTribu: "The Tribe",
-      linkLaTribu: "the-tribe",
-      recetas: "Recipes",
-      linkRecetas: "recipes",
-      calidad: "Quality",
-      linkCalidad: "quality",
-      contacto: "Contact",
-      linkContacto: "contact",
-      laHoguera: "The Bonfire",
-      linkLaHoguera: "the-bonfire",
-    },
   };
   return (
     <header>
-      <div className={headerStyle.idiomas}>
+      {/* <div className={headerStyle.idiomas}>
         <a href="/es/" className={headerStyle.idioma1}>
           ES
         </a>
         <a href="/en/" className={headerStyle.idioma2}>
           EN
         </a>
-      </div>
+      </div> */}
 
       <div className={headerStyle.logo}>
         <a href={`/${props.lang}`}>

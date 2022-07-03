@@ -30,8 +30,8 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: no-wrap;
-      flex-wrap: no-wrap;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
   background-color: var(--color_amarillomex);
   -webkit-box-align: stretch;
       -ms-flex-align: stretch;
@@ -40,12 +40,88 @@
 
 .recetas .cuerpo_recetas .lista_inicio_recetas ul li {
   width: 25%;
-  margin: 0px 0.5%;
+  padding: 0px 1%;
   position: relative;
   z-index: 1;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.recetas .cuerpo_recetas .lista_inicio_recetas ul li:nth-child(1) div.etiqueta {
+  font-weight: 600;
+  font-size: 1.5vw;
+  line-height: 1.5vw;
+  position: absolute;
+  z-index: 8;
+  bottom: 5%;
+  width: 49%;
+  padding: 2%;
+  border-radius: 1vw;
+  text-align: center;
+  left: 5%;
+  -webkit-transform: rotate(4deg);
+          transform: rotate(4deg);
+  border: 7px solid var(--color_morado);
+  background-color: var(--color_celeste);
+  color: var(--color_morado);
+}
+
+.recetas .cuerpo_recetas .lista_inicio_recetas ul li:nth-child(2) div.etiqueta {
+  font-weight: 600;
+  font-size: 1.5vw;
+  line-height: 1.5vw;
+  position: absolute;
+  z-index: 8;
+  bottom: 5%;
+  width: 49%;
+  padding: 2%;
+  border-radius: 1vw;
+  text-align: center;
+  left: 15%;
+  -webkit-transform: rotate(-15deg);
+          transform: rotate(-15deg);
+  border: 7px solid var(--color_turquesa);
+  background-color: var(--color_mostaza);
+  color: var(--color_turquesa);
+}
+
+.recetas .cuerpo_recetas .lista_inicio_recetas ul li:nth-child(3) div.etiqueta {
+  font-weight: 600;
+  font-size: 1.5vw;
+  line-height: 1.5vw;
+  position: absolute;
+  z-index: 8;
+  bottom: 5%;
+  width: 49%;
+  padding: 2%;
+  border-radius: 1vw;
+  text-align: center;
+  left: 5%;
+  -webkit-transform: rotate(7deg);
+          transform: rotate(7deg);
+  border: 7px solid var(--color_fucsia);
+  background-color: var(--color_rosa);
+  color: var(--color_fucsia);
+}
+
+.recetas .cuerpo_recetas .lista_inicio_recetas ul li:nth-child(4) div.etiqueta {
+  font-weight: 600;
+  font-size: 1.5vw;
+  line-height: 1.5vw;
+  position: absolute;
+  z-index: 8;
+  bottom: 5%;
+  width: 49%;
+  padding: 2%;
+  border-radius: 1vw;
+  text-align: center;
+  right: 5%;
+  -webkit-transform: rotate(-7deg);
+          transform: rotate(-7deg);
+  border: 7px solid var(--color_morado);
+  background-color: var(--color_mostaza);
+  color: var(--color_morado);
 }
 
 .recetas .cuerpo_recetas .lista_inicio_recetas ul li a {
@@ -59,6 +135,13 @@
 .recetas .cuerpo_recetas .lista_inicio_recetas ul li img {
   position: relative;
   z-index: 1;
+  width: 100%;
+  height: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  aspect-ratio: 1/1;
 }
 
 .recetas .cuerpo_recetas .lista_inicio_recetas ul li .espacio_ver_recetas {
@@ -89,6 +172,26 @@
   .recetas .cuerpo_recetas {
     width: 95%;
   }
+  .recetas .cuerpo_recetas .lista_inicio_recetas ul li:nth-child(1) div.etiqueta {
+    font-size: 2.5vw;
+    line-height: 2.5vw;
+    width: 60%;
+  }
+  .recetas .cuerpo_recetas .lista_inicio_recetas ul li:nth-child(2) div.etiqueta {
+    font-size: 2.5vw;
+    line-height: 2.5vw;
+    width: 60%;
+  }
+  .recetas .cuerpo_recetas .lista_inicio_recetas ul li:nth-child(3) div.etiqueta {
+    font-size: 2.5vw;
+    line-height: 2.5vw;
+    width: 60%;
+  }
+  .recetas .cuerpo_recetas .lista_inicio_recetas ul li:nth-child(4) div.etiqueta {
+    font-size: 2.5vw;
+    line-height: 2.5vw;
+    width: 60%;
+  }
 }
 
 @media only screen and (max-width: 768px) {
@@ -103,6 +206,26 @@
   .recetas .cuerpo_recetas .lista_inicio_recetas ul li {
     width: 48%;
     margin: 6px 1%;
+  }
+  .recetas .cuerpo_recetas .lista_inicio_recetas ul li:nth-child(1) div.etiqueta {
+    font-size: 3.5vw;
+    line-height: 3.5vw;
+    width: 50%;
+  }
+  .recetas .cuerpo_recetas .lista_inicio_recetas ul li:nth-child(2) div.etiqueta {
+    font-size: 3.5vw;
+    line-height: 3.5vw;
+    width: 50%;
+  }
+  .recetas .cuerpo_recetas .lista_inicio_recetas ul li:nth-child(3) div.etiqueta {
+    font-size: 3.5vw;
+    line-height: 3.5vw;
+    width: 50%;
+  }
+  .recetas .cuerpo_recetas .lista_inicio_recetas ul li:nth-child(4) div.etiqueta {
+    font-size: 3.5vw;
+    line-height: 3.5vw;
+    width: 50%;
   }
 }
 /*# sourceMappingURL=LastRecipes.module.css.map */

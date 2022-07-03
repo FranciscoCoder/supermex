@@ -79,6 +79,17 @@
   border: 1px solid var(--gray-light);
 }
 
+.contentBody table tbody tr td img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  aspect-ratio: 16/9;
+  -o-object-position: center;
+     object-position: center;
+  width: 100%;
+  height: auto;
+  max-width: 300px;
+}
+
 .contentBody input[type=text], .contentBody select, .contentBody textarea {
   background-color: var(--white);
   border: 2px solid var(--gray-light);
