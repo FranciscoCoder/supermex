@@ -24,6 +24,7 @@ class RecetasController extends AbstractController
         $page = $request->query->get('page', 1);
         $language = $request->query->get('language');
         $limit = $request->query->get('limit', 20);
+        $active = $request->query->get('active');
 
         if($page<=0){$page=1;}
 
@@ -38,7 +39,7 @@ class RecetasController extends AbstractController
 
         //Consulta para recibir las recetas segun los params recibidos
         if(!empty($language)){
-            $recetas = $recetasRepository->findBy(['idioma' => $language], ['id' => 'DESC'], $limit, $offset);
+            $recetas = $recetasRepository->findBy(['idioma' => $language, 'activo' => $active], ['id' => 'DESC'], $limit, $offset);
         }
         else{
             $recetas = $recetasRepository->findBy([], ['id' => 'DESC'], $limit, $offset);
@@ -47,6 +48,12 @@ class RecetasController extends AbstractController
         $resultado = [];
         foreach ($recetas as $receta){
             if($receta->getActivo()===1){$activo='Si';}else{$activo='No';}
+            $imagen='';
+            if(!empty($receta->getImagen()))
+            {
+                $imagen='http://localhost:8080/uploads/'.$receta->getImagen();
+            }
+
             $resultado[]=[
                 'id' => $receta->getId(),
                 'nombre' => $receta->getNombre(),
@@ -57,7 +64,7 @@ class RecetasController extends AbstractController
                 'idioma' => strtoupper($receta->getIdioma()->getAbreviatura()),
                 'fecha_creacion' => $receta->getFechaCreacion()->format('d-m-Y H:i'),
                 'activo' => $activo,
-                'imagen' => $receta->getImagen(),
+                'imagen' => $imagen,
             ];
         }
 
@@ -77,6 +84,12 @@ class RecetasController extends AbstractController
             throw $this->createNotFoundException();
         }
         
+        $imagen='';
+        if(!empty($receta->getImagen()))
+        {
+            $imagen='http://localhost:8080/uploads/'.$receta->getImagen();
+        }
+
         $resultado[]=[
             'id' => $receta->getId(),
             'nombre' => $receta->getNombre(),
@@ -86,7 +99,7 @@ class RecetasController extends AbstractController
             'idioma' => $receta->getIdioma()->getId(),
             'fecha_creacion' => $receta->getFechaCreacion()->format('d-m-Y H:i'),
             'activo' => $receta->getActivo(),
-            'imagen' => $receta->getImagen(),
+            'imagen' => $imagen,
         ];
 
         return $this->json([
@@ -107,10 +120,13 @@ class RecetasController extends AbstractController
         $ingredientesRequest = $request->request->get("ingredientes");
         $descripcionRequest = $request->request->get("descripcion");
 
-        if(!empty($imagen->getClientOriginalName()))
+        if(!empty($imagen))
         {
-            $nombreImagen = uniqid().'_'.strtolower(trim(preg_replace('/[^A-Za-z.]+/', '-', $imagen->getClientOriginalName())));
-            $imagen->move('uploads/', $nombreImagen);
+            if(!empty($imagen->getClientOriginalName()))
+            {
+                $nombreImagen = uniqid().'_'.strtolower(trim(preg_replace('/[^A-Za-z.]+/', '-', $imagen->getClientOriginalName())));
+                $imagen->move('uploads/', $nombreImagen);
+            }
         }
 
         //$data = $request->toArray();
