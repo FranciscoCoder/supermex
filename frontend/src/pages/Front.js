@@ -8,6 +8,7 @@ import Receta from "./Receta/Receta";
 import LaTribu from "./LaTribu/LaTribu";
 import Calidad from "./Calidad/Calidad";
 import LaHoguera from "./LaHoguera/LaHoguera";
+import Post from "./Post/Post";
 import Contacto from "./Contacto/Contacto";
 import NoEncontrada from "./NoEncontrada/NoEncontrada";
 import Enviado from "./Enviado/Enviado";
@@ -25,6 +26,7 @@ function Front() {
           <Route path="/es/la-tribu" element={<LaTribu lang="es" />} />
           <Route path="/es/calidad" element={<Calidad lang="es" />} />
           <Route path="/es/la-hoguera" element={<LaHoguera lang="es" />} />
+          <Route path="/es/post/:slug" element={<Post lang="es" />} />
           <Route path="/es/contacto" element={<Contacto lang="es" />} />
           <Route path="/es/enviado" element={<Enviado lang="es" />} />
           <Route path="/es/no-enviado" element={<NoEnviado lang="es" />} />

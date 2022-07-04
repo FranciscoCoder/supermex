@@ -32,17 +32,17 @@ export default function Footer(props) {
             <div className={footerStyles.iconos_redes_sociales}>
                 <div className={footerStyles.footer_twitter}>
                     <a href="https://twitter.com/SuperMexFoods" target="_blank" rel="noreferrer">
-                        <img src={iconTwitter} alt="Twitter" className={footerStyles.imagenwidth} width="201" height="201" />
+                        <img src={iconTwitter} alt="Twitter" className="imagenwidth" width="201" height="201" />
                     </a>
                 </div>
                 <div className={footerStyles.footer_facebook}>
                     <a href="https://www.facebook.com/SuperMexFoods" target="_blank" rel="noreferrer">
-                        <img src={iconFacebook} alt="Facebook" className={footerStyles.imagenwidth} width="261" height="238" />
+                        <img src={iconFacebook} alt="Facebook" className="imagenwidth" width="261" height="238" />
                     </a>
                 </div>
                 <div className={footerStyles.footer_instagram}>
                     <a href="https://www.instagram.com/supermexfoods/" target="_blank" rel="noreferrer">
-                        <img src={iconInstagram} alt="Instagram" className={footerStyles.imagenwidth} width="195" height="196" />
+                        <img src={iconInstagram} alt="Instagram" className="imagenwidth" width="195" height="196" />
                     </a>
                 </div>
             </div>

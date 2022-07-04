@@ -1,0 +1,70 @@
+.section1{
+    padding: 200px 0 0;
+    width: 90%;
+    margin: 0 auto;
+    color: var(--color_amarillomex);
+    & .enlaceAtras{
+        padding: 0;
+        text-align: center;
+        font-weight: 700;
+        padding: 0 0 50px;
+        font-size: 30px;
+        & a{
+            color: var(--color_amarillomex);
+        }
+    }
+    & .noticia{
+        display: flex;
+        flex-wrap: wrap;
+        & > div{
+            width: 50%;
+            &.imagen{
+                & img{
+                    width: 100%;
+                    height: auto;
+                    object-fit: cover;
+                    object-position: center;
+                    aspect-ratio: 16/9;
+                    border: 4px solid var(--color_amarillomex);
+                }
+            }
+            &.textoNoticia div{
+                width: 90%;
+                margin: 0 0 30px auto;
+                & h1{
+                    font-size: 32px;
+                    line-height: 40px;
+                    font-weight: 700;
+                }
+                & p{
+                    font-size: 20px;
+                    line-height: 25px;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .section1{
+        padding: 150px 0 0;
+        width: 90%;
+        & .noticia{
+            & > div{
+                width: 100%;
+                &.textoNoticia div{
+                    width: 100%;
+                    margin: 0 auto;
+                    padding: 30px 0 0;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 768px) {
+    .section1{
+        padding: 100px 0 100px;
+    }
+}
+@media only screen and (max-width: 500px) {}

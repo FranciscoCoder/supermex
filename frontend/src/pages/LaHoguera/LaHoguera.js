@@ -5,7 +5,7 @@ import styleLaHoguera from './LaHoguera.module.css';
 import { useEffect, useState } from 'react';
 
 export default function LaHoguera(props){
-    changeStyleBody('fondoamarillo','fondomorado');
+    changeStyleBody('fondomorado','fondoturquesa');
     
     const [page, setPage] = useState(1);
     const [noticias, setNoticias] = useState([]);
@@ -36,9 +36,15 @@ export default function LaHoguera(props){
                 </div>
             </div>
             <div>
-                <div>
-                    <div>
-                    </div>
+                <div className={styleLaHoguera.listaNoticias}>
+                {noticias.map((noticia) => (
+                  <div key={noticia.id}>
+                    <a href={`/${props.lang}/post/${noticia.slug}`}>
+                      <div><img src={noticia.imagen} width="300px" height="300px" alt="imagen Noticia"  /></div>
+                      <div><h2>{noticia.titular}</h2></div>
+                    </a>
+                  </div>
+                ))}
                 </div>
             </div>
         </section>
