@@ -90,7 +90,7 @@
   max-width: 300px;
 }
 
-.contentBody input[type=text], .contentBody select, .contentBody textarea {
+.contentBody input[type=text], .contentBody input[type=password], .contentBody select, .contentBody textarea {
   background-color: var(--white);
   border: 2px solid var(--gray-light);
   padding: 10px;

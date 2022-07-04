@@ -8,6 +8,8 @@ import Receta from "./admin/Receta/Receta";
 import Noticias from "./admin/Noticias/Noticias";
 import Noticia from "./admin/Noticia/Noticia";
 import Contactos from "./admin/Contactos/Contactos";
+import Usuarios from "./admin/Usuarios/Usuarios";
+import Usuario from "./admin/Usuario/Usuario";
 import styleDashboard from "./Dashboard.module.css";
 import {backgroundColorBody} from '../components/Utils';
 import NoConexion from "./admin/NoConexion/NoConexion";
@@ -28,6 +30,9 @@ function Dashboard() {
           <Route path="/noticia" element={<Noticia />} />
           <Route path="/noticia/:slug" element={<Noticia />} />
           <Route path="/contactos" element={<Contactos />} />
+          <Route path="/usuarios" element={<Usuarios />} />
+          <Route path="/usuario" element={<Usuario />} />
+          <Route path="/usuario/:username" element={<Usuario />} />
           <Route path="/error-conexion" element={<NoConexion />} />
         </Route>
       <Route path="*" element={<Navigate replace to="/admin/inicio" />} />

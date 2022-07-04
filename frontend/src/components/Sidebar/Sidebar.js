@@ -19,6 +19,15 @@ export default function Sidebar() {
         <li>
           <Link to={`/admin/contactos`}>Contactos</Link>
         </li>
+        <li>
+          <Link to={`/admin/usuarios`}>Usuarios</Link>
+        </li>
+        <li>
+          <button type="button" onClick={()=>{
+            localStorage.removeItem("token");
+            window.location.href="/admin/login";
+          }} >Desconectar</button>
+        </li>
       </ul>
     </div>
   );
