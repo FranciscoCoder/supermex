@@ -166,16 +166,32 @@ class RecetasController extends AbstractController
     }
 
     /**
-     * @Route("/api/recipe/{id}", name="app_recipes_update", methods={"PUT"})
+     * @Route("/api/recipe/{id}", name="app_recipes_update", methods={"POST"})
      */
     public function updateRecipe(Request $request, IdiomasRepository $idiomasRepository, RecetasRepository $recetasRepository, EntityManagerInterface $em, $id): Response
     {
+        // if (!$this->isGranted('ROLE_MODIFY')){
+        //     return $this->json(['error' => "no tienes permiso"]);
+        // };
+
+        //$data = $request->toArray();
+        $imagen = $request->files->get('imagen');
+        $nombreImagen='';
         $nombreRequest = $request->request->get("nombre");
         $idiomaRequest = $request->request->get("idioma");
         $activoRequest = $request->request->get("activo");
         $ingredientesRequest = $request->request->get("ingredientes");
         $descripcionRequest = $request->request->get("descripcion");
 
+        if(!empty($imagen))
+        {
+            if(!empty($imagen->getClientOriginalName()))
+            {
+                $nombreImagen = uniqid().'_'.strtolower(trim(preg_replace('/[^A-Za-z.]+/', '-', $imagen->getClientOriginalName())));
+                $imagen->move('uploads/', $nombreImagen);
+            }
+        }
+     
         //Comprobamos si existe el idioma
         $idioma = $idiomasRepository->find($idiomaRequest);
         //Comprobamos si existe el registro
@@ -194,8 +210,9 @@ class RecetasController extends AbstractController
 
                 $receta->setDescripcion($descripcionRequest);
                 $receta->setIngredientes($ingredientesRequest);
-                $receta->setIdioma($idioma->getId());
+                $receta->setIdioma($idioma);
                 $receta->setActivo($activoRequest);
+                if(!empty($nombreImagen)){$receta->setImagen($nombreImagen);}
         
                 $receta->setFechaModificacion(new \DateTime());
                 $em->flush();
@@ -211,7 +228,7 @@ class RecetasController extends AbstractController
     }
 
     /**
-     * @Route("/api/recipe/{id}", name="app_recipes_detele", methods={"DELETE"})
+     * @Route("/api/recipe/{id}/delete", name="app_recipes_delete", methods={"DELETE"})
      */
     public function deleteRecipe(RecetasRepository $recetasRepository, EntityManagerInterface $em, $id): Response
     {

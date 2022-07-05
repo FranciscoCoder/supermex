@@ -51,8 +51,11 @@ security:
     access_control:
         - { path: ^/api/(login|token/refresh), roles: PUBLIC_ACCESS }
         - { path: ^/api/login, roles: ROLE_SUPERADMIN }
-        - { path: ^/api, roles: PUBLIC_ACCESS }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/api/recipe/, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/new/, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/user/, roles: IS_AUTHENTICATED_FULLY }
+        
+        # - { path: ^/delete, roles: ROLE_DELETE }
 
 when@test:
     security:

@@ -110,7 +110,6 @@ class NoticiasController extends AbstractController
      */
     public function newNew(Request $request, IdiomasRepository $idiomasRepository, EntityManagerInterface $em): Response
     {
-
         $imagen = $request->files->get('imagen');
         $nombreImagen='';
         $nombreRequest = $request->request->get("nombre");
@@ -164,15 +163,25 @@ class NoticiasController extends AbstractController
     }
 
     /**
-     * @Route("/api/new/{id}", name="app_new_update", methods={"PUT"})
+     * @Route("/api/new/{id}", name="app_new_update", methods={"POST"})
      */
     public function updateNew(Request $request, IdiomasRepository $idiomasRepository, NoticiasRepository $noticiasRepository, EntityManagerInterface $em, $id): Response
     {
         //$data=$request->toArray();
+        $nombreImagen='';
         $nombreRequest = $request->request->get("nombre");
         $idiomaRequest = $request->request->get("idioma");
         $activoRequest = $request->request->get("activo");
         $descripcionRequest = $request->request->get("descripcion");
+
+        if(!empty($imagen))
+        {
+            if(!empty($imagen->getClientOriginalName()))
+            {
+                $nombreImagen = uniqid().'_'.strtolower(trim(preg_replace('/[^A-Za-z.]+/', '-', $imagen->getClientOriginalName())));
+                $imagen->move('uploads/', $nombreImagen);
+            }
+        }
 
         //Comprobamos si existe el idioma
         $idioma = $idiomasRepository->find($idiomaRequest);
@@ -197,6 +206,9 @@ class NoticiasController extends AbstractController
                     $noticia->setActivo($activoRequest);
                 }
 
+                $noticia->setIdioma($idioma);
+                if(!empty($nombreImagen)){$noticia->setImagen($nombreImagen);}
+
                 $noticia->setFechaModificacion(new \DateTime());
                 $em->flush();
 
@@ -211,7 +223,7 @@ class NoticiasController extends AbstractController
     }
 
     /**
-     * @Route("/api/new/{id}", name="app_new_detele", methods={"DELETE"})
+     * @Route("/api/new/{id}/delete", name="app_new_delete", methods={"DELETE"})
      */
     public function deleteRecipe(NoticiasRepository $noticiasRepository, EntityManagerInterface $em, $id): Response
     {

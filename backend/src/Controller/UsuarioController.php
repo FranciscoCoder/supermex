@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UsuarioController extends AbstractController
@@ -33,7 +34,7 @@ class UsuarioController extends AbstractController
             $resultado[]=[
                 'id' => $usuario->getId(),
                 'nombre' => $usuario->getNombre(),
-                'username' => $usuario->getUserIdentifier(),
+                'usuario' => $usuario->getUserIdentifier(),
                 'rol' => $usuario->getRoles(),
                 'fecha_creacion' => $usuario->getFechaCreacion()->format('d-m-Y H:i'),
             ];
@@ -46,11 +47,11 @@ class UsuarioController extends AbstractController
     }
 
     /**
-     * @Route("/api/users/{username}", name="app_users_show", methods={"GET"})
+     * @Route("/api/users/{id}", name="app_users_show", methods={"GET"})
      */
-    public function showRecipe(UsuarioRepository $usuarioRepository, $username): Response
+    public function showRecipe(UsuarioRepository $usuarioRepository, $id): Response
     {
-        $usuario = $usuarioRepository->findOneBy(['username'=>$username]);
+        $usuario = $usuarioRepository->find($id);
         if($usuario === null){
             throw $this->createNotFoundException();
         }
@@ -58,7 +59,7 @@ class UsuarioController extends AbstractController
         $resultado[]=[
             'id' => $usuario->getId(),
             'nombre' => $usuario->getNombre(),
-            'username' => $usuario->getUserIdentifier(),
+            'usuario' => $usuario->getUserIdentifier(),
             'rol' => $usuario->getRoles(),
             'fecha_creacion' => $usuario->getFechaCreacion()->format('d-m-Y H:i')
         ];
@@ -71,7 +72,7 @@ class UsuarioController extends AbstractController
     /**
      * @Route("/api/user/", name="app_user_register", methods={"POST"})
      */
-    public function newRecipe(Request $request, EntityManagerInterface $em): Response
+    public function newRecipe(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $em): Response
     {
         $nombreRequest = $request->request->get("nombre");
         $usuarioRequest = $request->request->get("usuario");
@@ -87,7 +88,16 @@ class UsuarioController extends AbstractController
             $usuario->setNombre($nombreRequest);
             $usuario->setUsername($usuarioRequest);
             $usuario->setRoles([$rolRequest]);
-            $usuario->setPassword($passwordRequest);
+
+            if(!empty($passwordRequest))
+            {
+                $hashedPassword = $passwordHasher->hashPassword(
+                    $usuario,
+                    $passwordRequest
+                );
+                $usuario->setPassword($hashedPassword);
+            }
+            
             $usuario->setFechaCreacion(new \DateTime());
 
             $em->persist($usuario);
@@ -108,9 +118,9 @@ class UsuarioController extends AbstractController
     }
 
     /**
-     * @Route("/api/user/{id}", name="app_recipes_update", methods={"PUT"})
+     * @Route("/api/user/{id}", name="app_user_update", methods={"PUT"})
      */
-    public function updateRecipe(Request $request, UsuarioRepository $usuarioRepository, EntityManagerInterface $em, $id): Response
+    public function updateRecipe(Request $request, UsuarioRepository $usuarioRepository, UserPasswordHasherInterface $passwordHasher,EntityManagerInterface $em, $id): Response
     {
         $nombreRequest = $request->request->get("nombre");
         $usuarioRequest = $request->request->get("usuario");
@@ -126,7 +136,15 @@ class UsuarioController extends AbstractController
             $usuario->setNombre($nombreRequest);
             $usuario->setUsername($usuarioRequest);
             $usuario->setRoles([$rolRequest]);
-            $usuario->setPassword($passwordRequest);
+            
+            if(!empty($passwordRequest))
+            {
+                $hashedPassword = $passwordHasher->hashPassword(
+                    $usuario,
+                    $passwordRequest
+                );
+                $usuario->setPassword($hashedPassword);
+            }
             $em->flush();
 
             $resultado="ok";
@@ -139,10 +157,14 @@ class UsuarioController extends AbstractController
     }
 
     /**
-     * @Route("/api/user/{id}", name="app_recipes_detele", methods={"DELETE"})
+     * @Route("/api/user/{id}/delete", name="app_user_delete", methods={"DELETE"})
      */
     public function deleteRecipe(UsuarioRepository $usuarioRepository, EntityManagerInterface $em, $id): Response
     {
+        // if(!$this->isGranted('ROLE_DELETE')) {
+        //     return $this->json('No has dicho la palabra mágica ah aa h.');
+        // }
+
         $resultado="ko";
         if(!empty($id)){
             $receta = $usuarioRepository->find($id);

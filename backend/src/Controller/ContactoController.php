@@ -94,7 +94,6 @@ class ContactoController extends AbstractController
 
             if(!empty($contacto->getId()))
             {
-                //mail('fcommm@gmail.com', "Formulario de contacto", $contacto->getMensaje());
                 $resultado="ok";
             }
         }
