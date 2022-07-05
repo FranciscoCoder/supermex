@@ -170,6 +170,16 @@
     }
 }
 
+.imagenDetalle{
+    & img{
+        width: 300px;
+        height: 200px;
+        object-fit: cover;
+        object-position: center;
+        aspect-ratio: 16/9;
+    }
+}
+
 .loading{
     width: 100%;
     height: 100vh;

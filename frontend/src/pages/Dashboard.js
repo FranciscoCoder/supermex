@@ -32,7 +32,7 @@ function Dashboard() {
           <Route path="/contactos" element={<Contactos />} />
           <Route path="/usuarios" element={<Usuarios />} />
           <Route path="/usuario" element={<Usuario />} />
-          <Route path="/usuario/:username" element={<Usuario />} />
+          <Route path="/usuario/:usernameId" element={<Usuario />} />
           <Route path="/error-conexion" element={<NoConexion />} />
         </Route>
       <Route path="*" element={<Navigate replace to="/admin/inicio" />} />

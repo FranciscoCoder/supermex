@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styleDashboard from "../../Dashboard.module.css";
 
 export default function Receta() {
   const params = useParams("");
-
+  const navigate = useNavigate();
   const [tituloApartado, setTituloApartado] = useState("Nueva receta");
+  const [imagenReceta, setImagenReceta] = useState("");
   const [registerId, setRegisterId] = useState("");
-  const [operation, setOperation] = useState("new");
+  //const [operation, setOperation] = useState("new");
   const [formValues, setFormValues] = useState({
     nombre: "",
     ingredientes: "",
@@ -56,25 +57,27 @@ export default function Receta() {
     formData.append("activo", formValues.activo);
     formData.append("idioma", formValues.idioma);
 
-    let methodState = "POST";
-    if (operation === "edit") {
-      methodState = "PUT";
-    } else {
-      formData.append("imagen", e.target.imagen.files[0]);
-    }
+    //let methodState = "POST";
+    // if (operation === "edit") {
+    //   methodState = "PUT";
+    //   formData=JSON.stringify(formValues);
+    // } else {
+    formData.append("imagen", e.target.imagen.files[0]);
+    // }
 
     fetch(`http://127.0.0.1:8080/api/recipe/${registerId}`, {
-      method: methodState,
+      method: "POST",
       body: formData,
       headers: {
         enctype: "multipart/form-data",
+        "Authorization": 'Bearer '+ localStorage.getItem('token')
       },
     })
       .then((res) => res.json())
       .then((data) => {
         //console.log(data);
         if (data.result === "ok") {
-          window.location.href = "/admin/recetas";
+          navigate(`/admin/recetas`, { replace: true });
         }
       });
   };
@@ -90,7 +93,9 @@ export default function Receta() {
       })
         .then((res) => res.json())
         .then((data) => {
+          //Guardamos el Id en un useState
           setRegisterId(data.result[0].id);
+          //Guardamos la informacion del registro en un useState
           setFormValues((prev) => ({
             ...prev,
             nombre: data.result[0].nombre,
@@ -99,8 +104,13 @@ export default function Receta() {
             idioma: data.result[0].idioma,
             activo: data.result[0].activo,
           }));
+
+          //Seleccionamos los campos select
           document.querySelector("#idiomaReceta").value = data.result[0].idioma;
           document.querySelector("#activoReceta").value = data.result[0].activo;
+
+          //En caso de obtener una imagen creamos la etiqueta
+          setImagenReceta(data.result[0].imagen);
         })
         .catch((error) => console.log(error));
     }
@@ -110,7 +120,7 @@ export default function Receta() {
     //Comprobamos si estamos insertando / editando un registro
     if (params.slug !== "" && params.slug !== undefined) {
       setTituloApartado("Editar receta");
-      setOperation("edit");
+      //setOperation("edit");
       consultaEdicion(params.slug);
     }
   }, [params.slug]);
@@ -197,6 +207,9 @@ export default function Receta() {
               accept="image/*"
             />
           </div>
+          <div className={styleDashboard.imagenDetalle}>
+            <ImagenReceta img={imagenReceta} />
+          </div>
           <div className={styleDashboard.botonesDerecha}>
             <a href="/admin/recetas" className={styleDashboard.botonVolver}>
               Cancelar
@@ -209,4 +222,13 @@ export default function Receta() {
       </div>
     </>
   );
+}
+
+function ImagenReceta(prop){
+  if(prop.img!==''){
+    return (<img src={prop.img} width="300px" height="200px" alt="imagen Receta" />)
+  }
+  else{
+    return(<></>);
+  }
 }

@@ -1,10 +1,21 @@
 .banner {
   position: relative;
   text-align: center;
-  display: flex;
-  align-items: stretch;
   width: 100%;
   transition: all 0.3s cubic-bezier(0.42, 0, 0.21, 0.99);
+  overflow: hidden;
+  & button{
+    position: absolute;
+    top: 0;
+    width: 10%;
+    height: 100%;
+    appearance: none;
+    cursor: pointer;
+    z-index: 3;
+    background: none;
+    &.buttonPrev{left: 0;}
+    &.buttonNext{right: 0;}
+  }
 }
 
 .banner1 {
@@ -27,7 +38,19 @@
   align-items: stretch;
   width: 100%;
   height: 100%;
-  position: relative;
+  position: absolute;
+  top: 0;
+  transition: all 0.3s linear;
+  z-index: 2;
+  &.activeBanner{
+    left: 0;
+  }
+  &.nextBanner{
+    left: 100%;
+  }
+  &.prevBanner{
+    left: -100%;
+  }
   & div.textosbanner {
     width: 80%;
     padding: 0px 0px;
@@ -53,10 +76,8 @@
   }
   & div:first-child img {
     transform: translateX(-50%);
-    cursor: pointer;
   }
   & div:last-child img {
     transform: translateX(50%);
-    cursor: pointer;
   }
 }

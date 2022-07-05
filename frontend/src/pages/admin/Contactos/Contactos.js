@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styleDashboard from "../../Dashboard.module.css";
 
 export default function Contactos() {
+  const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [paginador, setPaginador] = useState();
   const [loading, setLoading] = useState(true);
@@ -23,8 +24,8 @@ export default function Contactos() {
       setPaginador(data.count);
     })
     .catch((error)=>{
-      window.location.href="/admin/error-conexion";
-    });;
+      navigate(`/admin/error-conexion`, { replace: true });
+    });
   }, [page, paginador]);
 
   if(loading){

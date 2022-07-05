@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styleDashboard from "../../Dashboard.module.css";
 
 export default function Recetas() {
+  const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [usuarios, setUsuarios] = useState([]);
@@ -22,9 +24,9 @@ export default function Recetas() {
         setUsuarios(data.result);
       })
       .catch((error) => {
-        window.location.href = "/admin/error-conexion";
+        navigate(`/admin/error-conexion`, { replace: true });
       });
-  }, [page]);
+  }, [page, navigate]);
 
   if (loading) {
     return <div className={styleDashboard.loading}>Loading</div>;
@@ -53,7 +55,7 @@ export default function Recetas() {
               {usuarios.map((usuario) => (
                 <tbody key={usuario.id}>
                   <tr key={usuario.id}>
-                    <td>{usuario.username}</td>
+                    <td className={styleDashboard.alignCenter}>{usuario.usuario}</td>
                     <td>{usuario.rol}</td>
                     <td className={styleDashboard.alignCenter}>
                       {usuario.fecha_creacion}
@@ -61,7 +63,7 @@ export default function Recetas() {
                     <td>
                       <div className={styleDashboard.botonesCentrado}>
                         <a
-                          href={`/admin/usuario/${usuario.username}`}
+                          href={`/admin/usuario/${usuario.id}`}
                           className={styleDashboard.botonNuevo}
                         >
                           Editar
@@ -74,22 +76,24 @@ export default function Recetas() {
                               window.confirm("¿Quieres eliminar este usuario?")
                             ) {
                               fetch(
-                                `http://127.0.0.1:8080/api/user/${usuario.id}`,
+                                `http://127.0.0.1:8080/api/user/${usuario.id}/delete`,
                                 {
                                   method: "DELETE",
                                   headers: {
                                     "Content-Type": "application/json",
+                                    "Authorization": 'Bearer '+ localStorage.getItem('token')
                                   },
                                 }
                               )
                                 .then((res) => res.json())
                                 .then((data) => {
                                   if (data.result === "ok") {
+                                    //navigate(`/admin/usuarios`, { replace: true });
                                     window.location.reload();
                                   }
                                 })
                                 .catch((error) => {
-                                  window.location.href = "/admin/error-conexion";
+                                  navigate(`/admin/error-conexion`, { replace: true });
                                 });
                             }
                           }}

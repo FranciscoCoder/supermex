@@ -1,9 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import sidebarStyle from "./Sidebar.module.css";
 
 export default function Sidebar() {
-  
+  const navigate = useNavigate();
   return (
     <div className={sidebarStyle.sidebar}>
       <ul>
@@ -25,7 +25,7 @@ export default function Sidebar() {
         <li>
           <button type="button" onClick={()=>{
             localStorage.removeItem("token");
-            window.location.href="/admin/login";
+            navigate(`/admin/login`, { replace: true });
           }} >Desconectar</button>
         </li>
       </ul>

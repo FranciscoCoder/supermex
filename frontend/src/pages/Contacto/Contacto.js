@@ -1,12 +1,13 @@
-import {useState } from "react";
+import { useState } from "react";
 import {changeStyleBody} from '../../components/Utils';
 import styleContacto from './Contacto.module.css';
 import bannerContacto from "../../assets/images/banner_contacto.jpg";
 import iconoLagarto from "../../assets/svg/glifo_lagarto.svg";
+import { useNavigate } from "react-router-dom";
 
 export default function Contacto(props){
     changeStyleBody('fondoazuloscuro','fondorosa');
-
+    const navigate = useNavigate();
     const [estadoEnvio, setEstadoEnvio] = useState(false);
     const [formValues, setFormValues] = useState({ nombre: "", correo: "", telefono: "", mensaje: "" , acepto: "0" });
     const handleInputChange = (e) => {
@@ -30,13 +31,15 @@ export default function Contacto(props){
         })
         .then((res) => res.json())
         .then((data) => {
-            if(data.resultado=="ok"){
+            if(data.resultado==="ok"){
                 setEstadoEnvio(true);
             }
         });
       };
 
-    if (estadoEnvio) {window.location.href=`/${props.lang}/enviado`;};
+    if (estadoEnvio) {
+        navigate(`/${props.lang}/enviado`, { replace: true });
+    };
     
     return(
         <div>

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styleDashboard from "../../Dashboard.module.css";
 
 export default function Noticias() {
+  const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [noticias, setNoticias] = useState([]);
@@ -22,9 +24,9 @@ export default function Noticias() {
         setNoticias(data.result);
       })
       .catch((error) => {
-        window.location.href = "/admin/error-conexion";
+        navigate(`/admin/error-conexion`, { replace: true });
       });
-  }, [page]);
+  }, [page, navigate]);
 
   if (loading) {
     return <div className={styleDashboard.loading}>Loading</div>;
@@ -82,22 +84,24 @@ export default function Noticias() {
                               window.confirm("¿Quieres eliminar el registro?")
                             ) {
                               fetch(
-                                `http://127.0.0.1:8080/api/new/${noticia.id}`,
+                                `http://127.0.0.1:8080/api/new/${noticia.id}/delete`,
                                 {
                                   method: "DELETE",
                                   headers: {
                                     "Content-Type": "application/json",
+                                    "Authorization": 'Bearer '+ localStorage.getItem('token')
                                   },
                                 }
                               )
                                 .then((res) => res.json())
                                 .then((data) => {
                                   if (data.result === "ok") {
+                                    //navigate(`/admin/noticias`, { replace: true });
                                     window.location.reload();
                                   }
                                 })
                                 .catch((error) => {
-                                  window.location.href = "/admin/error-conexion";
+                                  navigate(`/admin/error-conexion`, { replace: true });
                                 });
                             }
                           }}

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import stylesLogin from "./Login.module.css";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
     username: "",
     password: "",
@@ -25,7 +27,7 @@ export default function Login() {
         }
         else{
           localStorage.setItem("token", data.token);
-          window.location.href="/admin/inicio";
+          navigate(`/admin/inicio`, { replace: true });
         }
         
       });

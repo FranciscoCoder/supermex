@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styleDashboard from "../../Dashboard.module.css";
 
 export default function Receta() {
   const params = useParams("");
-
+  const navigate = useNavigate();
   const [tituloApartado, setTituloApartado] = useState("Nuevo usuario");
   const [registerId, setRegisterId] = useState("");
   const [operation, setOperation] = useState("new");
@@ -27,7 +27,7 @@ export default function Receta() {
 
     let formData = new FormData();
     formData.append("nombre", formValues.nombre);
-    formData.append("usuario", formValues.username);
+    formData.append("usuario", formValues.usuario);
     formData.append("rol", formValues.rol);
     formData.append("password", formValues.password);
 
@@ -41,15 +41,17 @@ export default function Receta() {
       body: formData,
       headers: {
         enctype: "multipart/form-data",
+        "Authorization": 'Bearer '+ localStorage.getItem('token')
       },
     })
       .then((res) => res.json())
       .then((data) => {
         //console.log(data);
         if (data.result === "ok") {
-          window.location.href = "/admin/usuarios";
+          navigate(`/admin/usuarios`, { replace: true });
         }
-      });
+      })
+      .catch((error) => console.log(error));
   };
 
   //Funcion para consultar el registro en el caso de editar
@@ -59,6 +61,7 @@ export default function Receta() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": 'Bearer '+ localStorage.getItem('token')
         },
       })
         .then((res) => res.json())
@@ -67,7 +70,7 @@ export default function Receta() {
           setFormValues((prev) => ({
             ...prev,
             nombre: data.result[0].nombre,
-            usuario: data.result[0].username,
+            usuario: data.result[0].usuario,
             rol: data.result[0].rol,
           }));
           document.querySelector("#rolUsuario").value = data.result[0].rol;
@@ -78,12 +81,12 @@ export default function Receta() {
 
   useEffect(() => {
     //Comprobamos si estamos insertando / editando un registro
-    if (params.username !== "" && params.username !== undefined) {
+    if (params.usernameId !== "" && params.usernameId !== undefined) {
       setTituloApartado("Editar usuario");
       setOperation("edit");
-      consultaEdicion(params.username);
+      consultaEdicion(params.usernameId);
     }
-  }, [params.username]);
+  }, [params.usernameId]);
 
   return (
     <>
@@ -110,7 +113,7 @@ export default function Receta() {
                 onChange={handleInputChange}
                 required
               >
-                <option value="ROLE_SUPERADMIN">SUPER ADMIN</option>
+                {/* <option value="ROLE_SUPERADMIN">SUPER ADMIN</option> */}
                 <option value="ROLE_ADMIN">ADMIN</option>
                 <option value="ROLE_BLOQUERO">BLOGUERO</option>
               </select>

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styleDashboard from "../../Dashboard.module.css";
 
 export default function Noticia() {
   const params = useParams("");
-
+  const navigate = useNavigate();
   const [tituloApartado, setTituloApartado] = useState("Nueva noticia");
+  const [imagenNoticia, setImagenNoticia] = useState("");
   const [registerId, setRegisterId] = useState("");
   const [operation, setOperation] = useState("new");
   const [formValues, setFormValues] = useState({
@@ -57,6 +58,7 @@ export default function Noticia() {
     let methodState = "POST";
     if (operation === "edit") {
       methodState = "PUT";
+      formData=JSON.stringify(formValues);
     } else {
       formData.append("imagen", e.target.imagen.files[0]);
     }
@@ -71,12 +73,13 @@ export default function Noticia() {
       body: formData,
       headers: {
         enctype: "multipart/form-data",
+        "Authorization": 'Bearer '+ localStorage.getItem('token')
       },
     })
       .then((res) => res.json())
       .then((data) => {
         if (data.result === "ok") {
-          window.location.href = "/admin/noticias";
+          navigate(`/admin/noticias`, { replace: true });
         }
       });
   };
@@ -92,7 +95,9 @@ export default function Noticia() {
       })
         .then((res) => res.json())
         .then((data) => {
+          //Guardamos el Id en un useState
           setRegisterId(data.result[0].id);
+          //Guardamos la informacion del registro en un useState
           setFormValues((prev) => ({
             ...prev,
             nombre: data.result[0].titular,
@@ -100,10 +105,13 @@ export default function Noticia() {
             idioma: data.result[0].idioma,
             activo: data.result[0].activo,
           }));
-          document.querySelector("#idiomaNoticia").value =
-            data.result[0].idioma;
-          document.querySelector("#activoNoticia").value =
-            data.result[0].activo;
+
+          //Seleccionamos los campos select
+          document.querySelector("#idiomaNoticia").value = data.result[0].idioma; 
+          document.querySelector("#activoNoticia").value = data.result[0].activo;
+
+          //En caso de obtener una imagen creamos la etiqueta
+          setImagenNoticia(data.result[0].imagen);
         })
         .catch((error) => console.log(error));
     }
@@ -190,6 +198,9 @@ export default function Noticia() {
               accept="image/*"
             />
           </div>
+          <div className={styleDashboard.imagenDetalle}>
+            <ImagenNoticia img={imagenNoticia} />
+          </div>
           <div className={styleDashboard.botonesDerecha}>
             <a href="/admin/noticias" className={styleDashboard.botonVolver}>
               Cancelar
@@ -202,4 +213,13 @@ export default function Noticia() {
       </div>
     </>
   );
+}
+
+function ImagenNoticia(prop){
+  if(prop.img!==''){
+    return (<img src={prop.img} width="300px" height="200px" alt="imagen Noticia" />)
+  }
+  else{
+    return(<></>);
+  }
 }

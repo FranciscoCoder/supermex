@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styleDashboard from "../../Dashboard.module.css";
 
 export default function Recetas() {
+  const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [recetas, setRecetas] = useState([]);
@@ -22,9 +24,9 @@ export default function Recetas() {
         setRecetas(data.result);
       })
       .catch((error) => {
-        window.location.href = "/admin/error-conexion";
+        navigate(`/admin/error-conexion`, { replace: true });
       });
-  }, [page]);
+  }, [page, navigate]);
 
   if (loading) {
     return <div className={styleDashboard.loading}>Loading</div>;
@@ -84,11 +86,12 @@ export default function Recetas() {
                               window.confirm("¿Quieres eliminar el registro?")
                             ) {
                               fetch(
-                                `http://127.0.0.1:8080/api/recipe/${receta.id}`,
+                                `http://127.0.0.1:8080/api/recipe/${receta.id}/delete`,
                                 {
                                   method: "DELETE",
                                   headers: {
                                     "Content-Type": "application/json",
+                                    "Authorization": 'Bearer '+ localStorage.getItem('token')
                                   },
                                 }
                               )
@@ -96,10 +99,11 @@ export default function Recetas() {
                                 .then((data) => {
                                   if (data.result === "ok") {
                                     window.location.reload();
+                                    //navigate(`/admin/recetas`, { replace: true });
                                   }
                                 })
                                 .catch((error) => {
-                                  window.location.href = "/admin/error-conexion";
+                                  navigate(`/admin/error-conexion`, { replace: true });
                                 });
                             }
                           }}
