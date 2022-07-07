@@ -188,11 +188,11 @@
 }
 
 .section3 > div > div h2 {
-  font-size: calc(20px + (80 - 20) * ((100vw - 300px) / (1920 - 300)));
+  font-size: calc(30px + (80 - 30) * ((100vw - 300px) / (1920 - 300)));
 }
 
 .section3 > div > div p {
-  font-size: 18px;
+  font-size: 23px;
 }
 
 @media only screen and (max-width: 1024px) {

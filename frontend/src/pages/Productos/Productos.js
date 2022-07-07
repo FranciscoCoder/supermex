@@ -1,9 +1,8 @@
-import {changeStyleBody} from '../../components/Utils';
+import {changeStyleBody, goTop} from '../../components/Utils';
 
 import styleProductos from './Productos.module.css';
 
 import bannerProductos1 from '../../assets/images/banner_productos1.jpg';
-import bannerProductos2 from '../../assets/images/banner_productos2.jpg';
 
 import patataClasica from '../../assets/images/bolsa_patatas_clasicas.png';
 import tortitas from '../../assets/images/tortitas.png';
@@ -12,6 +11,7 @@ import sazonadores from '../../assets/images/paquete_sachet_packet.png';
 import chiliConCarne from '../../assets/images/lata_tin_can.png';
 
 export default function Productos(){
+    goTop();
     changeStyleBody('fondoazuloscuro','fondorosa');  
     return(
     <div>

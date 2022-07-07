@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import globalUrl from "../../../components/Utils";
 import styleDashboard from "../../Dashboard.module.css";
 
 export default function Noticia() {
@@ -8,7 +9,6 @@ export default function Noticia() {
   const [tituloApartado, setTituloApartado] = useState("Nueva noticia");
   const [imagenNoticia, setImagenNoticia] = useState("");
   const [registerId, setRegisterId] = useState("");
-  const [operation, setOperation] = useState("new");
   const [formValues, setFormValues] = useState({
     nombre: "",
     descripcion: "",
@@ -19,7 +19,7 @@ export default function Noticia() {
 
   //Rellenamos el campos idioma segun api languages
   useEffect(() => {
-    fetch("http://127.0.0.1:8080/api/languages", {
+    fetch(`${globalUrl}/api/languages`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -54,22 +54,10 @@ export default function Noticia() {
     formData.append("descripcion", formValues.descripcion);
     formData.append("activo", formValues.activo);
     formData.append("idioma", formValues.idioma);
+    formData.append("imagen", e.target.imagen.files[0]);
 
-    let methodState = "POST";
-    if (operation === "edit") {
-      methodState = "PUT";
-      formData=JSON.stringify(formValues);
-    } else {
-      formData.append("imagen", e.target.imagen.files[0]);
-    }
-
-    fetch(`http://127.0.0.1:8080/api/new/${registerId}`, {
-      // method: methodState,
-      // body: JSON.stringify(formValues),
-      // headers: {
-      //   "Content-Type": "multipart/form-data",
-      // },
-      method: methodState,
+    fetch(`${globalUrl}/api/new/${registerId}`, {
+      method: "POST",
       body: formData,
       headers: {
         enctype: "multipart/form-data",
@@ -87,7 +75,7 @@ export default function Noticia() {
   //Funcion para consultar el registro en el caso de editar
   const consultaEdicion = (valor) => {
     if (valor !== "") {
-      fetch(`http://127.0.0.1:8080/api/news/${valor}`, {
+      fetch(`${globalUrl}/api/news/${valor}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -121,7 +109,6 @@ export default function Noticia() {
     //Comprobamos si estamos insertando / editando un registro
     if (params.slug !== "" && params.slug !== undefined) {
       setTituloApartado("Editar noticia");
-      setOperation("edit");
       consultaEdicion(params.slug);
     }
   }, [params.slug]);
@@ -134,9 +121,9 @@ export default function Noticia() {
       <div className={styleDashboard.contentBody}>
         <form onSubmit={handleSubmit} encType="multipart/form-data">
           <div className={styleDashboard.botonesDerecha}>
-            <a href="/admin/noticias" className={styleDashboard.botonVolver}>
+            <Link to={`/admin/noticias`} className={styleDashboard.botonVolver}>
               Cancelar
-            </a>
+            </Link>
             <button className={styleDashboard.botonGuardar} type="submit">
               Guardar
             </button>

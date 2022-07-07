@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import globalUrl from "../../../components/Utils";
 import styleDashboard from "../../Dashboard.module.css";
 
 export default function Receta() {
@@ -8,7 +9,6 @@ export default function Receta() {
   const [tituloApartado, setTituloApartado] = useState("Nueva receta");
   const [imagenReceta, setImagenReceta] = useState("");
   const [registerId, setRegisterId] = useState("");
-  //const [operation, setOperation] = useState("new");
   const [formValues, setFormValues] = useState({
     nombre: "",
     ingredientes: "",
@@ -20,7 +20,7 @@ export default function Receta() {
 
   //Rellenamos el campos idioma segun api languages
   useEffect(() => {
-    fetch("http://127.0.0.1:8080/api/languages", {
+    fetch(`${globalUrl}/api/languages`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -56,16 +56,9 @@ export default function Receta() {
     formData.append("ingredientes", formValues.ingredientes);
     formData.append("activo", formValues.activo);
     formData.append("idioma", formValues.idioma);
-
-    //let methodState = "POST";
-    // if (operation === "edit") {
-    //   methodState = "PUT";
-    //   formData=JSON.stringify(formValues);
-    // } else {
     formData.append("imagen", e.target.imagen.files[0]);
-    // }
 
-    fetch(`http://127.0.0.1:8080/api/recipe/${registerId}`, {
+    fetch(`${globalUrl}/api/recipe/${registerId}`, {
       method: "POST",
       body: formData,
       headers: {
@@ -85,7 +78,7 @@ export default function Receta() {
   //Funcion para consultar el registro en el caso de editar
   const consultaEdicion = (valor) => {
     if (valor !== "") {
-      fetch(`http://127.0.0.1:8080/api/recipes/${valor}`, {
+      fetch(`${globalUrl}/api/recipes/${valor}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -120,7 +113,6 @@ export default function Receta() {
     //Comprobamos si estamos insertando / editando un registro
     if (params.slug !== "" && params.slug !== undefined) {
       setTituloApartado("Editar receta");
-      //setOperation("edit");
       consultaEdicion(params.slug);
     }
   }, [params.slug]);
@@ -133,9 +125,9 @@ export default function Receta() {
       <div className={styleDashboard.contentBody}>
         <form onSubmit={handleSubmit} encType="multipart/form-data">
           <div className={styleDashboard.botonesDerecha}>
-            <a href="/admin/recetas" className={styleDashboard.botonVolver}>
+            <Link to={`/admin/recetas`} className={styleDashboard.botonVolver}>
               Cancelar
-            </a>
+            </Link>
             <button className={styleDashboard.botonGuardar} type="submit">
               Guardar
             </button>
@@ -211,9 +203,9 @@ export default function Receta() {
             <ImagenReceta img={imagenReceta} />
           </div>
           <div className={styleDashboard.botonesDerecha}>
-            <a href="/admin/recetas" className={styleDashboard.botonVolver}>
+            <Link to={`/admin/recetas`} className={styleDashboard.botonVolver}>
               Cancelar
-            </a>
+            </Link>
             <button className={styleDashboard.botonGuardar} type="submit">
               Guardar
             </button>

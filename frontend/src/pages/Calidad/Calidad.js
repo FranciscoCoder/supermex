@@ -1,4 +1,4 @@
-import {changeStyleBody} from '../../components/Utils';
+import {changeStyleBody, goTop} from '../../components/Utils';
 
 import styleCalidad from './Calidad.module.css';
 
@@ -6,6 +6,7 @@ import imgCalidad1 from "../../assets/images/img_calidad1.jpg";
 import imgCalidad2 from "../../assets/images/img_calidad2.jpg";
 
 export default function Calidad(){
+    goTop();
     changeStyleBody('fondomorado','fondoturquesa');
 
     return(

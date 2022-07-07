@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import globalUrl from "../../../components/Utils";
 import styleDashboard from "../../Dashboard.module.css";
 
 export default function Receta() {
@@ -36,7 +37,7 @@ export default function Receta() {
       methodState = "PUT";
     }
 
-    fetch(`http://127.0.0.1:8080/api/user/${registerId}`, {
+    fetch(`${globalUrl}/api/user/${registerId}`, {
       method: methodState,
       body: formData,
       headers: {
@@ -46,7 +47,6 @@ export default function Receta() {
     })
       .then((res) => res.json())
       .then((data) => {
-        //console.log(data);
         if (data.result === "ok") {
           navigate(`/admin/usuarios`, { replace: true });
         }
@@ -57,7 +57,7 @@ export default function Receta() {
   //Funcion para consultar el registro en el caso de editar
   const consultaEdicion = (valor) => {
     if (valor !== "") {
-      fetch(`http://127.0.0.1:8080/api/users/${valor}`, {
+      fetch(`${globalUrl}/api/users/${valor}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -96,9 +96,9 @@ export default function Receta() {
       <div className={styleDashboard.contentBody}>
         <form onSubmit={handleSubmit} encType="multipart/form-data">
           <div className={styleDashboard.botonesDerecha}>
-            <a href="/admin/usuarios" className={styleDashboard.botonVolver}>
+            <Link to={`/admin/usuarios`} className={styleDashboard.botonVolver}>
               Cancelar
-            </a>
+            </Link>
             <button className={styleDashboard.botonGuardar} type="submit">
               Guardar
             </button>
@@ -113,7 +113,6 @@ export default function Receta() {
                 onChange={handleInputChange}
                 required
               >
-                {/* <option value="ROLE_SUPERADMIN">SUPER ADMIN</option> */}
                 <option value="ROLE_ADMIN">ADMIN</option>
                 <option value="ROLE_BLOQUERO">BLOGUERO</option>
               </select>
@@ -148,14 +147,13 @@ export default function Receta() {
                 name="password"
                 placeholder="Contraseña"
                 onChange={handleInputChange}
-                defaultValue=""
               />
             </div>
           </div>
           <div className={styleDashboard.botonesDerecha}>
-            <a href="/admin/usuarios" className={styleDashboard.botonVolver}>
+            <Link to={`/admin/usuarios`} className={styleDashboard.botonVolver}>
               Cancelar
-            </a>
+            </Link>
             <button className={styleDashboard.botonGuardar} type="submit">
               Guardar
             </button>

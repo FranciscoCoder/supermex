@@ -1,4 +1,4 @@
-import {changeStyleBody} from '../../components/Utils';
+import {changeStyleBody, goTop} from '../../components/Utils';
 
 import homeProductoChips from '../../assets/images/home-producto-chips.jpg';
 import homeProductoSalsas from '../../assets/images/home-producto-salsas.jpg';
@@ -12,8 +12,8 @@ import Slider from '../../components/Slider/Slider';
 import LastRecipes from '../../components/LastRecipes/LastRecipes';
 
 export default function Inicio(props) {
+  goTop();
   changeStyleBody('fondoturquesa','fondorosa');
-
   return (
     <div>
         <Slider lang={props.lang} />
@@ -48,8 +48,8 @@ export default function Inicio(props) {
         <section className={styleInicio.receta_inicio}>
           <div className={styleInicio.img_conocenos}>
               <a href={`/${props.lang}/recetas`}>
-              <div className={styleInicio.txt_aun_no}><img src={homeNoConocesSaborTexto} className="imagenwidth" alt='Imagen aun no conoces nuestro sabor' /></div>
-              <div className={styleInicio.aun_no}><img src={homeNoConocesSabor}  className="imagenwidth" alt='Imagen aun no conoces nuestro sabor' /></div>
+                <div className={styleInicio.txt_aun_no}><img src={homeNoConocesSaborTexto} className="imagenwidth" alt='Imagen aun no conoces nuestro sabor' /></div>
+                <div className={styleInicio.aun_no}><img src={homeNoConocesSabor}  className="imagenwidth" alt='Imagen aun no conoces nuestro sabor' /></div>
               </a>
           </div>
           <div className={styleInicio.frase_receta1}>

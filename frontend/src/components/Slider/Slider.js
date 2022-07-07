@@ -1,5 +1,5 @@
 import React from "react";
-import {alturaBanner} from '../../components/Utils';
+import {heightBanner} from '../../components/Utils';
 import iconLagarto from '../../assets/svg/glifo_lagarto.svg';
 import iconCocodrilo from '../../assets/svg/glifo_cocodrilo.svg';
 import iconSerpiente from '../../assets/svg/glifo_serpiente.svg';
@@ -7,12 +7,12 @@ import styleSlider from "./Slider.module.css";
 
 export default function Slider(props) {
 
-  alturaBanner();  
+  heightBanner();  
   let alturaVentana = window.innerHeight;
   if(alturaVentana<500){alturaVentana=500;}
   
   //Funcion para cambiar el color del banner segun data-color
-  const cambiabanner = () => {
+  const changeColorBanner = () => {
     let colorfondo=document.querySelector(`.${styleSlider.activeBanner}`).getAttribute('data-color');
     let banner=document.querySelector("#bannerInicio");
   
@@ -33,11 +33,7 @@ export default function Slider(props) {
   const prevBanner = () => {
     let positionBanner=parseInt(document.querySelector(`.${styleSlider.activeBanner}`).getAttribute('data-position'));
     let prevBanner = positionBanner-1;
-    let nextBanner = positionBanner+1;
     let sliderItem=document.querySelectorAll(`.${styleSlider.contenido_banner}`);
-    console.log('actual:'+positionBanner);
-    console.log('previo:'+prevBanner);
-    console.log('siguiente:'+nextBanner);
     if(prevBanner>=0){
       for (let i = sliderItem.length-1; i >= 0; --i) {
         if(i===positionBanner)
@@ -51,7 +47,7 @@ export default function Slider(props) {
             sliderItem[i].classList.add(`${styleSlider.activeBanner}`);
         }
       }
-      cambiabanner();
+      changeColorBanner();
     }
   }
 
@@ -82,12 +78,12 @@ export default function Slider(props) {
             }
         }
       }
-      cambiabanner();
+      changeColorBanner();
     }
   }
 
   
-  window.addEventListener('resize', alturaBanner);
+  window.addEventListener('resize', heightBanner);
   
   return (
     <section>

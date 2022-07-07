@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import globalUrl from "../../../components/Utils";
 import stylesLogin from "./Login.module.css";
 
 export default function Login() {
@@ -13,7 +14,7 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`http://127.0.0.1:8080/api/login_check`, {
+    fetch(`${globalUrl}/api/login_check`, {
       method: "POST",
       body: JSON.stringify(formValues),
       headers: {

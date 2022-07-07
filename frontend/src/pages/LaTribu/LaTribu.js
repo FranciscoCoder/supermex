@@ -1,4 +1,4 @@
-import {changeStyleBody} from '../../components/Utils';
+import {changeStyleBody, goTop} from '../../components/Utils';
 import iconTribu from '../../assets/svg/icono_tribu.svg';
 // import iconTokTok from '../../assets/svg/tok_tok.svg';
 import imgTribu from '../../assets/images/img_tribu.jpg';
@@ -8,6 +8,7 @@ import imgGlifos from '../../assets/svg/img_glifos.svg';
 import stylesLaTribu from './LaTribu.module.css';
 
 export default function LaTribu(){
+    goTop();
     changeStyleBody('fondoazuloscuro','fondoturquesa');
     return(
         <div>

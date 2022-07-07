@@ -2,7 +2,7 @@
   position: relative;
   text-align: center;
   width: 100%;
-  transition: all 0.3s cubic-bezier(0.42, 0, 0.21, 0.99);
+  transition: all 0.3s linear;
   overflow: hidden;
   & button{
     position: absolute;
@@ -57,11 +57,11 @@
     display: flex;
     align-items: center;
     & div {
-      max-width: 560px;
+      max-width: 730px;
       width: 80%;
       margin: 0px auto;
-      font-size: 80px;
-      line-height: 80px;
+      font-size: calc(40px + (100 - 40) * ((100vw - 300px) / (1920 - 300)));
+      line-height: calc(40px + (100 - 40) * ((100vw - 300px) / (1920 - 300)));
       font-weight: 700;
       text-transform: uppercase;
       padding: 50px 0px;

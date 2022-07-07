@@ -108,7 +108,7 @@
 }
 
 .section2 .texto {
-  font-size: 20px;
+  font-size: 23px;
 }
 
 .section2 img {
@@ -213,6 +213,9 @@
   }
   .section1 > div:last-child {
     padding: 50px 5%;
+  }
+  .section2 {
+    padding: 100px 0 0;
   }
   .section2 .patatas > .colPatatas {
     width: 100%;

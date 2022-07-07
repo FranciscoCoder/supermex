@@ -1,12 +1,14 @@
 import { useState } from "react";
-import {changeStyleBody} from '../../components/Utils';
+import {changeStyleBody, goTop} from '../../components/Utils';
+import globalUrl from '../../components/Utils';
 import styleContacto from './Contacto.module.css';
 import bannerContacto from "../../assets/images/banner_contacto.jpg";
 import iconoLagarto from "../../assets/svg/glifo_lagarto.svg";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Contacto(props){
     changeStyleBody('fondoazuloscuro','fondorosa');
+    goTop();
     const navigate = useNavigate();
     const [estadoEnvio, setEstadoEnvio] = useState(false);
     const [formValues, setFormValues] = useState({ nombre: "", correo: "", telefono: "", mensaje: "" , acepto: "0" });
@@ -22,7 +24,7 @@ export default function Contacto(props){
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch('http://127.0.0.1:8080/api/contact',{
+        fetch(`${globalUrl}/api/contact`,{
           method: "POST",
           body: JSON.stringify(formValues),
           headers: {
@@ -67,7 +69,7 @@ export default function Contacto(props){
                                     <textarea name="mensaje" id="mensajeContacto" placeholder='¡Hola!' onChange={handleInputChange} value={formValues.mensaje}></textarea>
                                 </div>
                                 <div className={styleContacto.aceptoPolitica}>
-                                    <input type="checkbox" name="acepto" id='aceptoContacto' onChange={handleInputChange} value="1" required /> He leído y acepto la <a href={`/${props.lang}/politica-de-privacidad/`}>política de privacidad</a>.
+                                    <input type="checkbox" name="acepto" id='aceptoContacto' onChange={handleInputChange} value="1" required /> He leído y acepto la <Link to={`/${props.lang}/politica-de-privacidad/`}>política de privacidad</Link>.
                                 </div>
                                 <div className={styleContacto.botonEnviar}> 
                                     <button type='submit'>enviar</button>

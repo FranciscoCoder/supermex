@@ -18,7 +18,7 @@
 }
 
 .section1 .contenidoSection1 p {
-  font-size: 20px;
+  font-size: 23px;
   width: 310px;
   color: var(--color_fucsia);
 }
@@ -55,7 +55,7 @@
 }
 
 .section1 .aroma {
-  font-size: 20px;
+  font-size: 23px;
   color: var(--color_fucsia);
   width: 25%;
   margin: -50px 10% 0 auto;
@@ -137,7 +137,7 @@
 }
 
 .contenidoSection2 p {
-  font-size: 20px;
+  font-size: 23px;
 }
 
 .section3 {
@@ -170,7 +170,7 @@
 }
 
 .section3 > div:last-child p {
-  font-size: 20px;
+  font-size: 23px;
 }
 
 .section3 > div:last-child p strong {
@@ -239,7 +239,7 @@
     aspect-ratio: 16/9;
   }
   .contenidoSection2 p {
-    font-size: 18px;
+    font-size: 23px;
   }
   .section3 {
     padding: 100px 0 0;
