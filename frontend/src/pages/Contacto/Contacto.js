@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {changeStyleBody, goTop} from '../../components/Utils';
+import {changeStyleBody} from '../../components/Utils';
 import globalUrl from '../../components/Utils';
 import styleContacto from './Contacto.module.css';
 import bannerContacto from "../../assets/images/banner_contacto.jpg";
@@ -8,7 +8,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function Contacto(props){
     changeStyleBody('fondoazuloscuro','fondorosa');
-    goTop();
     const navigate = useNavigate();
     const [estadoEnvio, setEstadoEnvio] = useState(false);
     const [formValues, setFormValues] = useState({ nombre: "", correo: "", telefono: "", mensaje: "" , acepto: "0" });

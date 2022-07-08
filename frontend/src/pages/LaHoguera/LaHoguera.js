@@ -1,19 +1,24 @@
-import { createContext, useEffect, useState } from "react";
+//import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+//import { PaginationContext } from "../../App";
 import { changeStyleBody, goTop } from "../../components/Utils";
 import globalUrl from "../../components/Utils";
 import Pagination from "../../components/Pagination/Pagination";
 import iconLaHoguera from "../../assets/svg/icono_totem_noticias.svg";
 import styleLaHoguera from "./LaHoguera.module.css";
 
-export const GlobalContext = createContext({});
-
 export default function LaHoguera(props) {
   changeStyleBody("fondomorado", "fondoturquesa");
+  //Recepcion de variables globales del sistema de paginacion
+  //const {page, setPageTotal} = useContext(PaginationContext);
   const [page, setPage] = useState(1);
   const [pageTotal, setPageTotal] = useState(1);
+  
+  //Declaracion de variables para Recetas
   const [noticias, setNoticias] = useState([]);
   let limit = 8;
+  
   //Listamos las noticias dadas de alta
   useEffect(() => {
     goTop();
@@ -33,9 +38,8 @@ export default function LaHoguera(props) {
       .catch((error) => {
         console.log(error);
       });
-  }, [page, props.lang, limit]);
+  }, [page, props.lang, limit, setPageTotal]);
   return (
-    <GlobalContext.Provider value={{ page, setPage, pageTotal }}>
       <LayoutNews lang={props.lang}>
         {noticias.length > 0 ? (
           <div className={styleLaHoguera.listaNoticias}>
@@ -58,13 +62,12 @@ export default function LaHoguera(props) {
                 </li>
               ))}
             </ul>
-            <Pagination pages="front" limit={limit} />
+            <Pagination pages={`front`} limit={limit} pageTotal={pageTotal} page={page} prevPage={() => setPage(page - 1)} nextPage={() => setPage(page + 1)}/>
           </div>
         ) : (
           <div className={styleLaHoguera.notFound}>No hay noticias</div>
         )}
       </LayoutNews>
-    </GlobalContext.Provider>
   );
 }
 

@@ -28,7 +28,7 @@ export default function Productos(){
         </section>
         <section className={styleProductos.section2}>
             <div>
-                <div class={styleProductos.tortillachips}>
+                <div className={styleProductos.tortillachips}>
                     <div className={styleProductos.titulo}>
                         Tortilla chips
                     </div>

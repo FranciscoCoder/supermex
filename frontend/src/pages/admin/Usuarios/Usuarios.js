@@ -1,15 +1,18 @@
-import React, { createContext, useEffect, useState } from "react";
+//import React, { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+//import { PaginationContext } from "../../../App";
 import globalUrl from "../../../components/Utils";
 import Pagination from "../../../components/Pagination/Pagination";
 import styleDashboard from "../../Dashboard.module.css";
 
-export const GlobalContext = createContext({});
-
 export default function Recetas() {
-  const navigate = useNavigate();
+  //Recepcion de variables globales del sistema de paginacion
+  //const {page, setPageTotal} = useContext(PaginationContext);
   const [page, setPage] = useState(1);
   const [pageTotal, setPageTotal] = useState(1);
+  //Declaramos variables iniciales
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [usuarios, setUsuarios] = useState([]);
   let limit = 20;
@@ -33,13 +36,12 @@ export default function Recetas() {
       .catch((error) => {
         navigate(`/admin/error-conexion`, { replace: true });
       });
-  }, [page, navigate, limit]);
+  }, [page, navigate, limit, setPageTotal]);
 
   if (loading) {
     return <div className={styleDashboard.loading}>Loading</div>;
   } else {
     return (
-      <GlobalContext.Provider value={{ page, setPage, pageTotal }}>
         <LayoutUsers>
           {usuarios.length > 0 ? (
             <div>
@@ -114,13 +116,12 @@ export default function Recetas() {
                   </tbody>
                 )}
               </table>
-              <Pagination pages="dashboard" limit={limit} />
+              <Pagination pages={`dashboard`} limit={limit} pageTotal={pageTotal} page={page} prevPage={() => setPage(page - 1)} nextPage={() => setPage(page + 1)}/>
             </div>
           ) : (
             <div className={styleDashboard.notFound}>No hay usuarios</div>
           )}
         </LayoutUsers>
-      </GlobalContext.Provider>
     );
   }
 }

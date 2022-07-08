@@ -1,15 +1,17 @@
 import React from "react";
+import { goTop } from "../../components/Utils";
 import headerStyle from "./Header.module.css";
 import menu1 from "../../assets/images/menu1.png";
 import menu2 from "../../assets/images/menu2.png";
 import menu3 from "../../assets/images/menu3.png";
 import videomenu from "../../assets/video/menu_back.mp4";
+import { Link } from "react-router-dom";
 
 export default function Header(props) {
   //Funcion para generar un numero aleatorio
-  // const generateRandomNumber = (min, max) => Math.floor(Math.random() * (max - min) + min);
+  //const generateRandomNumber = (min, max) => Math.floor(Math.random() * (max - min) + min);
 
-  const opera_menu = () =>{
+  const openMenu = () =>{
     let menu= document.querySelector('#btmenu');
     if(menu.getAttribute("data-menu")==='closed'){
       menu.setAttribute("data-menu", "open");
@@ -24,20 +26,30 @@ export default function Header(props) {
       document.querySelector('body').classList.add('noscroll');
     }
     else{
-      menu.setAttribute("data-menu", "closed");
-      document.querySelector('#lineamenu1').classList.remove(`${headerStyle.rotadch}`);
-      document.querySelector('#lineamenu1').classList.add(`${headerStyle.lineamenu1}`);
-      document.querySelector('#lineamenu2').classList.remove(`${headerStyle.ocultar}`);
-      document.querySelector('#lineamenu3').classList.remove(`${headerStyle.rotaizq}`);
-      document.querySelector('#lineamenu3').classList.add(`${headerStyle.lineamenu3}`);
-      document.querySelector('#menucompleto').classList.remove(`${headerStyle.mostrarmenu}`);
-      document.querySelector('#videomenu').pause();
-      document.querySelector('#videomenu').currentTime = 0;
-      document.querySelector('html').classList.remove('noscroll');
-      document.querySelector('body').classList.remove('noscroll');
+      closeMenu();
     }
   };
-  // let logoaleatorio = generateRandomNumber(1, 5);
+
+  const closeMenu= () =>{
+    let menu= document.querySelector('#btmenu');
+    menu.setAttribute("data-menu", "closed");
+    document.querySelector('#lineamenu1').classList.remove(`${headerStyle.rotadch}`);
+    document.querySelector('#lineamenu1').classList.add(`${headerStyle.lineamenu1}`);
+    document.querySelector('#lineamenu2').classList.remove(`${headerStyle.ocultar}`);
+    document.querySelector('#lineamenu3').classList.remove(`${headerStyle.rotaizq}`);
+    document.querySelector('#lineamenu3').classList.add(`${headerStyle.lineamenu3}`);
+    document.querySelector('#menucompleto').classList.remove(`${headerStyle.mostrarmenu}`);
+    document.querySelector('#videomenu').pause();
+    document.querySelector('#videomenu').currentTime = 0;
+    document.querySelector('html').classList.remove('noscroll');
+    document.querySelector('body').classList.remove('noscroll');
+  };
+
+  const closeMenu2= () =>{
+    closeMenu(); goTop();
+  }
+  
+  //let logoaleatorio = generateRandomNumber(1, 5);
   // let idioma1=generateRandomNumber(1, 5);
   // let idioma2=generateRandomNumber(1, 5);
 
@@ -70,7 +82,7 @@ export default function Header(props) {
       </div> */}
 
       <div className={headerStyle.logo}>
-        <a href={`/${props.lang}`}>
+        <Link onClick={closeMenu2} to={`/${props.lang}`}>
           <svg xmlns="http://www.w3.org/2000/svg" width="278" height="135" viewBox="0 0 278 135">
               <g transform="translate(-1141 270)">
                   <rect className={headerStyle.logo_rectangulo1} width="278" height="135" transform="translate(1141 -270)" fill="#13235a"/>
@@ -129,9 +141,9 @@ export default function Header(props) {
                   </g>
               </g>
           </svg>
-        </a>
+        </Link>
       </div>
-      <div id="btmenu" className={headerStyle.btmenu} data-menu="closed" onClick={() => {opera_menu();}}>
+      <div id="btmenu" className={headerStyle.btmenu} data-menu="closed" onClick={() => {openMenu();}}>
         <div id="lineamenu1" className={headerStyle.lineamenu1}>
           <img src={menu1} width="55" height="15" alt="lineamenu1" className="imagenmaxwidth" />
         </div>
@@ -147,9 +159,9 @@ export default function Header(props) {
         <div>
           <ul className={headerStyle.listamenu}>
             <li>
-              <a href={`/${props.lang}/${headerTranslate[props.lang].linkProducto}`}>
+              <Link onClick={closeMenu2} to={`/${props.lang}/${headerTranslate[props.lang].linkProducto}`}>
                 {headerTranslate[props.lang].producto}
-              </a>
+              </Link>
             </li>
             {/* <li>
               <a href={`/${props.lang}/horeca`}>
@@ -157,29 +169,29 @@ export default function Header(props) {
               </a>
             </li> */}
             <li>
-              <a href={`/${props.lang}/${headerTranslate[props.lang].linkLaTribu}`}>
+              <Link onClick={closeMenu2} to={`/${props.lang}/${headerTranslate[props.lang].linkLaTribu}`}>
                 {headerTranslate[props.lang].laTribu}
-              </a>
+              </Link>
             </li>
             <li>
-              <a href={`/${props.lang}/${headerTranslate[props.lang].linkRecetas}`}>
+              <Link onClick={closeMenu2} to={`/${props.lang}/${headerTranslate[props.lang].linkRecetas}`}>
                 {headerTranslate[props.lang].recetas}
-              </a>
+              </Link>
             </li>
             <li>
-              <a href={`/${props.lang}/${headerTranslate[props.lang].linkCalidad}`}>
+              <Link onClick={closeMenu2} to={`/${props.lang}/${headerTranslate[props.lang].linkCalidad}`}>
                 {headerTranslate[props.lang].calidad}
-              </a>
+              </Link>
             </li>
             <li>
-              <a href={`/${props.lang}/${headerTranslate[props.lang].linkContacto}`}>
+              <Link onClick={closeMenu2} to={`/${props.lang}/${headerTranslate[props.lang].linkContacto}`}>
                 {headerTranslate[props.lang].contacto}
-              </a>
+              </Link>
             </li>
             <li>
-              <a href={`/${props.lang}/${headerTranslate[props.lang].linkLaHoguera}`}>
+              <Link onClick={closeMenu2} to={`/${props.lang}/${headerTranslate[props.lang].linkLaHoguera}`}>
                 {headerTranslate[props.lang].laHoguera}
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
