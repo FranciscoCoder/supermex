@@ -24,6 +24,7 @@ class NoticiasController extends AbstractController
         $language = $request->query->get('language');
         $limit = $request->query->get('limit', 20);
         $active = $request->query->get('active');
+        $totalRegistros=0;
 
         if($page<=0){$page=1;}
 
@@ -39,11 +40,13 @@ class NoticiasController extends AbstractController
         //Consulta para recibir las noticias segun los params recibidos
         if(!empty($language)){
             $noticias = $noticiasRepository->findBy(['idioma' => $language, 'activo' => $active], ['id' => 'DESC'], $limit, $offset);
+            $totalRegistros = count($noticiasRepository->findBy(['idioma' => $language, 'activo' => $active]));
         }
         else{
             $noticias = $noticiasRepository->findBy([], ['id' => 'DESC'], $limit, $offset);
+            $totalRegistros = count($noticiasRepository->findBy([], ['id' => 'DESC']));
         }
-        $totalRegistros = count($noticiasRepository->findBy(['idioma' => $language]));
+        
         $resultado = [];
         foreach ($noticias as $noticia){
             if($noticia->getActivo()===1){$activo='Si';}else{$activo='No';}

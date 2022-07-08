@@ -25,6 +25,7 @@ class RecetasController extends AbstractController
         $language = $request->query->get('language');
         $limit = $request->query->get('limit', 20);
         $active = $request->query->get('active');
+        $totalRegistros=0;
 
         if($page<=0){$page=1;}
 
@@ -40,11 +41,13 @@ class RecetasController extends AbstractController
         //Consulta para recibir las recetas segun los params recibidos
         if(!empty($language)){
             $recetas = $recetasRepository->findBy(['idioma' => $language, 'activo' => $active], ['id' => 'DESC'], $limit, $offset);
+            $totalRegistros = count($recetasRepository->findBy(['idioma' => $language, 'activo' => $active]));
         }
         else{
             $recetas = $recetasRepository->findBy([], ['id' => 'DESC'], $limit, $offset);
+            $totalRegistros = count($recetasRepository->findBy([], ['id' => 'DESC']));
         }
-        $totalRegistros = count($recetasRepository->findBy(['idioma' => $language]));
+        
         $resultado = [];
         foreach ($recetas as $receta){
             if($receta->getActivo()===1){$activo='Si';}else{$activo='No';}
