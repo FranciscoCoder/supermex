@@ -70,6 +70,21 @@ class UsuarioController extends AbstractController
     }
 
     /**
+     * @Route("/api/verify_token", name="app_users_verify", methods={"POST"})
+     */
+    public function verifyToken(): Response
+    {
+        $resultado="ok";
+        if((!$this->isGranted('ROLE_SUPERADMIN'))&&(!$this->isGranted('ROLE_ADMIN'))&&(!$this->isGranted('ROLE_BLOGUERO'))) {
+            $resultado="ko";
+        }
+
+        return $this->json([
+            'result' => $resultado,
+        ]);
+    }
+
+    /**
      * @Route("/api/user/", name="app_user_register", methods={"POST"})
      */
     public function newRecipe(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $em): Response

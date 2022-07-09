@@ -54,6 +54,7 @@ security:
         - { path: ^/api/recipe/, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/api/new/, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/api/user/, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/verify_token/, roles: IS_AUTHENTICATED_FULLY }
         
         # - { path: ^/delete, roles: ROLE_DELETE }
 
