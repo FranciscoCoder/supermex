@@ -1,21 +1,19 @@
-// import { useContext, useEffect, useState } from "react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-//import { PaginationContext } from "../../../App";
+import {goTop} from "../../../components/Utils";
 import globalUrl from "../../../components/Utils";
 import Pagination from "../../../components/Pagination/Pagination";
 import styleDashboard from "../../Dashboard.module.css";
 
 export default function Noticias() {
-  //Recepcion de variables globales del sistema de paginacion
-  //const {page, setPageTotal} = useContext(PaginationContext);
-  const [page, setPage] = useState(1);
-  const [pageTotal, setPageTotal] = useState(1);
   //Declaramos variables iniciales
+  const [page, setPage] = useState(1);
+  const [registerTotal, setRegisterTotal] = useState(0);
+  const limit = 20;
+  const pageNumber=[];
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [noticias, setNoticias] = useState([]);
-  let limit = 2;
 
   //Listamos las noticias dados de alta
   useEffect(() => {
@@ -27,16 +25,25 @@ export default function Noticias() {
     })
       .then((res) => res.json())
       .then((data) => {
-        //Actualizamos el estado login a false para renderizar los datos
+        //Actualizamos el estado loading a false para renderizar los datos
         setLoading(false);
-        //Actualizadmos el estado recetas con los datos
+        //Actualizadmos el estado noticias con los datos
         setNoticias(data.result);
-        setPageTotal(data.count);
+        setRegisterTotal(data.count);
       })
       .catch((error) => {
         navigate(`/admin/error-conexion`, { replace: true });
       });
-  }, [page, navigate, limit, setPageTotal]);
+  }, [page, navigate]);
+
+  const pageNumberTotal = Math.ceil(registerTotal/limit);
+  //Bucle para crear las pagina
+  for(let i = 1; i<=pageNumberTotal; i++){
+    pageNumber.push({
+      "pageCount": i,
+      'updatePage': ()=>setPage(i)
+    });
+  }
 
   if (loading) {
     return <div className={styleDashboard.loading}>Loading</div>;
@@ -82,6 +89,7 @@ export default function Noticias() {
                     <td>
                       <div className={styleDashboard.botonesCentrado}>
                         <Link
+                          onClick={goTop}
                           to={`/admin/noticia/${noticia.slug}`}
                           className={styleDashboard.botonNuevo}
                         >
@@ -129,7 +137,7 @@ export default function Noticias() {
                 </tbody>
               )}
             </table>
-            <Pagination pages={`dashboard`} limit={limit} pageTotal={pageTotal} page={page} prevPage={() => setPage(page - 1)} nextPage={() => setPage(page + 1)}/>
+            <Pagination section={`dashboard`} page={page} prevPage={() => setPage(page - 1)} pageNumber={pageNumber} nextPage={() => setPage(page + 1)} firstPage={() => setPage(1)} lastPage={() => setPage(pageNumberTotal)}/>
           </div>
         ) : (
           <div className={styleDashboard.notFound}>

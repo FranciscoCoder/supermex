@@ -1,4 +1,4 @@
-import {changeStyleBody, goTop} from '../../components/Utils';
+import {changeStyleBody} from '../../components/Utils';
 
 import styleCalidad from './Calidad.module.css';
 

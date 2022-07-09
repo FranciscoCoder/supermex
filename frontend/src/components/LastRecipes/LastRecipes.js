@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { goTop } from "../../components/Utils";
 import globalUrl from "../../components/Utils";
 import IconoReceta from '../../assets/svg/recetas_tribu.svg';
 import IconoCubiertos from '../../assets/svg/cubiertos_recetas.svg';
@@ -31,7 +32,7 @@ export default function LastRecipes(props) {
                     <ul>
                         {lastRecipes.map((recipe) => (
                             <li key={recipe.id}>
-                                <Link to={`/${props.lang}/receta/${recipe.slug}`}>
+                                <Link onClick={goTop} to={`/${props.lang}/receta/${recipe.slug}`}>
                                     <img src={recipe.imagen} width="300" height="300" alt={recipe.nombre} />
                                     <div className={`${styleLastRecipes.etiqueta}`}>Guacamole casero con pico de gallo</div>
                                 </Link>

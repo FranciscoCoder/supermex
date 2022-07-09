@@ -1,7 +1,5 @@
-//import { useContext, useEffect, useState } from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-//import { PaginationContext } from "../../App";
 import { changeStyleBody, goTop } from "../../components/Utils";
 import globalUrl from "../../components/Utils";
 import Pagination from "../../components/Pagination/Pagination";
@@ -10,14 +8,12 @@ import styleLaHoguera from "./LaHoguera.module.css";
 
 export default function LaHoguera(props) {
   changeStyleBody("fondomorado", "fondoturquesa");
-  //Recepcion de variables globales del sistema de paginacion
-  //const {page, setPageTotal} = useContext(PaginationContext);
+  //Declaramos variables iniciales
   const [page, setPage] = useState(1);
-  const [pageTotal, setPageTotal] = useState(1);
-  
-  //Declaracion de variables para Recetas
+  const [registerTotal, setRegisterTotal] = useState(0);
+  const limit = 8;
+  const pageNumber=[];
   const [noticias, setNoticias] = useState([]);
-  let limit = 8;
   
   //Listamos las noticias dadas de alta
   useEffect(() => {
@@ -33,12 +29,21 @@ export default function LaHoguera(props) {
       .then((data) => {
         //Actualizadmos el estado noticias con los datos
         setNoticias(data.result);
-        setPageTotal(data.count);
+        setRegisterTotal(data.count);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [page, props.lang, limit, setPageTotal]);
+  }, [page, props.lang,]);
+
+  const pageNumberTotal = Math.ceil(registerTotal/limit);
+  //Bucle para crear las pagina
+  for(let i = 1; i<=pageNumberTotal; i++){
+    pageNumber.push({
+      "pageCount": i,
+      'updatePage': ()=>setPage(i)
+    });
+  }
   return (
       <LayoutNews lang={props.lang}>
         {noticias.length > 0 ? (
@@ -46,7 +51,7 @@ export default function LaHoguera(props) {
             <ul>
               {noticias.map((noticia) => (
                 <li key={noticia.id}>
-                  <Link to={`/${props.lang}/post/${noticia.slug}`}>
+                  <Link onClick={goTop()} to={`/${props.lang}/post/${noticia.slug}`}>
                     <div>
                       <img
                         src={noticia.imagen}
@@ -62,7 +67,7 @@ export default function LaHoguera(props) {
                 </li>
               ))}
             </ul>
-            <Pagination pages={`front`} limit={limit} pageTotal={pageTotal} page={page} prevPage={() => setPage(page - 1)} nextPage={() => setPage(page + 1)}/>
+            <Pagination section={`front`} page={page} prevPage={() => setPage(page - 1)} pageNumber={pageNumber} nextPage={() => setPage(page + 1)} firstPage={() => setPage(1)} lastPage={() => setPage(pageNumberTotal)}/>
           </div>
         ) : (
           <div className={styleLaHoguera.notFound}>No hay noticias</div>

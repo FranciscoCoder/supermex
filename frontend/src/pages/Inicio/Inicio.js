@@ -1,4 +1,4 @@
-import {changeStyleBody, goTop} from '../../components/Utils';
+import {changeStyleBody} from '../../components/Utils';
 
 import homeProductoChips from '../../assets/images/home-producto-chips.jpg';
 import homeProductoSalsas from '../../assets/images/home-producto-salsas.jpg';
@@ -12,7 +12,6 @@ import Slider from '../../components/Slider/Slider';
 import LastRecipes from '../../components/LastRecipes/LastRecipes';
 
 export default function Inicio(props) {
-  goTop();
   changeStyleBody('fondoturquesa','fondorosa');
   return (
     <div>

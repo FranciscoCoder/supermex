@@ -1,60 +1,48 @@
 import React from "react";
 import stylePagination from "./Pagination.module.css";
 
-export default function Pagination({pages, limit, pageTotal, page, prevPage, nextPage}) {
-  //let pageTotal=props.pagetotal;
-  //Creamos la variable total de paginas
-  let total = 0;
-  //Calculamos el numero de paginas totales
-  total = Math.ceil(pageTotal / parseInt(limit));
-
-  let verifyPrevPage = page - 1;
-  let verifyNextPage = page + 1;
-
-  if (total > 1) {
-    if (pages === "front") {
+export default function Pagination({section, page, prevPage, pageNumber, nextPage, firstPage, lastPage}) {
+  const finalPage=pageNumber.length; 
+  if (finalPage > 1) {
+    if (section === "front") {
+      //Renderizamos la paginacion del front
       return (
         <div className={stylePagination.pagination}>
-          {verifyPrevPage > 0 ? (
-            <button onClick={prevPage}>&lt;</button>
-          ) : (
-            ""
-          )}
+          {page > 1
+          ? (<button onClick={prevPage}>&lt;</button>) 
+          : ("")}
           <div>
-            {page} / {total}
+            {page} / {finalPage}
           </div>
-          {verifyNextPage <= total ? (
-            <button onClick={nextPage}>&gt;</button>
-          ) : (
-            ""
-          )}
+          {page < finalPage 
+          ? (<button onClick={nextPage}>&gt;</button>) 
+          : ("")}
         </div>
       );
-    } else if (pages === "dashboard") {
-      const pagesArray = [];
-      for (let i = 1; i <= total; i++) {
-        pagesArray.push(i);
-      }
+    } else if (section === "dashboard") {
+      //Renderizamos la paginacion del dashboard
       return (
-        <div>
+        <div className={stylePagination.paginationDashboard}>
           <ul>
-            <li>
-              <button onClick={prevPage}>
-                Anterior
-              </button>
-            </li>
-            {/* {pagesArray.map((pgNumber) => (
-              <li key={pgNumber}>
-                <button onClick={() => setPage(pgNumber)}>
-                  {pgNumber}
+            {firstPage 
+            ? (<li><button onClick={firstPage}>&lt;&lt;</button></li>)
+            : ("")}
+            {page > 1 
+            ? (<li><button onClick={prevPage}>&lt;</button></li>) 
+            : ("")}
+            {pageNumber.map((pgNumber) => (
+              <li key={`Page${pgNumber.pageCount}`}>
+                <button onClick={pgNumber.updatePage} className={pgNumber.pageCount===page ? (stylePagination.active) : ("")}>
+                  {pgNumber.pageCount}
                 </button>
               </li>
-            ))} */}
-            <li>
-              <button onClick={nextPage}>
-                Siguiente
-              </button>
-            </li>
+            ))}
+            {page < finalPage
+            ? (<li><button onClick={nextPage}>&gt;</button></li>) 
+            : ("")}
+            {lastPage 
+            ? (<li><button onClick={lastPage}>&gt;&gt;</button></li>)
+            : ("")}
           </ul>
         </div>
       );

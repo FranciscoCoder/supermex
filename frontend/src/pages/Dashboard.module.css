@@ -32,14 +32,12 @@
 .estiloBody {
   font-family: "Open sans", sans-serif;
   width: 100%;
-  /*height: 100vh;*/
   padding: 50px 0;
 }
 
 .content {
   padding: 0 0 0 150px;
   width: 100%;
-  /*height: 100%;*/
   display: block;
 }
 
@@ -57,6 +55,7 @@
   background-color: var(--white);
   border-radius: 5px;
   padding: 20px 2rem;
+  overflow-x: auto;
 }
 
 .contentBody label {
@@ -77,6 +76,7 @@
   padding: 5px;
   margin: 0;
   border: 1px solid var(--gray-light);
+  font-size: 17px;
 }
 
 .contentBody table tbody tr td img {
@@ -96,7 +96,8 @@
   padding: 10px;
   border-radius: 5px;
   font-family: "Open sans", sans-serif;
-  font-size: 15px;
+  font-size: 18px;
+  width: 100%;
 }
 
 .contentBody textarea {
@@ -110,6 +111,8 @@
   -webkit-box-pack: left;
       -ms-flex-pack: left;
           justify-content: left;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .contentBody .agrupacion .grupoCampo {
@@ -164,7 +167,7 @@
   border-radius: 5px;
   -webkit-transition: all 0.3s linear;
   transition: all 0.3s linear;
-  font-size: 15px;
+  font-size: 18px;
   margin: 0 5px 0px;
   cursor: pointer;
 }
@@ -181,7 +184,7 @@
   border-radius: 5px;
   -webkit-transition: all 0.3s linear;
   transition: all 0.3s linear;
-  font-size: 15px;
+  font-size: 18px;
   margin: 0 5px 0px;
   cursor: pointer;
 }
@@ -197,7 +200,7 @@
   border-radius: 5px;
   -webkit-transition: all 0.3s linear;
   transition: all 0.3s linear;
-  font-size: 15px;
+  font-size: 18px;
   margin: 0 5px 0px;
   cursor: pointer;
 }
@@ -213,7 +216,7 @@
   border-radius: 5px;
   -webkit-transition: all 0.3s linear;
   transition: all 0.3s linear;
-  font-size: 15px;
+  font-size: 18px;
   margin: 0 5px 0px;
   cursor: pointer;
 }
@@ -223,8 +226,9 @@
 }
 
 .imagenDetalle img {
-  width: 300px;
-  height: 200px;
+  max-width: 300px;
+  width: 100%;
+  height: auto;
   -o-object-fit: cover;
      object-fit: cover;
   -o-object-position: center;

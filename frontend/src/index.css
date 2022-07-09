@@ -56,9 +56,8 @@ body {
 
 body {
   font-family: "Barlow Condensed", sans-serif;
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-  opacity: 1;
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
 }
 
 p {

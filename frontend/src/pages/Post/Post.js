@@ -8,7 +8,6 @@ import styleNoEncontrado from "../NoEncontrada/NoEncontrada.module.css";
 export default function Post(props) {
   const params = useParams();
   const [post, setPost] = useState([]);
-  goTop();
   changeStyleBody("fondomorado", "fondoturquesa");
 
   useEffect(() => {
@@ -30,7 +29,7 @@ export default function Post(props) {
     return (
       <section key={post[0].id} className={stylePost.section1}>
         <div className={stylePost.enlaceAtras}>
-          <Link to={`/${props.lang}/la-hoguera`}>atrás</Link>
+          <Link onClick={goTop} to={`/${props.lang}/la-hoguera`}>atrás</Link>
         </div>
         <div className={stylePost.noticia}>
           <div className={stylePost.imagen}>

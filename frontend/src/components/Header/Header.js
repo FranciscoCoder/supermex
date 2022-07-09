@@ -45,8 +45,9 @@ export default function Header(props) {
     document.querySelector('body').classList.remove('noscroll');
   };
 
-  const closeMenu2= () =>{
-    closeMenu(); goTop();
+  const closeAndGoTop = () =>{
+    closeMenu();
+    goTop();
   }
   
   //let logoaleatorio = generateRandomNumber(1, 5);
@@ -82,7 +83,7 @@ export default function Header(props) {
       </div> */}
 
       <div className={headerStyle.logo}>
-        <Link onClick={closeMenu2} to={`/${props.lang}`}>
+        <Link onClick={closeAndGoTop} to={`/${props.lang}`}>
           <svg xmlns="http://www.w3.org/2000/svg" width="278" height="135" viewBox="0 0 278 135">
               <g transform="translate(-1141 270)">
                   <rect className={headerStyle.logo_rectangulo1} width="278" height="135" transform="translate(1141 -270)" fill="#13235a"/>
@@ -159,37 +160,32 @@ export default function Header(props) {
         <div>
           <ul className={headerStyle.listamenu}>
             <li>
-              <Link onClick={closeMenu2} to={`/${props.lang}/${headerTranslate[props.lang].linkProducto}`}>
+              <Link onClick={closeAndGoTop} to={`/${props.lang}/${headerTranslate[props.lang].linkProducto}`}>
                 {headerTranslate[props.lang].producto}
               </Link>
             </li>
-            {/* <li>
-              <a href={`/${props.lang}/horeca`}>
-                {headerTranslate[props.lang].horeca}
-              </a>
-            </li> */}
             <li>
-              <Link onClick={closeMenu2} to={`/${props.lang}/${headerTranslate[props.lang].linkLaTribu}`}>
+              <Link onClick={closeAndGoTop} to={`/${props.lang}/${headerTranslate[props.lang].linkLaTribu}`}>
                 {headerTranslate[props.lang].laTribu}
               </Link>
             </li>
             <li>
-              <Link onClick={closeMenu2} to={`/${props.lang}/${headerTranslate[props.lang].linkRecetas}`}>
+              <Link onClick={closeAndGoTop} to={`/${props.lang}/${headerTranslate[props.lang].linkRecetas}`}>
                 {headerTranslate[props.lang].recetas}
               </Link>
             </li>
             <li>
-              <Link onClick={closeMenu2} to={`/${props.lang}/${headerTranslate[props.lang].linkCalidad}`}>
+              <Link onClick={closeAndGoTop} to={`/${props.lang}/${headerTranslate[props.lang].linkCalidad}`}>
                 {headerTranslate[props.lang].calidad}
               </Link>
             </li>
             <li>
-              <Link onClick={closeMenu2} to={`/${props.lang}/${headerTranslate[props.lang].linkContacto}`}>
+              <Link onClick={closeAndGoTop} to={`/${props.lang}/${headerTranslate[props.lang].linkContacto}`}>
                 {headerTranslate[props.lang].contacto}
               </Link>
             </li>
             <li>
-              <Link onClick={closeMenu2} to={`/${props.lang}/${headerTranslate[props.lang].linkLaHoguera}`}>
+              <Link onClick={closeAndGoTop} to={`/${props.lang}/${headerTranslate[props.lang].linkLaHoguera}`}>
                 {headerTranslate[props.lang].laHoguera}
               </Link>
             </li>

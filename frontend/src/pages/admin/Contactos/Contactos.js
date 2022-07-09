@@ -1,22 +1,18 @@
-//import { useContext, useEffect, useState } from "react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-//import { PaginationContext } from "../../../App";
 import globalUrl from "../../../components/Utils";
 import Pagination from "../../../components/Pagination/Pagination";
 import styleDashboard from "../../Dashboard.module.css";
 
 export default function Contactos() {
-  //Recepcion de variables globales del sistema de paginacion
-  //const {page, setPageTotal} = useContext(PaginationContext);
-  
-  const [page, setPage] = useState(1);
-  const [pageTotal, setPageTotal] = useState(1);
   //Declaramos variables iniciales
+  const [page, setPage] = useState(1);
+  const [registerTotal, setRegisterTotal] = useState(0);
+  const limit = 20;
+  const pageNumber=[];
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [contactos, setContactos] = useState([]);
-  let limit = 20;
 
   useEffect(() => {
     //Api para recibir contactos segun parametros
@@ -28,18 +24,30 @@ export default function Contactos() {
     })
       .then((res) => res.json())
       .then((data) => {
+        //Actualizamos el estado loading a false para renderizar los datos
         setLoading(false);
+        //Actualizadmos el estado contactos con los datos
         setContactos(data.result);
-        setPageTotal(data.count);
+        setRegisterTotal(data.count);
       })
       .catch((error) => {
         navigate(`/admin/error-conexion`, { replace: true });
       });
-  }, [page, navigate, limit, setPageTotal]);
+  }, [page, navigate]);
+
+  const pageNumberTotal = Math.ceil(registerTotal/limit);
+  //Bucle para crear las pagina
+  for(let i = 1; i<=pageNumberTotal; i++){
+    pageNumber.push({
+      "pageCount": i,
+      'updatePage': ()=>setPage(i)
+    });
+  }
 
   if (loading) {
     return <div className={styleDashboard.loading}>Loading</div>;
   } else {
+    let cont = 0;
     return (
       <LayoutContacts>
         {contactos.length > 0 ? (
@@ -54,21 +62,21 @@ export default function Contactos() {
                   <th>Fecha</th>
                 </tr>
               </thead>
+              <tbody>
               {contactos.map((contacto) => 
-                <tbody key={contacto.id}>
-                  <tr key={contacto.id}>
-                    <td>{contacto.nombre}</td>
-                    <td>{contacto.email}</td>
-                    <td>{contacto.telefono}</td>
-                    <td>{contacto.mensaje.split("\n").map((texto) => (
-                    <p key={`text${contacto.id}`}>{texto}</p>
-                  ))}</td>
-                    <td>{contacto.fecha}</td>
-                  </tr>
-                </tbody>
+                <tr key={contacto.id}>
+                  <td>{contacto.nombre}</td>
+                  <td>{contacto.email}</td>
+                  <td>{contacto.telefono}</td>
+                  <td>{contacto.mensaje.split("\n").map((texto) => (
+                  <p key={`text${cont++}`}>{texto}</p>
+                ))}</td>
+                  <td>{contacto.fecha}</td>
+                </tr>
               )}
+              </tbody>
             </table>
-            <Pagination pages={`dashboard`} limit={limit} pageTotal={pageTotal} page={page} prevPage={() => setPage(page - 1)} nextPage={() => setPage(page + 1)}/>
+            <Pagination section={`dashboard`} page={page} prevPage={() => setPage(page - 1)} pageNumber={pageNumber} nextPage={() => setPage(page + 1)} firstPage={() => setPage(1)} lastPage={() => setPage(pageNumberTotal)}/>
           </div>
         ) : (
           <div className={styleDashboard.notFound}>No hay contactos</div>

@@ -9,14 +9,12 @@ import styleRecetas from "./Recetas.module.css";
 export default function Recetas(props) {
   goTop();
   changeStyleBody("fondorosa", "fondoturquesa");
-  //Recepcion de variables globales del sistema de paginacion
-  //const {page, setPageTotal} = useContext(PaginationContext);
-
-  //Declaracion de variables para Recetas
+  //Declaramos variables iniciales
   const [page, setPage] = useState(1);
-  const [pageTotal, setPageTotal] = useState(1);
+  const [registerTotal, setRegisterTotal] = useState(0);
+  const limit = 8;
+  const pageNumber=[];
   const [recetas, setRecetas] = useState([]);
-  let limit = 6;
 
   //Listamos las recetas dadas de alta
   useEffect(() => {
@@ -31,14 +29,21 @@ export default function Recetas(props) {
     .then((data) => {
       //Actualizadmos el estado recetas con los datos
       setRecetas(data.result);
-      setPageTotal(data.count);
+      setRegisterTotal(data.count);
     })
     .catch((error) => {
       console.log(error);
     });
-  }, [page, limit, props.lang, ]);
+  }, [page, props.lang]);
 
-  
+  const pageNumberTotal = Math.ceil(registerTotal/limit);
+  //Bucle para crear las pagina
+  for(let i = 1; i<=pageNumberTotal; i++){
+    pageNumber.push({
+      "pageCount": i,
+      'updatePage': ()=>setPage(i)
+    });
+  }
   return (
       <LayoutRecipes lang={props.lang}>
         {recetas.length > 0 ? (
@@ -58,7 +63,7 @@ export default function Recetas(props) {
                 </li>
               ))}
             </ul>
-            <Pagination pages={`front`} limit={limit} pageTotal={pageTotal} page={page} prevPage={() => setPage(page - 1)} nextPage={() => setPage(page + 1)}/>
+            <Pagination section={`front`} page={page} prevPage={() => setPage(page - 1)} pageNumber={pageNumber} nextPage={() => setPage(page + 1)} firstPage={() => setPage(1)} lastPage={() => setPage(pageNumberTotal)}/>
           </div>
         ) : (
           <div className={styleRecetas.notFound}>No hay recetas</div>
