@@ -18,7 +18,7 @@ export default function LaHoguera(props) {
   //Listamos las noticias dadas de alta
   useEffect(() => {
     goTop();
-    fetch(`${globalUrl}/api/news/?page=${page}&language=${props.lang}&limit=${limit}&active=1`, {
+    fetch(`${globalUrl}/api/news?page=${page}&language=${props.lang}&limit=${limit}&active=1`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

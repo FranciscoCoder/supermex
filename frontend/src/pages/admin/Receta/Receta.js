@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { generateSlug } from "../../../components/Utils";
 import globalUrl from "../../../components/Utils";
 import styleDashboard from "../../Dashboard.module.css";
 
@@ -11,6 +12,7 @@ export default function Receta() {
   const [registerId, setRegisterId] = useState("");
   const [formValues, setFormValues] = useState({
     nombre: "",
+    slug: "",
     ingredientes: "",
     descripcion: "",
     activo: 0,
@@ -42,8 +44,16 @@ export default function Receta() {
 
   //Funcion para actualizar los useState correspondiente a cada input
   const handleInputChange = (e) => {
-    //Ingresamos los campos del formulario
-    setFormValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    //Generacion slug segun el campo nombre
+    if(e.target.name==="nombre"){
+      let str = generateSlug(e.target.value);
+      setFormValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+      setFormValues((prev) => ({ ...prev, 'slug': str }));
+    }
+    else{
+      //Ingresamos los campos del formulario
+      setFormValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    }
   };
 
   //Funcion para insertar o modificar el registro al endpoint POST / PUT
@@ -52,6 +62,7 @@ export default function Receta() {
 
     let formData = new FormData();
     formData.append("nombre", formValues.nombre);
+    formData.append("slug", formValues.slug);
     formData.append("descripcion", formValues.descripcion);
     formData.append("ingredientes", formValues.ingredientes);
     formData.append("activo", formValues.activo);
@@ -92,6 +103,7 @@ export default function Receta() {
           setFormValues((prev) => ({
             ...prev,
             nombre: data.result[0].nombre,
+            slug: data.result[0].slug,
             ingredientes: data.result[0].ingredientes,
             descripcion: data.result[0].descripcion,
             idioma: data.result[0].idioma,
@@ -167,6 +179,18 @@ export default function Receta() {
               placeholder="Nombre receta"
               onChange={handleInputChange}
               defaultValue={formValues.nombre}
+            />
+          </div>
+          <div className={styleDashboard.grupoCampo}>
+            <label htmlFor="slugNoticia">Slug</label>
+            <input
+              type="text"
+              id="slugNoticia"
+              name="slug"
+              placeholder="Slug"
+              onChange={handleInputChange}
+              defaultValue={formValues.slug}
+              readOnly="readonly"
             />
           </div>
           <div className={styleDashboard.grupoCampo}>

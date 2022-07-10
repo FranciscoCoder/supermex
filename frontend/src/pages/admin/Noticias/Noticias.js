@@ -17,7 +17,7 @@ export default function Noticias() {
 
   //Listamos las noticias dados de alta
   useEffect(() => {
-    fetch(`${globalUrl}/api/news/?page=${page}&limit=${limit}`, {
+    fetch(`${globalUrl}/api/news?page=${page}&limit=${limit}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -102,9 +102,7 @@ export default function Noticias() {
                             if (
                               window.confirm("¿Quieres eliminar el registro?")
                             ) {
-                              fetch(
-                                `${globalUrl}/api/new/${noticia.id}/delete`,
-                                {
+                              fetch(`${globalUrl}/api/new/${noticia.id}/delete`,{
                                   method: "DELETE",
                                   headers: {
                                     "Content-Type": "application/json",

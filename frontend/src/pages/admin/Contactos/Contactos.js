@@ -16,7 +16,7 @@ export default function Contactos() {
 
   useEffect(() => {
     //Api para recibir contactos segun parametros
-    fetch(`${globalUrl}/api/contact/?page=${page}&limit=${limit}`, {
+    fetch(`${globalUrl}/api/contact?page=${page}&limit=${limit}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

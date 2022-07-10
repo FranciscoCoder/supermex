@@ -17,7 +17,7 @@ export default function Recetas() {
 
   //Listamos los usuarios dados de alta
   useEffect(() => {
-    fetch(`${globalUrl}/api/users/?page=${page}&limit=${limit}`, {
+    fetch(`${globalUrl}/api/users?page=${page}&limit=${limit}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -90,9 +90,7 @@ export default function Recetas() {
                                   "¿Quieres eliminar este usuario?"
                                 )
                               ) {
-                                fetch(
-                                  `${globalUrl}/api/user/${usuario.id}/delete`,
-                                  {
+                                fetch(`${globalUrl}/api/user/${usuario.id}/delete`,{
                                     method: "DELETE",
                                     headers: {
                                       "Content-Type": "application/json",

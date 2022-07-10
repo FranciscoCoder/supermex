@@ -17,7 +17,7 @@ export default function Recetas() {
 
   //Listamos las recetas dados de alta
   useEffect(() => {
-    fetch(`${globalUrl}/api/recipes/?page=${page}&limit=${limit}`, {
+    fetch(`${globalUrl}/api/recipes?page=${page}&limit=${limit}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

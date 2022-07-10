@@ -1,6 +1,8 @@
+//URL back
 let globalUrl = "http://127.0.0.1:8080";
 export default globalUrl;
 
+//Funcion para cambiar el color de fondo segun la posicion del footer al hacer scroll
 export function changeStyleBody(styleValue, styleValue2) {
   let bodyWeb = document.body;
   bodyWeb.classList.add(styleValue);
@@ -19,11 +21,13 @@ export function changeStyleBody(styleValue, styleValue2) {
   });
 }
 
+//Funcion color de fondo para Dashboard
 export function backgroundColorBody(styleValue) {
   let bodyWeb = document.body;
   bodyWeb.classList.add(styleValue);
 }
 
+//Calculo la altura del banner
 export function heightBanner() {
   let banner = document.querySelector("#bannerInicio");
   if (banner !== null) {
@@ -34,6 +38,25 @@ export function heightBanner() {
   }
 }
 
+//Funcion para hacer scroll 0 al renderizar
 export function goTop(){
   window.scrollTo(0, 0);
+}
+
+//Funcion para generar Slug en Dashboard
+export function generateSlug(str){
+    str = str.replace(/^\s+|\s+$/g, ''); // trim
+    str = str.toLowerCase();
+
+    // remove accents, swap ñ for n, etc
+    let from = "ÁÄÂÀÃÅČÇĆĎÉĚËÈÊẼĔȆĞÍÌÎÏİŇÑÓÖÒÔÕØŘŔŠŞŤÚŮÜÙÛÝŸŽáäâàãåčçćďéěëèêẽĕȇğíìîïıňñóöòôõøðřŕšşťúůüùûýÿžþÞĐđßÆa·/_,:;";
+    let to   = "AAAAAACCCDEEEEEEEEGIIIIINNOOOOOORRSSTUUUUUYYZaaaaaacccdeeeeeeeegiiiiinnooooooorrsstuuuuuyyzbBDdBAa------";
+    for (var i = 0, l = from.length; i < l; i++) {
+      str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+    }
+
+    str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+            .replace(/\s+/g, '-') // collapse whitespace and replace by -
+            .replace(/-+/g, '-'); // collapse dashes
+    return str;
 }

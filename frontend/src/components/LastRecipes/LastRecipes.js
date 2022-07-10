@@ -10,7 +10,7 @@ export default function LastRecipes(props) {
     const [lastRecipes, setLastRecipes] = useState([]);
 
     useEffect(()=>{
-        fetch(`${globalUrl}/api/recipes/?language=${props.lang}&limit=4&active=1`, {
+        fetch(`${globalUrl}/api/recipes?language=${props.lang}&limit=4&active=1`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
