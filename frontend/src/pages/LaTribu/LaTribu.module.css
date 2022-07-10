@@ -125,8 +125,8 @@
 .contenidoSection2 h4 {
   color: var(--color_fucsia);
   font-weight: 700;
-  font-size: calc(45px + (85 - 45) * ((100vw - 301px) / (1920 - 300)));
-  line-height: calc(45px + (85 - 45) * ((100vw - 301px) / (1920 - 300)));
+  font-size: calc(45px + (85 - 45) * ((100vw - 300px) / (1920 - 300)));
+  line-height: calc(45px + (85 - 45) * ((100vw - 300px) / (1920 - 300)));
 }
 
 .contenidoSection2 h5 {

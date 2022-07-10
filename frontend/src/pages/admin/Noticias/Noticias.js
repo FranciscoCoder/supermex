@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {goTop} from "../../../components/Utils";
+import {goTop, verifyToken} from "../../../components/Utils";
 import globalUrl from "../../../components/Utils";
 import Pagination from "../../../components/Pagination/Pagination";
 import styleDashboard from "../../Dashboard.module.css";
 
 export default function Noticias() {
+  verifyToken();
   //Declaramos variables iniciales
   const [page, setPage] = useState(1);
   const [registerTotal, setRegisterTotal] = useState(0);

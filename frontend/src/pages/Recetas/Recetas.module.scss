@@ -20,8 +20,8 @@
       line-height: 23px;
       font-weight: 500;
       & h1 {
-        font-size: calc(60px + (120 - 60) * ((100vw - 301px) / (1920 - 300)));
-        line-height: calc(60px + (120 - 60) * ((100vw - 301px) / (1920 - 300)));
+        font-size: calc(60px + (120 - 60) * ((100vw - 300px) / (1920 - 300)));
+        line-height: calc(60px + (120 - 60) * ((100vw - 300px) / (1920 - 300)));
         font-weight: 700;
       }
       & div {
@@ -43,8 +43,8 @@
       padding: 0 5% 30px;
       font-weight: 700;
       text-transform: uppercase;
-      line-height: calc(30px + (60 - 30) * ((100vw - 301px) / (1920 - 300)));
-      font-size: calc(30px + (60 - 30) * ((100vw - 301px) / (1920 - 300)));
+      line-height: calc(30px + (60 - 30) * ((100vw - 300px) / (1920 - 300)));
+      font-size: calc(30px + (60 - 30) * ((100vw - 300px) / (1920 - 300)));
       & a {
         color: var(--color_amarillomex);
       }
@@ -67,8 +67,8 @@
   text-align: center;
   color: var(--color_amarillomex);
   padding: 100px 0 0;
-  line-height: calc(30px + (110 - 30) * ((100vw - 301px) / (1920 - 300)));
-  font-size: calc(30px + (110 - 30) * ((100vw - 301px) / (1920 - 300)));
+  line-height: calc(30px + (110 - 30) * ((100vw - 300px) / (1920 - 300)));
+  font-size: calc(30px + (110 - 30) * ((100vw - 300px) / (1920 - 300)));
 }
 
 @media only screen and (max-width: 1024px) {

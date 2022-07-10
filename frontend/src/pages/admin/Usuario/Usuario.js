@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import globalUrl from "../../../components/Utils";
+import globalUrl, { takeRole } from "../../../components/Utils";
 import styleDashboard from "../../Dashboard.module.css";
 
 export default function Receta() {
+  const role = takeRole();
   const params = useParams("");
   const navigate = useNavigate();
   const [tituloApartado, setTituloApartado] = useState("Nuevo usuario");
@@ -42,13 +43,16 @@ export default function Receta() {
       body: formData,
       headers: {
         enctype: "multipart/form-data",
-        "Authorization": 'Bearer '+ localStorage.getItem('token')
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     })
       .then((res) => res.json())
       .then((data) => {
         if (data.result === "ok") {
           navigate(`/admin/usuarios`, { replace: true });
+        }
+        else{
+          alert('Error ya existe el usuario '+formValues.usuario);
         }
       })
       .catch((error) => console.log(error));
@@ -61,7 +65,7 @@ export default function Receta() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": 'Bearer '+ localStorage.getItem('token')
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       })
         .then((res) => res.json())
@@ -73,7 +77,8 @@ export default function Receta() {
             usuario: data.result[0].usuario,
             rol: data.result[0].rol,
           }));
-          document.querySelector("#rolUsuario").value = data.result[0].rol;
+          console.log(data.result[0].rol);
+          document.querySelector("#rolUsuario").value = data.result[0].rol[0];
         })
         .catch((error) => console.log(error));
     }
@@ -94,71 +99,82 @@ export default function Receta() {
         <h1>{tituloApartado}</h1>
       </div>
       <div className={styleDashboard.contentBody}>
-        <form onSubmit={handleSubmit} encType="multipart/form-data">
-          <div className={styleDashboard.botonesDerecha}>
-            <Link to={`/admin/usuarios`} className={styleDashboard.botonVolver}>
-              Cancelar
-            </Link>
-            <button className={styleDashboard.botonGuardar} type="submit">
-              Guardar
-            </button>
-          </div>
-
-          <div className={styleDashboard.agrupacion}>
-            <div className={styleDashboard.grupoCampo}>
-              <label htmlFor="rolUsuario">Rol</label>
-              <select
-                id="rolUsuario"
-                name="rol"
-                onChange={handleInputChange}
-                required
+        {role === "ROLE_SUPERADMIN" ? (
+          <form onSubmit={handleSubmit} encType="multipart/form-data">
+            <div className={styleDashboard.botonesDerecha}>
+              <Link
+                to={`/admin/usuarios`}
+                className={styleDashboard.botonVolver}
               >
-                <option value="ROLE_ADMIN">ADMIN</option>
-                <option value="ROLE_BLOQUERO">BLOGUERO</option>
-              </select>
+                Cancelar
+              </Link>
+              <button className={styleDashboard.botonGuardar} type="submit">
+                Guardar
+              </button>
             </div>
-            <div className={styleDashboard.grupoCampo}>
-              <label htmlFor="nombreContacto">Nombre contacto</label>
-              <input
-                type="text"
-                id="nombreContacto"
-                name="nombre"
-                placeholder="Nombre contacto"
-                onChange={handleInputChange}
-                defaultValue={formValues.nombre}
-              />
+
+            <div className={styleDashboard.agrupacion}>
+              <div className={styleDashboard.grupoCampo}>
+                <label htmlFor="rolUsuario">Rol</label>
+                <select
+                  id="rolUsuario"
+                  name="rol"
+                  onChange={handleInputChange}
+                  required
+                >
+                  <option value="ROLE_SUPERADMIN">SUPER ADMIN</option>
+                  <option value="ROLE_ADMIN">ADMIN</option>
+                  <option value="ROLE_BLOQUERO">BLOGUERO</option>
+                </select>
+              </div>
+              <div className={styleDashboard.grupoCampo}>
+                <label htmlFor="nombreContacto">Nombre contacto</label>
+                <input
+                  type="text"
+                  id="nombreContacto"
+                  name="nombre"
+                  placeholder="Nombre contacto"
+                  onChange={handleInputChange}
+                  defaultValue={formValues.nombre}
+                />
+              </div>
+              <div className={styleDashboard.grupoCampo}>
+                <label htmlFor="usuarioRegistro">Usuario</label>
+                <input
+                  type="text"
+                  id="usuarioRegistro"
+                  name="usuario"
+                  placeholder="Nombre usuario"
+                  onChange={handleInputChange}
+                  defaultValue={formValues.usuario}
+                />
+              </div>
+              <div className={styleDashboard.grupoCampo}>
+                <label htmlFor="passwordRegistro">Contraseña</label>
+                <input
+                  type="password"
+                  id="passwordRegistro"
+                  name="password"
+                  placeholder="Contraseña"
+                  onChange={handleInputChange}
+                />
+              </div>
             </div>
-            <div className={styleDashboard.grupoCampo}>
-              <label htmlFor="usuarioRegistro">Usuario</label>
-              <input
-                type="text"
-                id="usuarioRegistro"
-                name="usuario"
-                placeholder="Nombre usuario"
-                onChange={handleInputChange}
-                defaultValue={formValues.usuario}
-              />
+            <div className={styleDashboard.botonesDerecha}>
+              <Link
+                to={`/admin/usuarios`}
+                className={styleDashboard.botonVolver}
+              >
+                Cancelar
+              </Link>
+              <button className={styleDashboard.botonGuardar} type="submit">
+                Guardar
+              </button>
             </div>
-            <div className={styleDashboard.grupoCampo}>
-              <label htmlFor="passwordRegistro">Contraseña</label>
-              <input
-                type="password"
-                id="passwordRegistro"
-                name="password"
-                placeholder="Contraseña"
-                onChange={handleInputChange}
-              />
-            </div>
-          </div>
-          <div className={styleDashboard.botonesDerecha}>
-            <Link to={`/admin/usuarios`} className={styleDashboard.botonVolver}>
-              Cancelar
-            </Link>
-            <button className={styleDashboard.botonGuardar} type="submit">
-              Guardar
-            </button>
-          </div>
-        </form>
+          </form>
+        ) : (
+          <div>No tienes permiso de acceso</div>
+        )}
       </div>
     </>
   );

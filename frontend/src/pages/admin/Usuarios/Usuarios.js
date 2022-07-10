@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {goTop} from "../../../components/Utils";
+import {goTop, takeRole, verifyToken} from "../../../components/Utils";
 import globalUrl from "../../../components/Utils";
 import Pagination from "../../../components/Pagination/Pagination";
 import styleDashboard from "../../Dashboard.module.css";
 
 export default function Recetas() {
+  verifyToken();
+  const role = takeRole();
+
   //Declaramos variables iniciales
   const [page, setPage] = useState(1);
   const [registerTotal, setRegisterTotal] = useState(0);
@@ -50,7 +53,7 @@ export default function Recetas() {
     return <div className={styleDashboard.loading}>Loading</div>;
   } else {
     return (
-        <LayoutUsers>
+        <LayoutUsers role={role}>
           {usuarios.length > 0 ? (
             <div>
               <table>
@@ -68,7 +71,7 @@ export default function Recetas() {
                       <td className={styleDashboard.alignCenter}>
                         {usuario.usuario}
                       </td>
-                      <td>{usuario.rol}</td>
+                      <td>{usuario.rol[0]}</td>
                       <td className={styleDashboard.alignCenter}>
                         {usuario.fecha_creacion}
                       </td>
@@ -140,12 +143,19 @@ function LayoutUsers(props) {
         <h1>Usuarios</h1>
       </div>
       <div className={styleDashboard.contentBody}>
-        <div className={styleDashboard.botonesDerecha}>
-          <Link to={`/admin/usuario/`} className={styleDashboard.botonNuevo}>
-            Nuevo usuario
-          </Link>
-        </div>
-        {props.children}
+        {
+          props.role==='ROLE_SUPERADMIN'
+          ? 
+            <div>
+              <div className={styleDashboard.botonesDerecha}>
+                <Link to={`/admin/usuario/`} className={styleDashboard.botonNuevo}>
+                  Nuevo usuario
+                </Link>
+              </div>
+              {props.children}
+            </div>
+          :<div>No tienes permiso de acceso</div>
+        }
       </div>
     </div>
   );

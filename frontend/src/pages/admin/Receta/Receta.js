@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { generateSlug } from "../../../components/Utils";
+import { generateSlug, verifyToken } from "../../../components/Utils";
 import globalUrl from "../../../components/Utils";
 import styleDashboard from "../../Dashboard.module.css";
 
 export default function Receta() {
+  verifyToken();
   const params = useParams("");
   const navigate = useNavigate();
   const [tituloApartado, setTituloApartado] = useState("Nueva receta");

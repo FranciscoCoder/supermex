@@ -17,7 +17,6 @@ import NoConexion from "./admin/NoConexion/NoConexion";
 
 
 function Dashboard() {
-
     backgroundColorBody('fondoDashboard');
     return (
     <Routes>

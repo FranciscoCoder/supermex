@@ -99,8 +99,8 @@
     & h4{
         color: var(--color_fucsia);
         font-weight: 700;
-        font-size: calc(45px + (85 - 45) * ((100vw - 301px) / (1920 - 300)));
-        line-height: calc(45px + (85 - 45) * ((100vw - 301px) / (1920 - 300)));
+        font-size: calc(45px + (85 - 45) * ((100vw - 300px) / (1920 - 300)));
+        line-height: calc(45px + (85 - 45) * ((100vw - 300px) / (1920 - 300)));
     }
     & h5{
         font-size: calc(20px + (40 - 20) * ((100vw - 300px) / (1920 - 300)));

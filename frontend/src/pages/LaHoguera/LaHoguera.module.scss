@@ -73,8 +73,8 @@
     text-align: center;
     color: var(--color_amarillomex);
     padding: 100px 0 0;
-    line-height: calc(30px + (110 - 30) * ((100vw - 301px) / (1920 - 300)));
-    font-size: calc(30px + (110 - 30) * ((100vw - 301px) / (1920 - 300)));
+    line-height: calc(30px + (110 - 30) * ((100vw - 300px) / (1920 - 300)));
+    font-size: calc(30px + (110 - 30) * ((100vw - 300px) / (1920 - 300)));
   }
 
 @media only screen and (max-width: 1024px) {

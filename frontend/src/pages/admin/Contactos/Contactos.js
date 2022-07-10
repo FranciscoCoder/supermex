@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import globalUrl from "../../../components/Utils";
+import globalUrl, {takeRole, verifyToken} from "../../../components/Utils";
 import Pagination from "../../../components/Pagination/Pagination";
 import styleDashboard from "../../Dashboard.module.css";
 
 export default function Contactos() {
+  verifyToken();
+  const role = takeRole();
   //Declaramos variables iniciales
   const [page, setPage] = useState(1);
   const [registerTotal, setRegisterTotal] = useState(0);
@@ -49,7 +51,7 @@ export default function Contactos() {
   } else {
     let cont = 0;
     return (
-      <LayoutContacts>
+      <LayoutContacts role={role}>
         {contactos.length > 0 ? (
           <div>
             <table>
@@ -92,7 +94,13 @@ function LayoutContacts(props) {
       <div className={styleDashboard.contentHeader}>
         <h1>Contactos</h1>
       </div>
-      <div className={styleDashboard.contentBody}>{props.children}</div>
+      <div className={styleDashboard.contentBody}>
+      {
+          (props.role==='ROLE_SUPERADMIN'||props.role==='ROLE_ADMIN')
+          ? <div>{props.children}</div>
+          :<div>No tienes permiso de acceso</div>
+        }
+      </div>
     </div>
   );
 }
