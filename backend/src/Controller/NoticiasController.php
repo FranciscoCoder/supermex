@@ -130,9 +130,12 @@ class NoticiasController extends AbstractController
                 $noticia->setActivo($activoRequest);
                 $noticia->setTitular($nombreRequest);
 
+
+                $verifySlug = $noticiasRepository->find($slugRequest);
+
                 //$verifySlug=$noticiasRepository->getOldSlug($slugRequest);
-                // if(!empty($verifySlug)){
-                //     $noticia->setSlug($verifySlug.'-2');
+                // if($verifySlug){
+                //     $noticia->setSlug($verifySlug->getSlug().'-2');
                 // }
                 // else {$noticia->setSlug($slugRequest);}
                 $noticia->setSlug($slugRequest);

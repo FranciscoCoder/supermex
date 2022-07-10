@@ -49,7 +49,7 @@ class UsuarioController extends AbstractController
     /**
      * @Route("/api/users/{id}", name="app_users_show", methods={"GET"})
      */
-    public function showRecipe(UsuarioRepository $usuarioRepository, $id): Response
+    public function showUser(UsuarioRepository $usuarioRepository, $id): Response
     {
         $usuario = $usuarioRepository->find($id);
         if($usuario === null){
@@ -75,7 +75,7 @@ class UsuarioController extends AbstractController
     public function verifyToken(): Response
     {
         $resultado="ok";
-        if((!$this->isGranted('ROLE_SUPERADMIN'))&&(!$this->isGranted('ROLE_ADMIN'))&&(!$this->isGranted('ROLE_BLOGUERO'))) {
+        if((!$this->isGranted('ROLE_SUPERADMIN'))&&(!$this->isGranted('ROLE_ADMIN'))&&(!$this->isGranted('ROLE_USER'))) {
             $resultado="ko";
         }
 
@@ -87,7 +87,7 @@ class UsuarioController extends AbstractController
     /**
      * @Route("/api/user/", name="app_user_register", methods={"POST"})
      */
-    public function newRecipe(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $em): Response
+    public function newUser(Request $request, UsuarioRepository $usuarioRepository, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $em): Response
     {
         $nombreRequest = $request->request->get("nombre");
         $usuarioRequest = $request->request->get("usuario");
@@ -99,30 +99,36 @@ class UsuarioController extends AbstractController
         $registro='';
 
         if((!empty($usuarioRequest))&&(!empty($passwordRequest))){
-            $usuario = new Usuario();
-            $usuario->setNombre($nombreRequest);
-            $usuario->setUsername($usuarioRequest);
-            $usuario->setRoles([$rolRequest]);
-
-            if(!empty($passwordRequest))
-            {
-                $hashedPassword = $passwordHasher->hashPassword(
-                    $usuario,
-                    $passwordRequest
-                );
-                $usuario->setPassword($hashedPassword);
+            $verifyUser= $usuarioRepository->findBy(['username'=>$usuarioRequest]);
+            $registro='ko';
+            if(count($verifyUser)>0){
+                $registro="0";
             }
-            
-            $usuario->setFechaCreacion(new \DateTime());
-
-            $em->persist($usuario);
-            $em->flush();
-
-            $registro='';
-            if(!empty($usuario->getId()))
-            {
-                $resultado="ok";
-                $registro=$usuario->getId();
+            else{
+                $usuario = new Usuario();
+                $usuario->setNombre($nombreRequest);
+                $usuario->setUsername($usuarioRequest);
+                $usuario->setRoles([$rolRequest]);
+    
+                if(!empty($passwordRequest))
+                {
+                    $hashedPassword = $passwordHasher->hashPassword(
+                        $usuario,
+                        $passwordRequest
+                    );
+                    $usuario->setPassword($hashedPassword);
+                }
+                
+                $usuario->setFechaCreacion(new \DateTime());
+    
+                $em->persist($usuario);
+                $em->flush();
+    
+                if(!empty($usuario->getId()))
+                {
+                    $resultado="ok";
+                    $registro=$usuario->getId();
+                }
             }
         }
 
@@ -135,7 +141,7 @@ class UsuarioController extends AbstractController
     /**
      * @Route("/api/user/{id}", name="app_user_update", methods={"PUT"})
      */
-    public function updateRecipe(Request $request, UsuarioRepository $usuarioRepository, UserPasswordHasherInterface $passwordHasher,EntityManagerInterface $em, $id): Response
+    public function updateUser(Request $request, UsuarioRepository $usuarioRepository, UserPasswordHasherInterface $passwordHasher,EntityManagerInterface $em, $id): Response
     {
         $nombreRequest = $request->request->get("nombre");
         $usuarioRequest = $request->request->get("usuario");
@@ -174,7 +180,7 @@ class UsuarioController extends AbstractController
     /**
      * @Route("/api/user/{id}/delete", name="app_user_delete", methods={"DELETE"})
      */
-    public function deleteRecipe(UsuarioRepository $usuarioRepository, EntityManagerInterface $em, $id): Response
+    public function deleteUser(UsuarioRepository $usuarioRepository, EntityManagerInterface $em, $id): Response
     {
         // if(!$this->isGranted('ROLE_DELETE')) {
         //     return $this->json('No has dicho la palabra mágica ah aa h.');

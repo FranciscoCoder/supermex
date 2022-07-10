@@ -40,9 +40,12 @@ class NoticiasRepository extends ServiceEntityRepository
         }
     }
 
+    
     public function getOldSlug(string $slug): array
     {
         $qb = $this->createQueryBuilder("n")
+        ->select('n.slug')
+        ->from('noticias', 'n')
         ->where('n.slug like :oldSlug')
         ->orderBy('n.slug', 'DESC')
         ->setMaxResults(1)
