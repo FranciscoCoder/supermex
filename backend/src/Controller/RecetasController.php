@@ -118,19 +118,11 @@ class RecetasController extends AbstractController
         $imagen = $request->files->get('imagen');
         $nombreImagen='';
         $nombreRequest = $request->request->get("nombre");
+        $slugRequest = $request->request->get("slug");
         $idiomaRequest = $request->request->get("idioma");
         $activoRequest = $request->request->get("activo");
         $ingredientesRequest = $request->request->get("ingredientes");
         $descripcionRequest = $request->request->get("descripcion");
-
-        if(!empty($imagen))
-        {
-            if(!empty($imagen->getClientOriginalName()))
-            {
-                $nombreImagen = uniqid().'_'.strtolower(trim(preg_replace('/[^A-Za-z.]+/', '-', $imagen->getClientOriginalName())));
-                $imagen->move('uploads/', $nombreImagen);
-            }
-        }
 
         //$data = $request->toArray();
         $idioma = $idiomasRepository->find($idiomaRequest);
@@ -138,17 +130,26 @@ class RecetasController extends AbstractController
         $registro='';
         if(!empty($idioma->getId())){
             if(isset($nombreRequest)){
-                $slug=strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $nombreRequest)));
                 $receta = new Recetas();
                 $receta->setActivo($activoRequest);
                 $receta->setNombre($nombreRequest);
-                $receta->setSlug($slug);
+                $receta->setSlug($slugRequest);
                 $receta->setIdioma($idioma);
                 $receta->setDescripcion($descripcionRequest);
                 $receta->setIngredientes($ingredientesRequest);
                 $receta->setFechaCreacion(new \DateTime());
                 $receta->setFechaModificacion(new \DateTime());
-                $receta->setImagen($nombreImagen);
+
+                //Subimos la imagen
+                if(!empty($imagen))
+                {
+                    if(!empty($imagen->getClientOriginalName()))
+                    {
+                        $nombreImagen = uniqid().'_'.strtolower(trim(preg_replace('/[^A-Za-z.]+/', '-', $imagen->getClientOriginalName())));
+                        $imagen->move('uploads/', $nombreImagen);
+                        $receta->setImagen($nombreImagen);
+                    }
+                }
     
                 $em->persist($receta);
                 $em->flush();
@@ -181,19 +182,11 @@ class RecetasController extends AbstractController
         $imagen = $request->files->get('imagen');
         $nombreImagen='';
         $nombreRequest = $request->request->get("nombre");
+        $slugRequest = $request->request->get("slug");
         $idiomaRequest = $request->request->get("idioma");
         $activoRequest = $request->request->get("activo");
         $ingredientesRequest = $request->request->get("ingredientes");
         $descripcionRequest = $request->request->get("descripcion");
-
-        if(!empty($imagen))
-        {
-            if(!empty($imagen->getClientOriginalName()))
-            {
-                $nombreImagen = uniqid().'_'.strtolower(trim(preg_replace('/[^A-Za-z.]+/', '-', $imagen->getClientOriginalName())));
-                $imagen->move('uploads/', $nombreImagen);
-            }
-        }
      
         //Comprobamos si existe el idioma
         $idioma = $idiomasRepository->find($idiomaRequest);
@@ -205,19 +198,25 @@ class RecetasController extends AbstractController
         {
             if(!empty($receta->getId()))
             {
-                if(isset($nombreRequest)){
-                    $receta->setNombre($nombreRequest);
-                    $slug=strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $nombreRequest)));
-                    $receta->setSlug($slug);
-                }
-
+                $receta->setNombre($nombreRequest);
+                $receta->setSlug($slugRequest);
                 $receta->setDescripcion($descripcionRequest);
                 $receta->setIngredientes($ingredientesRequest);
                 $receta->setIdioma($idioma);
                 $receta->setActivo($activoRequest);
-                if(!empty($nombreImagen)){$receta->setImagen($nombreImagen);}
-        
+
+                //Subimos la imagen al servidor
+                if(!empty($imagen))
+                {
+                    if(!empty($imagen->getClientOriginalName()))
+                    {
+                        $nombreImagen = uniqid().'_'.strtolower(trim(preg_replace('/[^A-Za-z.]+/', '-', $imagen->getClientOriginalName())));
+                        $imagen->move('uploads/', $nombreImagen);
+                        $receta->setImagen($nombreImagen);
+                    }
+                }
                 $receta->setFechaModificacion(new \DateTime());
+        
                 $em->flush();
 
                 $resultado="ok";

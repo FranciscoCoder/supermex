@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Noticias;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -37,6 +38,16 @@ class NoticiasRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function getOldSlug(string $slug): array
+    {
+        $qb = $this->createQueryBuilder("n")
+        ->where('n.slug like :oldSlug')
+        ->orderBy('n.slug', 'DESC')
+        ->setMaxResults(1)
+        ->setParameter('oldSlug', $slug.'%');
+        return $qb->getQuery()->getResult();
     }
 
 //    /**
