@@ -2,6 +2,7 @@ import footerStyles from "./Footer.module.css";
 import iconTwitter from "../../assets/svg/footer_twitter.svg";
 import iconFacebook from "../../assets/svg/footer_facebook.svg";
 import iconInstagram from "../../assets/svg/footer_instagram.svg";
+import { Link } from "react-router-dom";
 
 export default function Footer(props) {
   return (
@@ -13,9 +14,9 @@ export default function Footer(props) {
                 DESCUBRIRLOS.
             </div>
             <div className={footerStyles.enlaceslegales}>
-                <a href={`/${props.lang}/aviso-legal/`}>Aviso legal</a>
-                <a href={`/${props.lang}/politica-de-privacidad/`}>Política de privacidad</a>
-                <a href={`/${props.lang}/politica-de-cookies/`}>Política de cookies</a>
+                <Link to={`/${props.lang}/aviso-legal/`}>Aviso legal</Link>
+                <Link to={`/${props.lang}/politica-de-privacidad/`}>Política de privacidad</Link>
+                {/* <a href={`/${props.lang}/politica-de-cookies/`}>Política de cookies</a> */}
             </div>
         </div>
         <div className={footerStyles.colfooter}>

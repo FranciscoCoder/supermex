@@ -13,6 +13,8 @@ import Contacto from "./Contacto/Contacto";
 import NoEncontrada from "./NoEncontrada/NoEncontrada";
 import Enviado from "./Enviado/Enviado";
 import NoEnviado from "./NoEnviado/NoEnviado";
+import AvisoLegal from "./AvisoLegal/AvisoLegal";
+import PoliticaPrivacidad from "./PoliticaPrivacidad/PoliticaPrivacidad";
 import Footer from "../components/Footer/Footer";
 
 function Front() {
@@ -29,6 +31,8 @@ function Front() {
           <Route path="/es/post/:slug" element={<Post lang="es" />} />
           <Route path="/es/contacto" element={<Contacto lang="es" />} />
           <Route path="/es/enviado" element={<Enviado lang="es" />} />
+          <Route path="/es/aviso-legal" element={<AvisoLegal lang="es" />} />
+          <Route path="/es/politica-de-privacidad" element={<PoliticaPrivacidad lang="es" />} />
           <Route path="/es/no-enviado" element={<NoEnviado lang="es" />} />
           <Route path="*" element={<NoEncontrada lang="es" />} />
         </Route>

@@ -33,14 +33,16 @@ export default function Contacto(props){
         .then((res) => res.json())
         .then((data) => {
             if(data.resultado==="ok"){
-                setEstadoEnvio(true);
+                navigate(`/${props.lang}/enviado`, { replace: true });
             }
+            else{
+                navigate(`/${props.lang}/no-enviado`, { replace: true });
+            }
+        }).catch((error) => {
+            navigate(`/${props.lang}/no-enviado`, { replace: true });
         });
       };
 
-    if (estadoEnvio) {
-        navigate(`/${props.lang}/enviado`, { replace: true });
-    };
     
     return(
         <div>
