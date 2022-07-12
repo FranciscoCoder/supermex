@@ -26,12 +26,22 @@ composer install
 ````
 [Or check here](https://symfony.com/doc/current/setup.html) for more information
 
-then, you will need modify the .env file to your user and your password from MYSQL.
+You will need modify the .env file to your user and your password from MYSQL.
 
 ### Import SQL file to your DB, then run: ### 
 
 ```
 symfony server:start --port=8080
+````
+
+### Install Lexik/jwt: ###
+```
+composer require lexik/jwt-authentication-bundle
+````
+
+### Exec this command for generate keypair###
+````
+php bin/console lexik:jwt:generate-keypair
 ````
 
 ## For install frontend you will need: ##
