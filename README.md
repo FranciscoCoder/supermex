@@ -3,7 +3,7 @@ Website with information about the products, recipes and news of the supermex fo
 
 ## Presentation ##
 
-Hi!!, Im Francisco Maquez and this is my final project for CodeSpace Academy.
+Hi!!, Im Francisco Marquez and this is my final project for CodeSpace Academy.
 
 ## Getting started ##
 
