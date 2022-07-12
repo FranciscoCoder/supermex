@@ -39,7 +39,7 @@ symfony server:start --port=8080
 composer require lexik/jwt-authentication-bundle
 ````
 
-### Exec this command for generate keypair###
+### Exec this command for generate keypair ###
 ````
 php bin/console lexik:jwt:generate-keypair
 ````
