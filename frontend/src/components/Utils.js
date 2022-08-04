@@ -1,10 +1,6 @@
 import jwt_decode from "jwt-decode";
 //URL back
-<<<<<<< HEAD
-let globalUrl = "http://localhost:8080";
-=======
 let globalUrl = "https://www.elpuentepruebas.com/supermex2/public";
->>>>>>> c0d3200a6d7cd2deb15a80fed9c13aa05e101f8f
 export default globalUrl;
 
 //Funcion para cambiar el color de fondo segun la posicion del footer al hacer scroll
