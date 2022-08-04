@@ -1,6 +1,6 @@
 import jwt_decode from "jwt-decode";
 //URL back
-let globalUrl = "http://127.0.0.1:8080";
+let globalUrl = "http://localhost:8080";
 export default globalUrl;
 
 //Funcion para cambiar el color de fondo segun la posicion del footer al hacer scroll
