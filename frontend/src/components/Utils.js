@@ -1,6 +1,10 @@
 import jwt_decode from "jwt-decode";
 //URL back
+<<<<<<< HEAD
 let globalUrl = "http://localhost:8080";
+=======
+let globalUrl = "https://www.elpuentepruebas.com/supermex2/public";
+>>>>>>> c0d3200a6d7cd2deb15a80fed9c13aa05e101f8f
 export default globalUrl;
 
 //Funcion para cambiar el color de fondo segun la posicion del footer al hacer scroll
@@ -96,6 +100,7 @@ export function verifyToken() {
   }
 }
 
+//Funcion para obtener role del usuario
 export function takeRole(){
   const token = localStorage.getItem("token");
   let role ='';
@@ -104,4 +109,27 @@ export function takeRole(){
     role = decoded.roles[0];
   }
   return role;
+}
+
+export function homeMouseEnter(classLetraDesplazada, classColeccionImg, classActivado){
+    document.querySelector(`.${classLetraDesplazada} a`).addEventListener('mouseenter', ()=>{
+        document.querySelectorAll(`.${classColeccionImg} img`).forEach(element=>{
+            element.classList.remove(`${classActivado}`);
+        });
+    });
+}
+export function homeMouseMove(classLetraDesplazada, dataNum, classActivado){
+    document.querySelector(`.${classLetraDesplazada} a`).addEventListener('mousemove', (e)=>{
+        let imagenDesplazar=document.querySelector('[data-desplazamiento="'+dataNum+'"]');
+        imagenDesplazar.classList.add(`${classActivado}`);
+        let cuerpozonarosa = document.querySelector('#cuerpozonarosa');
+        let relativeXPosition = (e.pageX - cuerpozonarosa.offsetLeft - 100);
+        let relativeYPosition = (e.pageY - cuerpozonarosa.offsetParent.offsetTop - 150);
+        document.querySelector('#coleccionimg').style.cssText = 'transform: translate(' + (relativeXPosition) +'px, ' + (relativeYPosition) + 'px)';
+    });
+}
+export function homeMouseOut(classLetraDesplazada, dataNum, classActivado){
+    document.querySelector(`.${classLetraDesplazada} a`).addEventListener('mouseout', ()=>{
+        document.querySelector('[data-desplazamiento="'+dataNum+'"]').classList.remove(`${classActivado}`);
+    });
 }

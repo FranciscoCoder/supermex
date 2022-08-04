@@ -34,10 +34,16 @@ class Idiomas
      */
     private $noticias;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Productos::class, mappedBy="idioma")
+     */
+    private $productos;
+
     public function __construct()
     {
         $this->recetas = new ArrayCollection();
         $this->noticias = new ArrayCollection();
+        $this->productos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -111,6 +117,36 @@ class Idiomas
             // set the owning side to null (unless already changed)
             if ($noticia->getIdioma() === $this) {
                 $noticia->setIdioma(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Productos>
+     */
+    public function getProductos(): Collection
+    {
+        return $this->productos;
+    }
+
+    public function addProducto(Productos $producto): self
+    {
+        if (!$this->productos->contains($producto)) {
+            $this->productos[] = $producto;
+            $producto->setIdioma($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProducto(Productos $producto): self
+    {
+        if ($this->productos->removeElement($producto)) {
+            // set the owning side to null (unless already changed)
+            if ($producto->getIdioma() === $this) {
+                $producto->setIdioma(null);
             }
         }
 

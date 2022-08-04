@@ -2,7 +2,7 @@
   position: relative;
   text-align: center;
   width: 100%;
-  transition: all 0.3s linear;
+  transition: all 0.1s linear;
   overflow: hidden;
   & button{
     position: absolute;
@@ -40,7 +40,7 @@
   height: 100%;
   position: absolute;
   top: 0;
-  transition: all 0.3s linear;
+  transition: all 0.1s linear;
   z-index: 2;
   &.activeBanner{
     left: 0;
