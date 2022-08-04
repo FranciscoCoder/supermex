@@ -1,0 +1,99 @@
+<IfModule mod_expires.c>
+  ExpiresActive on
+  # Por defecto 1 mes de cache
+  ExpiresDefault                          "access plus 1 years"
+
+  # los manifiestos appcache necesitan solicitarse cada vez, por firefox 3.6 (probablemente no necesario actualmente?
+  ExpiresByType text/cache-manifest       "access plus 1 years"
+
+  # El HTML nunca debe de ser cacheado
+  ExpiresByType text/html                 "access plus 1 years"
+
+  # Los datos dinamicos tampoco (tal vez podria variar dependiendo de tu aplicacion)
+  ExpiresByType text/xml                  "access plus 1 years"
+  ExpiresByType application/xml           "access plus 1 years"
+  ExpiresByType application/json          "access plus 1 years"
+
+  # Una hora para los feeds (cambiar dependiendo de la fecha de actualizacion de tu web)
+  ExpiresByType application/rss+xml       "access plus 1 years"
+  ExpiresByType application/atom+xml      "access plus 1 years"
+
+  # Favicon (Solo una semana porque el nombre no cambia, luego podria haber cambios y mantenerse el cacheado)
+  ExpiresByType image/x-icon              "access plus 1 years"
+
+  # Imagenes, video, audio: 1 mes
+  ExpiresByType image/gif                 "access plus 1 years"
+  ExpiresByType image/png                 "access plus 1 years"
+  ExpiresByType image/jpeg                "access plus 1 years"
+  ExpiresByType video/ogg                 "access plus 1 years"
+  ExpiresByType audio/ogg                 "access plus 1 years"
+  ExpiresByType video/mp4                 "access plus 1 years"
+  ExpiresByType video/webm                "access plus 1 years"
+
+  # Fuentes web: 1 mes
+  ExpiresByType application/x-font-ttf    "access plus 1 years"
+  ExpiresByType font/opentype             "access plus 1 years"
+  ExpiresByType application/x-font-woff   "access plus 1 years"
+  ExpiresByType image/svg+xml             "access plus 1 years"
+  ExpiresByType application/vnd.ms-fontobject "access plus 1 years"
+
+  # CSS y JavaScript: 1 anio. Ten en cuenta que si cambias los ficheros deberias usar una query string o un nombre de archivo diferente para evitar que los visitantes reciban archivos cacheados.
+  ExpiresByType text/css                  "access plus 1 years"
+  ExpiresByType application/javascript    "access plus 1 years"
+
+</IfModule>
+
+SetOutputFilter DEFLATE
+
+#Proteccion htaccess
+<Files .htaccess>
+Order allow,deny
+Deny from all
+</Files>
+
+# Proteccion extrema de htaccess
+<files ~ "^.*\.([Hh][Tt][Aa])">
+order allow,deny
+deny from all
+satisfy all
+</files>
+
+# Eliminar E-Tag
+# Estamos enviando periodos de cache muy amplios, asi que no es necesario que el navegador compruebe mediante E-Tag si el fichero cambio
+<IfModule mod_headers.c>
+  Header unset ETag
+</IfModule>
+FileETag None
+
+<IfModule mod_deflate.c>
+# Filtramos los tipos de contenido
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE application/xml
+AddOutputFilterByType DEFLATE application/xhtml+xml
+AddOutputFilterByType DEFLATE application/rss+xml
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/x-javascript
+AddOutputFilterByType DEFLATE application/x-httpd-php
+AddOutputFilterByType DEFLATE application/x-httpd-fastphp
+AddOutputFilterByType DEFLATE image/svg+xml
+
+# Quitamos los navegadores que dan problemas con GZIP
+BrowserMatch ^Mozilla/4 gzip-only-text/html
+BrowserMatch ^Mozilla/4\.0[678] no-gzip
+BrowserMatch \bMSI[E] !no-gzip !gzip-only-text/html
+
+# Nos aseguramos de que los Proxy no muestren contenido equivocado
+Header append Vary User-Agent env=!dont-vary
+</IfModule>
+
+RewriteEngine On
+RewriteCond %{HTTP_HOST} !^www\.
+RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
+
+Options -MultiViews
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.html [QSA,L]

@@ -33,8 +33,9 @@ export default function LastRecipes(props) {
                         {lastRecipes.map((recipe) => (
                             <li key={recipe.id}>
                                 <Link onClick={goTop} to={`/${props.lang}/receta/${recipe.slug}`}>
+
                                     <img src={recipe.imagen} width="300" height="300" alt={recipe.nombre} />
-                                    <div className={`${styleLastRecipes.etiqueta}`}>Guacamole casero con pico de gallo</div>
+                                    <div className={`${styleLastRecipes.etiqueta}`}>{recipe.nombre}</div>
                                 </Link>
                             </li>
                         ))}
