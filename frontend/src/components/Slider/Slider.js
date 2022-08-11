@@ -30,10 +30,54 @@ export default function Slider(props) {
     }
   }
 
+  const firstActive = () => {
+    let sliderItem=document.querySelectorAll(`.${styleSlider.contenido_banner}`);
+
+    for (let i = 0; i < sliderItem.length; ++i) {
+        sliderItem[i].classList.remove(`${styleSlider.activeBanner}`);
+        sliderItem[i].classList.remove(`${styleSlider.prevBanner}`);
+        sliderItem[i].classList.remove(`${styleSlider.nextBanner}`);
+        
+        if(i===0)
+        {
+            sliderItem[i].classList.add(`${styleSlider.activeBanner}`);
+        }
+        else
+        {
+            sliderItem[i].classList.add(`${styleSlider.nextBanner}`);
+        }
+      }
+  }
+
+  const lastActive = () => {
+    let sliderItem=document.querySelectorAll(`.${styleSlider.contenido_banner}`);
+
+    for (let i = 0; i < sliderItem.length; ++i) {
+        sliderItem[i].classList.remove(`${styleSlider.activeBanner}`);
+        sliderItem[i].classList.remove(`${styleSlider.prevBanner}`);
+        sliderItem[i].classList.remove(`${styleSlider.nextBanner}`);
+        
+        if(i===sliderItem.length-1)
+        {
+            sliderItem[i].classList.add(`${styleSlider.activeBanner}`);
+        }
+        else
+        {
+            sliderItem[i].classList.add(`${styleSlider.prevBanner}`);
+        }
+      }
+  }
+  
   const prevBanner = () => {
     let positionBanner=parseInt(document.querySelector(`.${styleSlider.activeBanner}`).getAttribute('data-position'));
     let prevBanner = positionBanner-1;
     let sliderItem=document.querySelectorAll(`.${styleSlider.contenido_banner}`);
+    let sliderTotal = sliderItem.length;
+    if(document.querySelector(`.${styleSlider.activeBanner}`).previousElementSibling===null){
+        sliderItem[sliderTotal-1].classList.remove(`${styleSlider.nextBanner}`);
+        sliderItem[sliderTotal-1].classList.add(`${styleSlider.prevBanner}`);
+    }
+
     if(prevBanner>=0){
       for (let i = sliderItem.length-1; i >= 0; --i) {
         if(i===positionBanner)
@@ -49,6 +93,10 @@ export default function Slider(props) {
       }
       changeColorBanner();
     }
+    else {
+        lastActive();
+        changeColorBanner();
+    }
   }
 
   const nextBanner = () => {
@@ -56,6 +104,7 @@ export default function Slider(props) {
     let prevBanner = positionBanner-1;
     let nextBanner = positionBanner+1;
     let sliderItem=document.querySelectorAll(`.${styleSlider.contenido_banner}`);
+
     if(nextBanner<sliderItem.length){
       for (let i = 0; i < sliderItem.length; ++i) {
         if(i<=prevBanner)
@@ -80,8 +129,11 @@ export default function Slider(props) {
       }
       changeColorBanner();
     }
+    else{
+        firstActive();
+        changeColorBanner();
+    }
   }
-
   
   window.addEventListener('resize', heightBanner);
   
@@ -90,6 +142,7 @@ export default function Slider(props) {
         <div id='bannerInicio' className={`${styleSlider.banner} ${styleSlider.banner1}`} style={{height: alturaVentana + 'px'}}>
             <button type="button" className={styleSlider.buttonPrev} onClick={prevBanner}></button>
             <button type="button" className={styleSlider.buttonNext} onClick={nextBanner}></button>
+            <div>
             <div className={`${styleSlider.contenido_banner} ${styleSlider.activeBanner}`} data-color="morado" data-position="0">
                 <div><img src={iconLagarto} className="imagenwidth" width="524" height="444" alt='icono glifo lagarto' /></div>
                 <div className={styleSlider.textosbanner}>
@@ -110,6 +163,7 @@ export default function Slider(props) {
                   <div>El secreto azteca ahora en tus manos</div>
                 </div>
                 <div><img src={iconLagarto} className="imagenwidth" width="524" height="444" alt='icono glifo lagarto' /></div>
+            </div>
             </div>
         </div>
       </section>
