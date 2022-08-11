@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RecetasRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -62,6 +64,16 @@ class Recetas
      * @ORM\Column(type="text")
      */
     private $slug;
+
+    /**
+     * @ORM\OneToMany(targetEntity=RecetasProductos::class, mappedBy="recetas")
+     */
+    private $recetasProductos;
+
+    public function __construct()
+    {
+        $this->recetasProductos = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -172,6 +184,36 @@ class Recetas
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, RecetasProductos>
+     */
+    public function getRecetasProductos(): Collection
+    {
+        return $this->recetasProductos;
+    }
+
+    public function addRecetasProducto(RecetasProductos $recetasProducto): self
+    {
+        if (!$this->recetasProductos->contains($recetasProducto)) {
+            $this->recetasProductos[] = $recetasProducto;
+            $recetasProducto->setRecetas($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecetasProducto(RecetasProductos $recetasProducto): self
+    {
+        if ($this->recetasProductos->removeElement($recetasProducto)) {
+            // set the owning side to null (unless already changed)
+            if ($recetasProducto->getRecetas() === $this) {
+                $recetasProducto->setRecetas(null);
+            }
+        }
 
         return $this;
     }
